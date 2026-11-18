@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>WORLD RIVALS V8.2 — Editor de personajes Ultra</title>
-<meta name="worldrivals-version" content="8.2.0">
+<title>WORLD RIVALS V8.5 — Publicación oficial en GitHub</title>
+<meta name="worldrivals-version" content="8.5.0">
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 
 
@@ -144,6 +144,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;bac
 .mic-settings-panel{right:68px;top:69px;width:min(345px,calc(100% - 28px));max-height:min(82vh,540px);overflow:auto}
 .panel-inner{padding:15px}
 .mic-main-button{width:100%}
+#micSettingsBtn.voice-on{background:#87203eea;border-color:#ff7599;box-shadow:0 0 20px #fb466969}
+#lobbyMicBtn{min-width:210px}
 .mic-settings-panel .form-row{margin:14px 0}
 .mic-settings-panel label{color:#c9e8f2}
 .mic-settings-panel .mic-gain-control{width:100%;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
@@ -444,9 +446,9 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   <div class="hero-art"><div class="orbit"><div class="globe">🌐</div><div class="orbit-label one">📍 GOOGLE STREET VIEW</div><div class="orbit-label two">⚡ MULTIJUGADOR</div><div class="orbit-label three">✦ WORLD CHAMPION</div></div></div>
  </section>
  <section class="feature-strip">
-  <div class="feature"><div class="feature-icon">🎨</div><div><b>NUEVO · Personajes ultraeditables</b><small>Avatar clásico avanzado, emojis y fondos, marcos y accesorios</small></div></div>
-  <div class="feature"><div class="feature-icon">📸</div><div><b>NUEVO · Tu propia foto</b><small>Sube una imagen, encuádrala y úsala como personaje en las salas</small></div></div>
-  <div class="feature"><div class="feature-icon">⚡</div><div><b>OPTIMIZADO · Avatar ligero</b><small>Fotos reducidas, vistas vectoriales y editor adaptado a móviles</small></div></div>
+  <div class="feature"><div class="feature-icon">🚀</div><div><b>V8.5 · Publicador oficial en GitHub</b><small>El código Konami y contraseña dan acceso a publicar para todos desde el juego</small></div></div>
+  <div class="feature"><div class="feature-icon">🔐</div><div><b>V8.5 · Token temporal y launcher</b><small>El token no se guarda; exporta el launcher con actualizaciones online</small></div></div>
+  <div class="feature"><div class="feature-icon">🌍</div><div><b>V8.5 · Juego y voz conservados</b><small>Se mantienen los mapas globales, los avatares y el único micrófono rojo</small></div></div>
  </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -470,7 +472,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 <section id="lobbyScreen" class="main hidden"><div class="lobby-wrap"><button class="back-link" id="lobbyBack">← Volver al inicio</button><div class="lobby-card">
  <div class="lobby-top"><div><div class="eyebrow">SALA PRIVADA · <span id="lobbyState">ESPERANDO JUGADORES</span></div><h1>Prepara la partida</h1><div class="muted" style="font-size:12px">Invita desde Amigos o comparte el código de seis caracteres.</div></div><div><div class="tiny muted" style="margin-bottom:7px;text-align:center">CÓDIGO DE SALA · TOCA PARA COPIAR</div><div id="roomCodeDisplay" class="room-code">------</div></div></div>
  <div class="room-grid"><div><h3 class="subhead">JUGADORES <span id="playerCount">(1/8)</span></h3><div id="lobbyPlayers" class="player-list"></div><div id="lobbyEmpty" class="empty-note hidden">Comparte el código de arriba para invitar a tus amigos.</div></div><div><h3 class="subhead">AJUSTES DE PARTIDA</h3><div class="settings-row"><span>🌍 Número de rondas</span><select id="roundSelect"><option value="3">3 rondas</option><option value="5" selected>5 rondas</option><option value="7">7 rondas</option><option value="10">10 rondas</option></select></div><div class="settings-row"><span>⏱️ Tiempo por ronda</span><select id="timeSelect"><option value="45">45 segundos</option><option value="60">60 segundos</option><option value="90" selected>90 segundos</option><option value="120">120 segundos</option></select></div><div class="settings-row"><span>👥 Límite de jugadores</span><span class="muted">8 jugadores</span></div><div class="settings-row"><span>🗺️ Mapa de respuestas</span><span class="muted">OpenFreeMap</span></div></div></div>
- <div class="lobby-friend-action"><button type="button" class="btn btn-secondary" id="lobbyFriendsBtn">👥 Invitar amigos sin código</button></div><div class="lobby-actions"><div class="muted" id="lobbyHint" style="font-size:11px">El anfitrión puede iniciar cuando todos estén listos. Las ubicaciones se mezclan y se buscan nuevas imágenes públicas cuando hay conexión.</div><button class="btn btn-primary" id="startGameBtn">🚀 Iniciar partida</button></div>
+ <div class="lobby-friend-action"><button type="button" class="btn btn-secondary" id="lobbyFriendsBtn">👥 Invitar amigos sin código</button></div><div class="lobby-friend-action" style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn-primary btn-small" id="lobbyMicBtn" aria-pressed="false">🎙️ Activar micrófono</button></div><div class="lobby-actions"><div class="muted" id="lobbyHint" style="font-size:11px">El anfitrión puede iniciar cuando todos estén listos. Las ubicaciones se mezclan y se buscan nuevas imágenes públicas cuando hay conexión.</div><button class="btn btn-primary" id="startGameBtn">🚀 Iniciar partida</button></div>
  </div></div></section>
 <section id="gameScreen" class="game-shell hidden">
  <div class="game-top"><div class="round-info"><div class="brand-mark">✦</div><div><div id="roundLabel" class="round-number">RONDA 1 / 5</div><div class="game-title" id="gameRoomTitle">WORLD RIVALS · SALA</div></div></div><div class="game-controls"><span class="hud-top-label">⟡ GEO BATTLE · EXPLORA Y ADIVINA</span><button class="icon-btn" id="leaveGameBtn" title="Salir de la partida" aria-label="Salir de la partida">✕</button></div></div>
@@ -479,15 +481,15 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 <div id="timer" class="timer hud-timer" role="timer" aria-label="Tiempo restante">01:30</div>
 <div class="hud-tools">
 <button class="hud-icon hud-fullscreen" id="fullscreenStreetBtn" type="button" title="Pantalla completa real (salir con Esc)" aria-label="Pantalla completa" aria-pressed="false">⛶</button>
-<button class="hud-icon" id="micSettingsBtn" type="button" title="Ajustes del micrófono" aria-label="Abrir ajustes del micrófono" aria-controls="micSettingsPanel" aria-expanded="false">🎙️</button>
+<button class="hud-icon" id="micSettingsBtn" type="button" title="Micrófono · abrir ajustes" aria-label="Abrir ajustes del micrófono" aria-controls="micSettingsPanel" aria-expanded="false">🎙️</button>
 <button class="hud-icon" id="chatToggleBtn" type="button" title="Chat de la sala" aria-label="Abrir chat de la sala" aria-controls="chatDock" aria-expanded="false">💬<span id="chatUnread" class="chat-unread hidden" aria-label="Mensajes nuevos"></span></button>
 </div></div>
 <div id="micSettingsPanel" class="hud-panel mic-settings-panel" aria-hidden="true">
 <div class="panel-top"><b>🎙️ AJUSTES DEL MICRÓFONO</b><button class="hud-close" type="button" data-ui-close="true" aria-label="Cerrar ajustes">✕</button></div>
-<div class="panel-inner"><button class="btn btn-primary btn-small mic-main-button" id="micBtn" type="button">🎙️ Activar micrófono</button>
+<div class="panel-inner"><button class="btn btn-primary btn-small mic-main-button" id="micBtn" type="button" aria-pressed="false">🎙️ Activar micrófono</button>
 <div class="form-row"><label for="micDeviceSelect">Dispositivo de entrada</label><select class="field" id="micDeviceSelect"><option value="">Micrófono predeterminado</option></select></div>
 <div class="mic-gain-control" title="Ajusta la ganancia del micrófono"><label for="micGainSlider">🎚️ VOLUMEN</label><input id="micGainSlider" type="range" min="0" max="300" step="5" value="100"><output id="micGainValue">100%</output></div>
-<p class="mic-info" id="voiceState">● Voz desconectada</p><p class="mic-info">La voz solo se activa en salas multijugador. Requiere permiso del navegador y HTTPS o localhost.</p></div></div>
+<p class="mic-info" id="voiceState" aria-live="polite">● Voz desconectada</p><p class="mic-info" id="voiceHelpText">Pulsa el botón rojo para hablar. La escucha se activa automáticamente al entrar en una sala. Autoriza el micrófono en el navegador (HTTPS o localhost; algunos navegadores también admiten archivos locales). Algunas redes necesitan un servidor TURN para conectar la voz.</p></div></div>
 <div id="chatDock" class="hud-panel chat-dock" aria-hidden="true">
 <div class="panel-top"><b>💬 CHAT DE SALA</b><button class="hud-close" type="button" data-ui-close="true" aria-label="Cerrar chat">✕</button></div>
 <div id="chatMessages" class="chat-messages"><div class="muted tiny">Los mensajes de la sala aparecerán aquí.</div></div>
@@ -503,7 +505,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 <footer class="footer-note"><span>WORLD//RIVALS · Un juego fan-made de exploración geográfica.</span><span>Imágenes: <a href="https://panoramax.fr/" target="_blank" rel="noopener">Panoramax (comunidad)</a> y <a href="https://www.google.com/maps/" target="_blank" rel="noopener">Google Maps (vínculos compartidos)</a> · Mapa: <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a></span></footer>
 </div>
 <div id="profileModal" class="modal-backdrop hidden"><div class="modal wr-profile-modal" role="dialog" aria-modal="true" aria-label="Editor de personaje WORLD RIVALS">
- <div class="modal-head"><div><div class="eyebrow">🎨 WORLD RIVALS · AVATAR LAB</div><h2>Personalización ULTRA <span class="wr-beta">V8.2</span></h2><p class="tiny muted">Tu identidad, totalmente a tu estilo. Los cambios se guardan al pulsar Guardar.</p></div><button class="icon-btn" data-close="profileModal" aria-label="Cerrar personalización">✕</button></div>
+ <div class="modal-head"><div><div class="eyebrow">🎨 WORLD RIVALS · AVATAR LAB</div><h2>Personalización ULTRA <span class="wr-beta">V8.5</span></h2><p class="tiny muted">Tu identidad, totalmente a tu estilo. Los cambios se guardan al pulsar Guardar.</p></div><button class="icon-btn" data-close="profileModal" aria-label="Cerrar personalización">✕</button></div>
  <div class="wr-editor-layout">
   <aside class="wr-editor-preview">
     <div class="wr-avatar-spot"><div id="profilePreview" class="avatar" aria-live="polite"></div></div>
@@ -571,6 +573,9 @@ let user=null,mapsReady=false,guessMap=null,miniGuessMap=null,guessMarker=null,m
 let streetFullscreen=false;
 let currentRoomId=null,roomRef=null,currentRoom=null,isSolo=false,players=[],guesses=[],messages=[],myGuess=null,lastPano='',roundTimer=null,localScore=0,localRound=1,localRounds=5,localSeconds=90,localEnd=0;
 let voiceOn=false,voiceStream=null,micInputStream=null,micAudioContext=null,micGainNode=null,micCompressor=null;
+let voiceAudioUnlocked=false,voiceActivationBusy=false;
+let voiceAudioBlocked=false;
+let voiceCallRetryCounts=new Map();
 let micGainValue=100;
 let roundSubmittedLocal=0;
 let panoramaxLoadPromise=null;
@@ -755,6 +760,7 @@ let p2pHost = false;
 let p2pHostConn = null;
 let p2pConnections = new Map();
 let p2pVoiceCalls = new Map();
+let p2pVoiceRetryTimers = new Map();
 let p2pUid = null;
 let p2pRoomClosed = false;
 
@@ -868,26 +874,59 @@ function loadMaps(){initGuessMap();updateConnection()}
    Public APIs are external and sometimes may be unavailable. */
 const PNX_ENDPOINT='https://api.panoramax.xyz/api';
 const PNX_REGIONS=[
- [48.86,2.34,'Francia'],[45.77,4.84,'Francia'],[43.60,1.44,'Francia'],[44.84,-.58,'Francia'],
- [47.22,-1.55,'Francia'],[48.11,-1.67,'Francia'],[50.63,3.06,'Francia'],[43.29,5.37,'Francia'],
- [43.61,3.88,'Francia'],[48.58,7.75,'Francia'],[47.32,5.04,'Francia'],[47.47,-.55,'Francia'],
- [49.44,1.10,'Francia'],[49.26,4.03,'Francia'],[47.39,.69,'Francia'],[48.39,-4.49,'Francia'],
- [45.18,5.72,'Francia'],[45.90,6.12,'Francia'],[49.49,.10,'Francia'],[43.70,7.26,'Francia'],
- [44.56,6.08,'Francia'],[42.70,2.90,'Francia'],[47.60,1.33,'Francia'],[46.20,6.15,'Suiza'],
- [46.52,6.63,'Suiza'],[50.85,4.35,'Bélgica'],[51.22,4.40,'Bélgica'],[52.37,4.90,'Países Bajos'],
- [52.09,5.12,'Países Bajos'],[40.42,-3.70,'España'],[41.39,2.17,'España'],[39.47,-.38,'España'],
- [37.39,-5.99,'España'],[36.72,-4.42,'España'],[43.26,-2.94,'España'],[41.65,-.89,'España'],
- [38.35,-.48,'España'],[38.00,-1.13,'España'],[42.24,-8.72,'España'],[41.15,-8.61,'Portugal'],
- [38.72,-9.14,'Portugal'],[41.90,12.50,'Italia'],[45.46,9.19,'Italia'],[45.44,12.33,'Italia'],
- [43.77,11.25,'Italia'],[40.85,14.27,'Italia'],[52.52,13.40,'Alemania'],[48.14,11.58,'Alemania'],
- [50.94,6.96,'Alemania'],[53.55,10.00,'Alemania'],[51.05,13.74,'Alemania'],[48.21,16.37,'Austria'],
- [50.08,14.43,'Chequia'],[52.23,21.01,'Polonia'],[51.51,-.13,'Reino Unido'],[53.48,-2.24,'Reino Unido'],
- [55.95,-3.19,'Reino Unido'],[55.68,12.57,'Dinamarca'],[59.33,18.06,'Suecia'],[59.91,10.75,'Noruega'],
- [35.68,139.69,'Japón'],[34.69,135.50,'Japón'],[37.56,126.98,'Corea del Sur'],[40.71,-74.01,'Estados Unidos'],
- [37.77,-122.42,'Estados Unidos'],[34.05,-118.24,'Estados Unidos'],[38.90,-77.04,'Estados Unidos'],
- [45.52,-122.68,'Estados Unidos'],[43.65,-79.38,'Canadá'],[-33.87,151.21,'Australia'],[-37.81,144.96,'Australia'],
- [-23.55,-46.63,'Brasil'],[-34.60,-58.38,'Argentina']
+ // Europa: ciudades repartidas por países, no decenas de semillas del mismo país.
+ [40.42,-3.70,'España'],[41.39,2.17,'España'],[37.39,-5.99,'España'],[43.26,-2.94,'España'],
+ [48.86,2.34,'Francia'],[45.77,4.84,'Francia'],[43.60,1.44,'Francia'],[50.63,3.06,'Francia'],
+ [38.72,-9.14,'Portugal'],[41.15,-8.61,'Portugal'],[41.90,12.50,'Italia'],[45.46,9.19,'Italia'],
+ [52.52,13.40,'Alemania'],[48.14,11.58,'Alemania'],[51.51,-.13,'Reino Unido'],[53.48,-2.24,'Reino Unido'],
+ [52.37,4.90,'Países Bajos'],[50.85,4.35,'Bélgica'],[46.52,6.63,'Suiza'],[48.21,16.37,'Austria'],
+ [50.08,14.43,'Chequia'],[52.23,21.01,'Polonia'],[47.50,19.04,'Hungría'],[44.43,26.10,'Rumanía'],
+ [42.70,23.32,'Bulgaria'],[37.98,23.73,'Grecia'],[45.81,15.98,'Croacia'],[44.81,20.46,'Serbia'],
+ [55.68,12.57,'Dinamarca'],[59.33,18.06,'Suecia'],[59.91,10.75,'Noruega'],[60.17,24.94,'Finlandia'],
+ [59.44,24.75,'Estonia'],[56.95,24.11,'Letonia'],[54.68,25.28,'Lituania'],[64.15,-21.94,'Islandia'],
+ // América del Norte y Central.
+ [40.71,-74.01,'Estados Unidos'],[37.77,-122.42,'Estados Unidos'],[34.05,-118.24,'Estados Unidos'],
+ [43.65,-79.38,'Canadá'],[45.50,-73.57,'Canadá'],[19.43,-99.13,'México'],[20.67,-103.35,'México'],
+ [9.93,-84.09,'Costa Rica'],[8.98,-79.52,'Panamá'],[14.63,-90.51,'Guatemala'],[18.49,-69.93,'República Dominicana'],
+ // América del Sur.
+ [-23.55,-46.63,'Brasil'],[-22.91,-43.17,'Brasil'],[-34.60,-58.38,'Argentina'],[-31.42,-64.18,'Argentina'],
+ [-33.45,-70.66,'Chile'],[-12.05,-77.04,'Perú'],[4.71,-74.07,'Colombia'],[6.25,-75.56,'Colombia'],
+ [-0.18,-78.47,'Ecuador'],[-34.90,-56.16,'Uruguay'],[-16.50,-68.15,'Bolivia'],[-25.30,-57.64,'Paraguay'],
+ // África.
+ [33.57,-7.59,'Marruecos'],[34.02,-6.84,'Marruecos'],[36.81,10.18,'Túnez'],[36.75,3.06,'Argelia'],
+ [30.04,31.24,'Egipto'],[14.69,-17.44,'Senegal'],[6.52,3.38,'Nigeria'],[-1.29,36.82,'Kenia'],
+ [-6.80,39.28,'Tanzania'],[-26.20,28.04,'Sudáfrica'],[-33.92,18.42,'Sudáfrica'],[-18.91,47.52,'Madagascar'],
+ // Asia.
+ [35.68,139.69,'Japón'],[34.69,135.50,'Japón'],[37.56,126.98,'Corea del Sur'],[25.04,121.56,'Taiwán'],
+ [13.76,100.50,'Tailandia'],[18.79,98.99,'Tailandia'],[21.03,105.85,'Vietnam'],[10.82,106.63,'Vietnam'],
+ [1.35,103.82,'Singapur'],[3.14,101.69,'Malasia'],[-6.21,106.85,'Indonesia'],[-8.65,115.22,'Indonesia'],
+ [14.60,120.98,'Filipinas'],[28.61,77.21,'India'],[19.08,72.88,'India'],[27.72,85.32,'Nepal'],
+ [41.01,28.98,'Turquía'],[39.93,32.86,'Turquía'],[31.95,35.93,'Jordania'],[25.20,55.27,'Emiratos Árabes Unidos'],
+ // Oceanía.
+ [-33.87,151.21,'Australia'],[-37.81,144.96,'Australia'],[-27.47,153.03,'Australia'],
+ [-36.85,174.76,'Nueva Zelanda'],[-41.29,174.78,'Nueva Zelanda'],[-17.74,168.32,'Vanuatu']
 ];
+const PNX_CONTINENTS={
+ Europa:new Set(['España','Francia','Portugal','Italia','Alemania','Reino Unido','Países Bajos','Bélgica','Suiza','Austria','Chequia','Polonia','Hungría','Rumanía','Bulgaria','Grecia','Croacia','Serbia','Dinamarca','Suecia','Noruega','Finlandia','Estonia','Letonia','Lituania','Islandia']),
+ Norteamérica:new Set(['Estados Unidos','Canadá','México','Costa Rica','Panamá','Guatemala','República Dominicana']),
+ Sudamérica:new Set(['Brasil','Argentina','Chile','Perú','Colombia','Ecuador','Uruguay','Bolivia','Paraguay']),
+ África:new Set(['Marruecos','Túnez','Argelia','Egipto','Senegal','Nigeria','Kenia','Tanzania','Sudáfrica','Madagascar']),
+ Asia:new Set(['Japón','Corea del Sur','Taiwán','Tailandia','Vietnam','Singapur','Malasia','Indonesia','Filipinas','India','Nepal','Turquía','Jordania','Emiratos Árabes Unidos']),
+ Oceanía:new Set(['Australia','Nueva Zelanda','Vanuatu'])
+};
+function continentFor(country){for(const [key,items] of Object.entries(PNX_CONTINENTS))if(items.has(country))return key;return 'Otros';}
+const PNX_MAX_PER_COUNTRY=115;
+function filterLegacyCatalog(items){
+ // Las versiones antiguas llenaban hasta 2.000 fotos de una misma ciudad.
+ const counts=new Map(),result=[];
+ for(const p of items){
+  if(!p||p.source!=='panoramax'||!p.photoId||!p.sequence||!Number.isFinite(p.lat)||!Number.isFinite(p.lng))continue;
+  const country=p.country||'Sin identificar',count=counts.get(country)||0;
+  if(count>=PNX_MAX_PER_COUNTRY)continue;
+  counts.set(country,count+1);result.push(p);
+ }
+ return result.slice(0,PNX_POOL_LIMIT);
+}
 /* V8 — Catálogo dinámico de panorámicas reales, no recorrido de IDs en orden.
    Los elementos se encuentran mediante Panoramax y se guardan para próximas
    visitas en este mismo navegador. No se fabrican imágenes ni coordenadas. */
@@ -897,10 +936,13 @@ const PNX_POOL_LIMIT=2000;
 const PNX_RECENT_LIMIT=650;
 const PNX_FETCH_LIMIT=100;
 let recentPanos=(()=>{try{return JSON.parse(localStorage.getItem(PNX_RECENT_KEY)||'[]').filter(x=>typeof x==='string').slice(-PNX_RECENT_LIMIT)}catch(e){return []}})();
-let panoCatalog=(()=>{try{return JSON.parse(localStorage.getItem(PNX_POOL_KEY)||'[]').filter(x=>x&&x.source==='panoramax'&&x.photoId&&x.sequence&&Number.isFinite(x.lat)&&Number.isFinite(x.lng)).slice(0,PNX_POOL_LIMIT)}catch(e){return []}})();
+let panoCatalog=(()=>{try{return filterLegacyCatalog(JSON.parse(localStorage.getItem(PNX_POOL_KEY)||'[]'))}catch(e){return []}})();
 const panoCatalogIds=new Set(panoCatalog.map(p=>p.pano));
 let discoverPromise=null;
 let recentRegionChoices=[];
+let recentCountries=[],recentContinents=[];
+// Una actualización no hereda un catálogo saturado de EE. UU.
+try{localStorage.setItem(PNX_POOL_KEY,JSON.stringify(panoCatalog))}catch(e){}
 // Rejection sampling: every index from 0 to (n-1) has equal probability.
 function randInt(n){
  if(!Number.isSafeInteger(n)||n<=1)return 0;
@@ -919,22 +961,50 @@ function rememberPano(id){
  try{localStorage.setItem(PNX_RECENT_KEY,JSON.stringify(recentPanos))}catch(e){}
 }
 function addPanoramaxCandidates(items){
- let count=0;
+ let count=0,countryCounts=new Map();
+ for(const p of panoCatalog)countryCounts.set(p.country||'Sin identificar',(countryCounts.get(p.country||'Sin identificar')||0)+1);
  for(const p of items){
   if(panoCatalog.length>=PNX_POOL_LIMIT)break;
   if(!p?.pano||panoCatalogIds.has(p.pano))continue;
-  panoCatalog.push(p);panoCatalogIds.add(p.pano);count++;
+  const country=p.country||'Sin identificar',total=countryCounts.get(country)||0;
+  if(total>=PNX_MAX_PER_COUNTRY)continue;
+  panoCatalog.push(p);panoCatalogIds.add(p.pano);countryCounts.set(country,total+1);count++;
  }
  if(count){try{localStorage.setItem(PNX_POOL_KEY,JSON.stringify(panoCatalog))}catch(e){}}
  return count;
+}
+function rememberGeography(p){
+ const c=p.country||'Sin identificar',continent=continentFor(c);
+ recentCountries.push(c);recentContinents.push(continent);
+ if(recentCountries.length>5)recentCountries.shift();
+ if(recentContinents.length>4)recentContinents.shift();
+}
+function balancedCountryChoice(items){
+ const byContinent=new Map();
+ for(const item of items){
+  const continent=continentFor(item.country||'Sin identificar');
+  if(!byContinent.has(continent))byContinent.set(continent,new Map());
+  const group=byContinent.get(continent),country=item.country||'Sin identificar';
+  if(!group.has(country))group.set(country,[]);
+  group.get(country).push(item);
+ }
+ let continents=[...byContinent.keys()];
+ // Evita el mismo continente dos veces seguidas cuando haya alternativa.
+ if(continents.length>1){const others=continents.filter(c=>c!==recentContinents.at(-1));if(others.length)continents=others;}
+ if(continents.length>2){const others=continents.filter(c=>!recentContinents.slice(-2).includes(c));if(others.length)continents=others;}
+ const continent=continents[randInt(continents.length)];
+ const groups=byContinent.get(continent);let countries=[...groups.keys()];
+ if(countries.length>1){const others=countries.filter(c=>c!==recentCountries.at(-1));if(others.length)countries=others;}
+ const country=countries[randInt(countries.length)],photos=groups.get(country);
+ return photos[randInt(photos.length)];
 }
 function randomGoogleBackup(){
  let choices=GOOGLE_FREE_PANOS.filter(p=>!previousPanoramas.has(p.pano)&&!recentPanos.includes(p.pano));
  if(!choices.length)choices=GOOGLE_FREE_PANOS.filter(p=>p.pano!==lastPano);
  if(!choices.length)choices=GOOGLE_FREE_PANOS;
- // IMPORTANTE: se sortea de nuevo cada vez, nunca se usa un cursor secuencial.
- const target={...choices[randInt(choices.length)],source:'google-public-embed',is360:true};
- rememberPano(target.pano);lastPano=target.pano;return target;
+ // Un país con seis fotos no puede ganar seis veces más que otro con una.
+ const target={...balancedCountryChoice(choices),source:'google-public-embed',is360:true};
+ rememberPano(target.pano);rememberGeography(target);lastPano=target.pano;return target;
 }
 function findPanoramaxPhoto(feature,defaultCountry){
  if(!feature?.id||!Array.isArray(feature.geometry?.coordinates)||!feature.collection)return null;
@@ -948,12 +1018,14 @@ function findPanoramaxPhoto(feature,defaultCountry){
    source:'panoramax',endpoint:PNX_ENDPOINT,country:defaultCountry,is360:true};
 }
 function chooseDiscoveryRegion(){
- let available=PNX_REGIONS.map((_,i)=>i).filter(i=>!recentRegionChoices.includes(i));
- if(!available.length){recentRegionChoices=[];available=PNX_REGIONS.map((_,i)=>i);}
- const idx=available[randInt(available.length)];
- recentRegionChoices.push(idx);
- if(recentRegionChoices.length>Math.min(35,PNX_REGIONS.length-1))recentRegionChoices.shift();
- return PNX_REGIONS[idx];
+ // Primero un continente, luego un país y luego una zona. No se premia el
+ // número de puntos de partida (antes Francia aparecía muchas más veces).
+ let viable=PNX_REGIONS.map((r,i)=>({region:r,index:i})).filter(x=>!recentRegionChoices.includes(x.index));
+ if(!viable.length){recentRegionChoices=[];viable=PNX_REGIONS.map((r,i)=>({region:r,index:i}));}
+ const chosen=balancedCountryChoice(viable.map(x=>({country:x.region[2],_region:x})));
+ const data=chosen._region;recentRegionChoices.push(data.index);
+ if(recentRegionChoices.length>Math.min(40,PNX_REGIONS.length-1))recentRegionChoices.shift();
+ return data.region;
 }
 async function fetchRegionPhotos(region){
  const [lat,lng,country]=region;
@@ -985,14 +1057,14 @@ function discoverMorePanoramas(){
  return discoverPromise;
 }
 function randomFromCatalog(){
- // Se selecciona un índice REALMENTE ALEATORIO entre las panorámicas
- // disponibles (hasta 2.000); no se recorre una lista predeterminada.
+ // Sortear continente -> país -> panorama, NO panorama a secas. Así un
+ // catálogo con 1.000 fotos de EE. UU. no monopoliza las partidas.
  if(!panoCatalog.length)return null;
  let choices=panoCatalog.filter(p=>!previousPanoramas.has(p.pano)&&!recentPanos.includes(p.pano));
  if(!choices.length)choices=panoCatalog.filter(p=>p.pano!==lastPano);
  if(!choices.length)choices=panoCatalog;
- const selected=choices[randInt(choices.length)];
- rememberPano(selected.pano);lastPano=selected.pano;
+ const selected=balancedCountryChoice(choices);
+ rememberPano(selected.pano);rememberGeography(selected);lastPano=selected.pano;
  return {...selected};
 }
 async function randomPanorama(){
@@ -1002,8 +1074,10 @@ async function randomPanorama(){
   if(!panoCatalog.length){
    try{await discoverMorePanoramas()}catch(e){console.info('Panoramax sin cobertura disponible: activando panorama de respaldo.');}
   }else if(panoCatalog.length<PNX_POOL_LIMIT){
-   // Ampliación no bloqueante mientras el jugador ve una ubicación existente.
-   discoverMorePanoramas().catch(()=>{});
+   // Si solo existe un país en caché, intenta diversificar antes de elegir.
+   const countries=new Set(panoCatalog.map(p=>p.country||'Sin identificar'));
+   if(countries.size<2){try{await discoverMorePanoramas()}catch(e){}}
+   else discoverMorePanoramas().catch(()=>{});
   }
   const found=randomFromCatalog();
   if(found)return found;
@@ -1094,7 +1168,7 @@ function registerP2PConnection(conn){
     if(players.length>=8){p2pSend(conn,{type:'error',message:'La sala está llena (máximo 8 jugadores).'});conn.close();return;}
     const existing=players.find(p=>p.uid===conn.peer);
     if(!existing)players.push({uid:conn.peer,...(msg.player||{}),score:0,mic:false});
-    hostPublish();
+    hostPublish();if(voiceOn&&voiceStream)callPeerAudio(conn.peer);
    }else if(msg.type==='chat'){
     const player=players.find(p=>p.uid===conn.peer);if(!player)return;
     messages.push({uid:conn.peer,name:player.name,flag:player.flag,nameColor:player.nameColor,gold:player.gold,text:String(msg.text||'').slice(0,300),createdAt:Date.now()});messages=messages.slice(-50);hostPublish();
@@ -1121,13 +1195,17 @@ function registerP2PConnection(conn){
  });
  conn.on('close',()=>{
   p2pConnections.delete(conn.peer);
+  for(const prefix of ['in:','out:']){const key=prefix+conn.peer,c=p2pVoiceCalls.get(key);if(c){p2pVoiceCalls.delete(key);try{c.close()}catch(e){}}}
+  if(p2pVoiceRetryTimers.has(conn.peer)){clearTimeout(p2pVoiceRetryTimers.get(conn.peer));p2pVoiceRetryTimers.delete(conn.peer);}
+  voiceCallRetryCounts.delete(conn.peer);
+  const oldAudio=document.getElementById('audio-'+conn.peer);if(oldAudio){oldAudio.srcObject=null;oldAudio.remove();}
   if(p2pHost){players=players.filter(p=>p.uid!==conn.peer);guesses=guesses.filter(g=>g.uid!==conn.peer);hostPublish();maybeFinishRound();}
  });
  conn.on('error',e=>console.warn('P2P connection',e));
 }
 function setupPeerObject(peer){
  peer.on('connection',registerP2PConnection);
- peer.on('call',call=>{call.answer(voiceStream||undefined);attachVoiceCall(call,false)});
+ peer.on('call',call=>{try{call.answer();attachVoiceCall(call,false)}catch(e){console.warn('Error al responder al audio',e);try{call.close()}catch(_){}}});
  peer.on('error',e=>{
   console.error('PeerJS',e);
   let msg=e?.type==='unavailable-id'?'Ese código ya está ocupado. Crea otra sala.':e?.type==='peer-unavailable'?'No se encuentra la sala. Comprueba el código y que el anfitrión siga conectado.':(e?.message||'Error de conexión P2P.');
@@ -1165,51 +1243,122 @@ function setMicGain(value){
  if($('micGainSlider'))$('micGainSlider').value=String(micGainValue);
  if($('micGainValue'))$('micGainValue').textContent=Math.round(micGainValue)+'%';
 }
+function setVoiceButtons(){
+ const label=voiceActivationBusy?'🎙️ Conectando micrófono…':voiceOn?'🔇 Silenciar micrófono':'🎙️ Activar micrófono';
+ for(const id of ['micBtn','lobbyMicBtn']){
+  const btn=$(id);
+  if(btn){btn.textContent=label;btn.disabled=voiceActivationBusy;btn.setAttribute('aria-pressed',String(voiceOn));}
+ }
+ const toolbar=$('micSettingsBtn');
+ if(toolbar){toolbar.classList.toggle('voice-on',voiceOn);toolbar.title=voiceOn?'Micrófono activado · ver ajustes':'Micrófono apagado · ver ajustes';}
+}
+function stopOutgoingVoiceCalls(){
+ for(const [key,call] of p2pVoiceCalls){
+  if(!key.startsWith('out:'))continue;
+  p2pVoiceCalls.delete(key);try{call.close()}catch(e){}
+ }
+}
 function cleanupVoice(){
+ for(const timer of p2pVoiceRetryTimers.values())clearTimeout(timer);
+ p2pVoiceRetryTimers.clear();voiceCallRetryCounts.clear();
  for(const call of p2pVoiceCalls.values()){try{call.close()}catch(e){}}
- p2pVoiceCalls.clear();document.querySelectorAll('audio[id^="audio-"]').forEach(a=>a.remove());
+ p2pVoiceCalls.clear();document.querySelectorAll('audio[id^="audio-"]').forEach(a=>{a.srcObject=null;a.remove()});
  if(voiceStream){voiceStream.getTracks().forEach(t=>t.stop());voiceStream=null;}
  if(micInputStream){micInputStream.getTracks().forEach(t=>t.stop());micInputStream=null;}
  if(micAudioContext){micAudioContext.close().catch(()=>{});micAudioContext=null;}
- micGainNode=null;micCompressor=null;voiceOn=false;
- $('micBtn').textContent='🎙️ Activar micro';
+ micGainNode=null;micCompressor=null;voiceOn=false;voiceActivationBusy=false;voiceAudioUnlocked=false;voiceAudioBlocked=false;
+ setVoiceButtons();renderVoiceState();
+}
+async function switchVoiceInputDevice(){
+ // Los cambios de dispositivo requieren una nueva captura. Mantener la
+ // anterior hacía que el selector mostrase un micro que no se estaba usando.
+ if(!micInputStream||voiceActivationBusy)return;
+ const wasOn=voiceOn;voiceOn=false;stopOutgoingVoiceCalls();
+ if(voiceStream){voiceStream.getTracks().forEach(t=>t.stop());voiceStream=null;}
+ micInputStream.getTracks().forEach(t=>t.stop());micInputStream=null;
+ if(micAudioContext){try{await micAudioContext.close()}catch(e){}micAudioContext=null;}
+ micGainNode=null;micCompressor=null;
+ if(wasOn)await toggleMic();else setVoiceButtons();
+}
+function unlockVoiceAudio(){
+ // Una pulsación real sobre el micrófono (o sobre el juego) permite reintentar
+ // las reproducciones bloqueadas por la política de autoplay del navegador.
+ // No se muestra ningún segundo botón de reproducción.
+ voiceAudioUnlocked=true;
+ const remoteAudios=[...document.querySelectorAll('audio[id^="audio-"]')];
+ for(const audio of remoteAudios){
+  if(!audio.srcObject)continue;
+  audio.muted=false;
+  const attempt=audio.play();
+  if(attempt&&typeof attempt.then==='function')attempt.then(()=>{
+   voiceAudioBlocked=false;renderVoiceState();
+  }).catch(e=>{
+   voiceAudioBlocked=true;voiceAudioUnlocked=false;
+   console.info('Reproducción de voz pendiente de interacción',e);
+   renderVoiceState();
+  });
+ }
 }
 async function createProcessedMicStream(){
  micInputStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:false,channelCount:1,...($('micDeviceSelect')?.value?{deviceId:{ideal:$('micDeviceSelect').value}}:{})}});
  const AudioCtx=window.AudioContext||window.webkitAudioContext;
- if(!AudioCtx)throw new Error('Tu navegador no permite procesar el micrófono con Web Audio.');
- micAudioContext=new AudioCtx({latencyHint:'interactive'});
- await micAudioContext.resume();
- const source=micAudioContext.createMediaStreamSource(micInputStream);
- micGainNode=micAudioContext.createGain();micGainNode.gain.value=micGainValue/100;
- micCompressor=micAudioContext.createDynamicsCompressor();
- micCompressor.threshold.value=-18;micCompressor.knee.value=14;micCompressor.ratio.value=4;micCompressor.attack.value=.004;micCompressor.release.value=.18;
- const destination=micAudioContext.createMediaStreamDestination();
- source.connect(micGainNode);micGainNode.connect(micCompressor);micCompressor.connect(destination);
- return destination.stream;
+ if(!AudioCtx)return micInputStream; // Fallback sin procesado; evita dejar el micrófono inutilizable.
+ try{
+  micAudioContext=new AudioCtx({latencyHint:'interactive'});
+  await micAudioContext.resume();
+  if(micAudioContext.state!=='running')throw new Error('AudioContext suspendido');
+  const source=micAudioContext.createMediaStreamSource(micInputStream);
+  micGainNode=micAudioContext.createGain();micGainNode.gain.value=micGainValue/100;
+  micCompressor=micAudioContext.createDynamicsCompressor();
+  micCompressor.threshold.value=-18;micCompressor.knee.value=14;micCompressor.ratio.value=4;micCompressor.attack.value=.004;micCompressor.release.value=.18;
+  const destination=micAudioContext.createMediaStreamDestination();
+  source.connect(micGainNode);micGainNode.connect(micCompressor);micCompressor.connect(destination);
+  return destination.stream;
+ }catch(e){
+  console.warn('Audio sin efectos, usando el micrófono original',e);
+  if(micAudioContext){try{await micAudioContext.close()}catch(_){}}
+  micAudioContext=null;micGainNode=null;micCompressor=null;
+  return micInputStream;
+ }
 }
 async function toggleMic(){
- if(!currentRoom||!p2pPeer){toast('El micrófono está disponible dentro de una sala multijugador.');return;}
- if(!navigator.mediaDevices?.getUserMedia){toast('El micrófono necesita HTTPS o localhost. Abre el juego desde un servidor local.');return;}
+ // La activación del audio debe arrancar directamente desde el clic del usuario.
+ // Así se evita depender del antiguo botón gris de «Reproducir sonido».
+ unlockVoiceAudio();
+ if(!currentRoom||!p2pPeer||isSolo){toast('Entra en una sala multijugador para activar la voz.');return;}
+ if(voiceActivationBusy)return;
+ if(!navigator.mediaDevices?.getUserMedia){toast('El micrófono necesita HTTPS, localhost y el permiso del navegador.');return;}
  if(!micInputStream){
+  voiceActivationBusy=true;setVoiceButtons();
   try{
    voiceStream=await createProcessedMicStream();voiceOn=true;
    micInputStream.getAudioTracks().forEach(t=>t.enabled=true);voiceStream.getAudioTracks().forEach(t=>t.enabled=true);
-   $('micBtn').textContent='🔇 Silenciar micrófono';
+   const me=players.find(p=>p.uid===p2pUid);if(me)me.mic=true;
+   if(p2pHost)hostPublish();else p2pSend(p2pHostConn,{type:'profile',player:{mic:true}});
+   voiceCallRetryCounts.clear();
    for(const p of players)if(p.uid!==p2pUid)callPeerAudio(p.uid);
-   const me=players.find(p=>p.uid===p2pUid);if(me)me.mic=true;if(p2pHost)hostPublish();else p2pSend(p2pHostConn,{type:'profile',player:{mic:true}});
-   toast('Micrófono activado · ganancia '+micGainValue+'%.');
-  }catch(e){console.error('Micrófono',e);cleanupVoice();toast('No se pudo activar/procesar el micrófono: '+(e.message||e));}
+   unlockVoiceAudio();
+   toast('Micrófono activado. Ya puedes hablar en grupo.');
+  }catch(e){console.error('Micrófono',e);cleanupVoice();toast('No se pudo activar el micro: '+(e.message||e));}
+  finally{voiceActivationBusy=false;setVoiceButtons();renderVoiceState();}
  }else{
   voiceOn=!voiceOn;micInputStream.getAudioTracks().forEach(t=>t.enabled=voiceOn);
-  $('micBtn').textContent=voiceOn?'🔇 Silenciar micrófono':'🎙️ Activar micrófono';
+  voiceStream?.getAudioTracks().forEach(t=>t.enabled=voiceOn);
+  if(voiceOn){voiceCallRetryCounts.clear();for(const p of players)if(p.uid!==p2pUid)callPeerAudio(p.uid);}
+  else{stopOutgoingVoiceCalls();for(const timer of p2pVoiceRetryTimers.values())clearTimeout(timer);p2pVoiceRetryTimers.clear();}
   const me=players.find(p=>p.uid===p2pUid);if(me)me.mic=voiceOn;
   if(p2pHost)hostPublish();else p2pSend(p2pHostConn,{type:'profile',player:{mic:voiceOn}});
-  toast(voiceOn?'Micrófono activado.':'Micrófono silenciado.');
-  if(voiceOn)for(const p of players)if(p.uid!==p2pUid)callPeerAudio(p.uid);
+  setVoiceButtons();renderVoiceState();toast(voiceOn?'Micrófono activado.':'Micrófono silenciado; sigues escuchando a tus amigos.');
  }
 }
-function renderVoiceState(){const active=players.filter(p=>p.mic).length;$('voiceState').textContent=active?`● ${active} con micro`:'● Voz desconectada';}
+function renderVoiceState(){
+ const active=players.filter(p=>p.mic).length;
+ const listening=[...document.querySelectorAll('audio[id^="audio-"]')].filter(a=>a.srcObject).length;
+ const el=$('voiceState');if(!el)return;
+ el.textContent=voiceAudioBlocked?'● Audio bloqueado: toca el juego para volver a escuchar':
+   active?`● ${active} micro${active===1?'':'s'} activo${active===1?'':'s'} · ${listening} ${listening===1?'voz recibida':'voces recibidas'}`:
+   '● Micro apagado · la escucha se activa automáticamente';
+}
 
 /* Restauración del controlador de salas y rondas.
    Estas funciones faltaban en la versión anterior; su ausencia hacía que
@@ -1346,20 +1495,59 @@ function sendMessage(text){
  else toast('Se ha perdido la conexión con el anfitrión.');
 }
 function attachVoiceCall(call,outgoing=false){
- const remoteId=call.peer;call.__wrOutgoing=outgoing;p2pVoiceCalls.set(remoteId,call);
- call.on('stream',stream=>{
+ const remoteId=call.peer,key=(outgoing?'out:':'in:')+remoteId;
+ const old=p2pVoiceCalls.get(key);
+ if(old&&old!==call){p2pVoiceCalls.delete(key);try{old.close()}catch(e){}}
+ call.__wrOutgoing=outgoing;call.__wrClosed=false;p2pVoiceCalls.set(key,call);
+ if(!outgoing)call.on('stream',stream=>{
+  // Cada usuario abre su propia llamada unidireccional. Las llamadas
+  // entrantes y salientes nunca se pisan cuando hablan a la vez.
+  if(p2pVoiceCalls.get(key)!==call)return;
   let audio=document.getElementById('audio-'+remoteId);
-  if(!audio){audio=document.createElement('audio');audio.id='audio-'+remoteId;audio.autoplay=true;audio.playsInline=true;document.body.appendChild(audio);}
-  audio.srcObject=stream;audio.play().catch(()=>{});
+  if(!audio){audio=document.createElement('audio');audio.id='audio-'+remoteId;audio.autoplay=true;audio.playsInline=true;audio.volume=1;document.body.appendChild(audio);}
+  if(audio.srcObject!==stream)audio.srcObject=stream;
+  audio.muted=false;
+  audio.play().then(()=>{voiceAudioUnlocked=true;voiceAudioBlocked=false;renderVoiceState();}).catch(e=>{
+   voiceAudioUnlocked=false;voiceAudioBlocked=true;
+   console.info('El navegador ha bloqueado la reproducción de voz',e);
+   const el=$('voiceHelpText');if(el)el.textContent='Si el navegador bloquea el audio, toca cualquier parte del juego para reintentarlo. El botón rojo controla únicamente tu micrófono.';
+   renderVoiceState();
+  });
+  renderVoiceState();
  });
- call.on('close',()=>{p2pVoiceCalls.delete(remoteId);document.getElementById('audio-'+remoteId)?.remove();});
- call.on('error',e=>console.warn('Voice call',e));
+ const forget=()=>{
+  call.__wrClosed=true;
+  if(p2pVoiceCalls.get(key)===call){
+   p2pVoiceCalls.delete(key);
+   if(!outgoing){const audio=document.getElementById('audio-'+remoteId);if(audio){audio.srcObject=null;audio.remove()}}
+   // En caso de corte inesperado del envío, intentar volver a conectar sin
+   // exigir al jugador que pulse otro botón. Limitado para no saturar la sala.
+   if(outgoing&&voiceOn&&p2pPeer&&!p2pPeer.destroyed&&players.some(p=>p.uid===remoteId)){
+    const attempts=voiceCallRetryCounts.get(remoteId)||0;
+    if(attempts<3&&!p2pVoiceRetryTimers.has(remoteId)){
+     voiceCallRetryCounts.set(remoteId,attempts+1);
+     const timer=setTimeout(()=>{
+      p2pVoiceRetryTimers.delete(remoteId);
+      if(voiceOn&&players.some(p=>p.uid===remoteId))callPeerAudio(remoteId);
+     },1500*(attempts+1));
+     p2pVoiceRetryTimers.set(remoteId,timer);
+    }
+   }
+  }
+  renderVoiceState();
+ };
+ call.on('close',forget);
+ call.on('error',e=>{console.warn('Error de voz',remoteId,e);forget();});
+ renderVoiceState();
 }
 function callPeerAudio(remoteId){
  if(!voiceOn||!voiceStream||!p2pPeer||!remoteId||remoteId===p2pUid)return;
- const existing=p2pVoiceCalls.get(remoteId);if(existing?.__wrOutgoing)return;
- if(existing){try{existing.close()}catch(e){}p2pVoiceCalls.delete(remoteId);}
- try{const call=p2pPeer.call(remoteId,voiceStream);if(call)attachVoiceCall(call,true);}catch(e){console.warn('No se pudo llamar al audio remoto',e);}
+ const key='out:'+remoteId,existing=p2pVoiceCalls.get(key);
+ if(existing&&!existing.__wrClosed)return;
+ try{
+  const call=p2pPeer.call(remoteId,voiceStream);
+  if(call)attachVoiceCall(call,true);
+ }catch(e){console.warn('No se pudo conectar el micro con',remoteId,e);}
 }
 function startSolo(){
  if(streetFullscreen)toggleStreetFullscreen(false);
@@ -1576,7 +1764,7 @@ function exportFriendsGame(){
  doc.querySelector('#lobbyScreen')?.classList.add('hidden');
  doc.querySelector('#homeScreen')?.classList.remove('hidden');
  const result='<!doctype html>\n'+doc.outerHTML;
- const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([result],{type:'text/html;charset=utf-8'}));link.download='WorldRivals_V8.2_UltraAvatar.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),2000);
+ const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([result],{type:'text/html;charset=utf-8'}));link.download='WorldRivals_V8_4_Microfono_Unico_Grupo.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),2000);
  toast('Juego exportado con configuración pública. Publícalo en GitHub para tus amigos.');
 }
 function saveProfile(){
@@ -1610,7 +1798,13 @@ async function refreshMicDevices(){
 }
 function initGameHud(){
  $('hudDismissLayer')?.addEventListener('pointerdown',closeGamePanels);
- $('micSettingsBtn')?.addEventListener('click',()=>showGamePanel('micSettingsPanel'));
+ $('micSettingsBtn')?.addEventListener('click',()=>{unlockVoiceAudio();showGamePanel('micSettingsPanel');});
+  $('lobbyMicBtn')?.addEventListener('click',toggleMic);
+ // Reintenta el sonido de amigos en cualquier interacción voluntaria,
+ // sin añadir otro control visible y sin pedir permisos extra.
+ document.addEventListener('pointerdown',()=>{
+  if(voiceAudioBlocked&&currentRoom&&!isSolo)unlockVoiceAudio();
+ },{capture:true});
  $('chatToggleBtn')?.addEventListener('click',()=>showGamePanel('chatDock'));
  document.querySelectorAll('[data-ui-close]').forEach(b=>b.addEventListener('click',closeGamePanels));
  for(const id of ['pano','guessMap','miniGuessMap'])$(id)?.addEventListener('pointerdown',closeGamePanels,{capture:true});
@@ -1623,7 +1817,7 @@ function initGameHud(){
  $('miniClearGuessBtn')?.addEventListener('click',()=>clearGuess());
  $('miniSubmitGuessBtn')?.addEventListener('click',()=>submitGuess());
  const regularConfirm=$('submitGuessBtn'),miniConfirm=$('miniSubmitGuessBtn');if(regularConfirm&&miniConfirm&&window.MutationObserver){const mo=new MutationObserver(()=>miniConfirm.disabled=regularConfirm.disabled);mo.observe(regularConfirm,{attributes:true,attributeFilter:['disabled']});}
- $('micDeviceSelect')?.addEventListener('change',()=>{if(voiceOn)toast('Para cambiar de micrófono, desactiva la voz y vuelve a activarla.');});
+ $('micDeviceSelect')?.addEventListener('change',()=>{switchVoiceInputDevice().catch(e=>toast('No se pudo cambiar el micrófono: '+e.message));});
  const chat=$('chatMessages');if(chat&&window.MutationObserver){
  const observer=new MutationObserver(()=>{
   if(hudPanelOpen==='chatDock'){chat.scrollTop=chat.scrollHeight;return;}
@@ -1714,15 +1908,15 @@ else initialiseWorldRivals();
    Local-only admin password is a convenience gate, NOT secure authentication. */
 (()=>{
 'use strict';
-const WR_BASE='8.2.0';
+const WR_BASE='8.5.0';
 const ADMIN_PASSWORD='Enrr_2013';
 const STABLE_DB='world-rivals-local-updates-v1';
 const LS_MANIFEST='wr_v7_manifest_url';
 const LS_LATEST='wr_v7_latest_html';
 const K_SEQUENCE=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a','Enter'];
 const currentVersion=()=>document.querySelector('meta[name="worldrivals-version"]')?.getAttribute('content')||WR_BASE;
-const versionParts=(str)=>String(str||'').replace(/^v/i,'').split('.').slice(0,4).map(x=>Number.parseInt(x,10)||0);
-const compare=(a,b)=>{let x=versionParts(a),y=versionParts(b);for(let i=0;i<4;i++){if((x[i]||0)!==(y[i]||0))return(x[i]||0)>(y[i]||0)?1:-1;}return 0;};
+const versionParts=(str)=>{const text=String(str||'').trim().replace(/^v\s*/i,'');const m=text.match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:\.(\d+))?\s*(?:[-_ ]*(alpha|beta|rc)[\s._-]*(\d+)?)?$/i);if(!m)return [0,0,0,0,-10,0];const stage=String(m[5]||'').toLowerCase();return [Number(m[1]),Number(m[2]||0),Number(m[3]||0),Number(m[4]||0),stage==='alpha'?-3:stage==='beta'?-2:stage==='rc'?-1:0,Number(m[6]||0)];};
+const compare=(a,b)=>{let x=versionParts(a),y=versionParts(b);for(let i=0;i<6;i++){if((x[i]||0)!==(y[i]||0))return(x[i]||0)>(y[i]||0)?1:-1;}return 0;};
 const ready=(fn)=>document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn,{once:true}):fn();
 const safeText=(s)=>String(s||'').replace(/[<>]/g,'').slice(0,300);
 const toast=(str)=>{const t=document.getElementById('toast');if(t){t.textContent=str;t.classList.add('show');window.setTimeout(()=>t.classList.remove('show'),4700);}else console.info('[WORLD RIVALS]',str);};
@@ -1771,14 +1965,14 @@ function render(){
  const backdrop=document.createElement('div');backdrop.id='wru-backdrop';backdrop.innerHTML=`<section id="wru-modal" role="dialog" aria-label="Centro de actualizaciones WORLD RIVALS" aria-modal="true">
 <button type="button" class="wru-close wru-second" id="wru-close" aria-label="Cerrar">✕</button>
 <div style="color:#54dfeb;font-weight:850;letter-spacing:.2em;font-size:10px;margin-bottom:10px">WORLD // RIVALS · CONTROL DE VERSIONES</div>
-<h2>◈ Centro de actualizaciones</h2><p class="wru-small">Versión cargada: <strong id="wru-current"></strong> · Última instalada: <strong id="wru-latest"></strong></p>
-<div id="wru-locked"><p>Introduce la contraseña de administrador para subir una nueva versión.</p><form id="wru-unlock-form"><label class="wru-label" for="wru-password">Contraseña</label><input id="wru-password" type="password" autocomplete="off" required><button type="submit">Desbloquear ↗</button></form><p id="wru-password-status" role="status" class="wru-small"></p></div>
+<h2>◈ Acceso de administrador</h2><p class="wru-small">Versión cargada: <strong id="wru-current"></strong> · Última instalada: <strong id="wru-latest"></strong></p>
+<div id="wru-locked"><p>Introduce la contraseña para abrir el publicador oficial de GitHub.</p><form id="wru-unlock-form"><label class="wru-label" for="wru-password">Contraseña</label><input id="wru-password" type="password" autocomplete="off" required><button type="submit">Desbloquear ↗</button></form><p id="wru-password-status" role="status" class="wru-small"></p></div>
 <div id="wru-unlocked" hidden>
 <p class="wru-info">Las versiones se guardan en este navegador. La actualización debe ser superior a la instalada y contener un HTML del juego. Abrir una copia antigua desde otra carpeta no puede bloquearse desde aquí.</p>
 <div class="wru-line"></div><label class="wru-label" for="wru-file">Archivo HTML de la actualización</label><input id="wru-file" type="file" accept=".html,.htm,text/html">
 <label class="wru-label" for="wru-target-version">Número de la nueva versión (ej. 8.0.0)</label><input id="wru-target-version" placeholder="8.0.0" inputmode="decimal" spellcheck="false">
 <label class="wru-label" for="wru-notes">3 novedades de ESTA versión (sustituyen las anteriores): Título | descripción</label>
-<textarea id="wru-notes" placeholder="🎲 Mapas variados | Selección aleatoria en cada ronda\n🌍 Más ubicaciones | Nuevas fotografías disponibles\n🚀 Mejor rendimiento | Navegación más fluida"></textarea>
+<textarea id="wru-notes" placeholder="🌍 Mapas globales | Sorteo equilibrado de continente y país\n🎙️ Micro en grupo | Llamadas de voz independientes\n🗺️ Más países | Nuevas regiones para descubrir"></textarea>
 <div class="wru-row"><button id="wru-install" type="button">Instalar actualización ↗</button><span id="wru-upload-status" class="wru-small" role="status"></span></div>
 <div class="wru-line"></div><label class="wru-label" for="wru-manifest">URL del manifiesto online (opcional)</label><input id="wru-manifest" type="url" placeholder="https://tusitio.com/worldrivals/version.json" spellcheck="false">
 <p class="wru-small">Al abrir el juego se comprobará esta URL si la configuras. Debe ofrecer JSON con <code>version</code> y <code>html_url</code>, y permitir peticiones CORS. Solo usa una dirección que controles.</p>
@@ -1793,7 +1987,7 @@ function render(){
  const q=(id)=>document.getElementById(id);
  q('wru-close').addEventListener('click',close);
  backdrop.addEventListener('click',(e)=>{if(e.target===backdrop)close();});
- q('wru-unlock-form').addEventListener('submit',(e)=>{e.preventDefault();if(q('wru-password').value===ADMIN_PASSWORD){authenticated=true;q('wru-locked').hidden=true;q('wru-unlocked').hidden=false;q('wru-password').value='';q('wru-password-status').textContent='';if(availableRemote)q('wru-install-remote').hidden=false;updateStatus();}else{q('wru-password-status').textContent='Contraseña incorrecta.';q('wru-password-status').className='wru-error';}});
+ q('wru-unlock-form').addEventListener('submit',(e)=>{e.preventDefault();if(q('wru-password').value===ADMIN_PASSWORD){authenticated=true;q('wru-locked').hidden=true;q('wru-unlocked').hidden=false;q('wru-password').value='';q('wru-password-status').textContent='';if(availableRemote)q('wru-install-remote').hidden=false;updateStatus();close();window.WRPublisher?.open?.();}else{q('wru-password-status').textContent='Contraseña incorrecta.';q('wru-password-status').className='wru-error';}});
  q('wru-file').addEventListener('change',(e)=>{selectedFile=e.target.files?.[0]||null;if(selectedFile){const guessed=guessVersion(selectedFile.name)||'';q('wru-target-version').value=guessed||'';q('wru-upload-status').textContent='Seleccionado: '+safeText(selectedFile.name);} });
  q('wru-install').addEventListener('click',installFile);
  q('wru-save-manifest').addEventListener('click',()=>{const val=q('wru-manifest').value.trim();if(val&&!/^https:\/\//i.test(val)){q('wru-check-status').textContent='La dirección debe empezar por https://';return;}safeStorage.put(LS_MANIFEST,val);availableRemote=null;q('wru-install-remote').hidden=true;q('wru-available').classList.remove('wru-visible');q('wru-check-status').textContent=val?'Fuente online guardada.':'Fuente online desactivada.';if(val)checkOnline();});
@@ -1807,6 +2001,7 @@ function updateStatus(){
 }
 function open(){const b=document.getElementById('wru-backdrop');if(!b)return;b.classList.add('wru-visible');updateStatus();if(!authenticated)document.getElementById('wru-password')?.focus();}
 function close(){document.getElementById('wru-backdrop')?.classList.remove('wru-visible');}
+window.WRLocalUpdater={open,close};
 window.addEventListener('keydown',(e)=>{
  if(e.key==='Escape'){close();return;}
  if(e.ctrlKey||e.altKey||e.metaKey||e.repeat)return;
@@ -1816,12 +2011,13 @@ window.addEventListener('keydown',(e)=>{
  seqIndex=key===K_SEQUENCE[0]?1:0;
 },true);
 function guessVersion(filename){const m=String(filename||'').match(/(?:^|[^a-z\d])v(?:ersion)?[\s._-]*(\d+)(?:[._-](\d+))?(?:[._-](\d+))?/i);if(!m)return null;return[m[1],m[2]||'0',m[3]||'0'].join('.');}
-function normalizedVersion(str){if(!/^\d+(?:\.\d+){0,3}$/.test(String(str||'').trim()))return null;return String(str).trim();}
+function normalizedVersion(str){if(!/^v?\d+(?:\.\d+){0,3}(?:[\s._-]*(?:alpha|beta|rc)(?:[\s._-]*\d+)?)?$/i.test(String(str||'').trim()))return null;return String(str).trim();}
 function parseHtmlInfo(html){const doc=new DOMParser().parseFromString(html,'text/html');return {isHtml:/<html[\s>]/i.test(html)&&/<body[\s>]/i.test(html),declared:doc.querySelector('meta[name="worldrivals-version"]')?.getAttribute('content')||'',title:doc.title||''};}
 function prepareHtml(html,version){
  // Inject the persistent update manager into each installed HTML so future versions remain manageable.
  let source=String(html);
  source=source.replace(/<script\b[^>]*id=["']wr-updater-script["'][^>]*>[\s\S]*?<\/script\s*>/ig,'');
+ source=source.replace(/<script\b[^>]*id=["']wr-github-publisher-script["'][^>]*>[\s\S]*?<\/script\s*>/ig,'');
  source=source.replace(/<meta\b[^>]*name=["']worldrivals-version["'][^>]*>/ig,'');
  const meta='<meta name="worldrivals-version" content="'+version+'">';
  source=source.replace(/<head[^>]*>/i,(tag)=>tag+'\n'+meta+'\n');
@@ -1829,8 +2025,10 @@ function prepareHtml(html,version){
  if(!existing)throw Error('No se encontró el gestor de actualizaciones en esta versión.');
  const bootstrapText=existing.textContent;
  const bootTag='<scr'+'ipt id="wr-updater-script">'+bootstrapText+'<'+'/scr'+'ipt>';
- if(/<\/body\s*>/i.test(source))source=source.replace(/<\/body\s*>/i,bootTag+'\n</body>');
- else source+=bootTag;
+ const pubText=document.getElementById('wr-github-publisher-script')?.textContent||'';
+ const pubTag=pubText?'<scr'+'ipt id="wr-github-publisher-script">'+pubText+'<'+'/scr'+'ipt>':'';
+ if(/<\/body\s*>/i.test(source))source=source.replace(/<\/body\s*>/i,bootTag+'\n'+pubTag+'\n</body>');
+ else source+=bootTag+pubTag;
  return source;
 }
 function parseNotes(){return(document.getElementById('wru-notes')?.value||'').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,3);}
@@ -1895,6 +2093,189 @@ ready(async()=>{
  updateStatus();
  if(safeStorage.get(LS_MANIFEST))checkOnline();
 });
+})();
+
+</script>
+<script id="wr-github-publisher-script">
+/* WORLD RIVALS V8.5 — GitHub official publisher.
+   GitHub credentials are used only for the explicit publish request and are never saved. */
+(()=>{
+'use strict';
+const STORAGE='wr_publisher_repository_v1';
+const MANIFEST_STORAGE='wr_v7_manifest_url';
+const OFFICIAL_GAME='world-rivals/game.html';
+const OFFICIAL_MANIFEST='world-rivals/latest.json';
+const DEFAULTS={owner:'poligatito',repo:'World-Rivals',branch:'main'};
+const q=id=>document.getElementById(id);
+const activeVersion=()=>document.querySelector('meta[name="worldrivals-version"]')?.content||'8.5.0';
+const toast=s=>{const el=q('wrp-status');if(el)el.textContent=s;};
+const sanitizeError=e=>{
+ const message=String(e?.message||e||'Error desconocido');
+ return message.replace(/(?:github_pat_|gh[pousr]_|ghu_)[A-Za-z0-9_\-]+/gi,'[token oculto]').slice(0,350);
+};
+let processing=false;
+function previousConfig(){try{const x=JSON.parse(localStorage.getItem(STORAGE)||'{}');return {...DEFAULTS,...x};}catch{return {...DEFAULTS};}}
+function config(){
+ const owner=q('wrp-owner').value.trim(),repo=q('wrp-repo').value.trim(),branch=q('wrp-branch').value.trim();
+ if(!/^[a-z\d](?:[a-z\d-]{0,38})$/i.test(owner)||owner.endsWith('-'))throw Error('Usuario de GitHub incorrecto.');
+ if(!/^[a-z\d._-]{1,100}$/i.test(repo)||repo==='.'||repo==='..')throw Error('Nombre de repositorio incorrecto.');
+ if(!/^[a-z\d._/-]{1,100}$/i.test(branch)||branch.includes('..')||branch.startsWith('/')||branch.endsWith('/'))throw Error('Rama incorrecta.');
+ return {owner,repo,branch};
+}
+function rawUrl(c,path){return 'https://raw.githubusercontent.com/'+encodeURIComponent(c.owner)+'/'+encodeURIComponent(c.repo)+'/'+c.branch.split('/').map(encodeURIComponent).join('/')+'/'+path;}
+function repoUrl(c){return 'https://github.com/'+encodeURIComponent(c.owner)+'/'+encodeURIComponent(c.repo);}
+function saveAddress(){
+ try{
+  const c=config();localStorage.setItem(STORAGE,JSON.stringify(c));
+  localStorage.setItem(MANIFEST_STORAGE,rawUrl(c,OFFICIAL_MANIFEST));
+  toast('Dirección guardada: '+c.owner+'/'+c.repo+' · '+c.branch+'. El comprobador de actualizaciones usará este repositorio.');
+ }catch(e){toast(sanitizeError(e));}
+}
+function modalCss(){
+ const s=document.createElement('style');s.id='wrp-style';s.textContent=`
+ #wrp-overlay{display:none;position:fixed;inset:0;z-index:2147483000;background:#070b12e8;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}
+ #wrp-overlay.wrp-open{display:flex}
+ #wrp-panel{width:min(640px,100%);max-height:min(91vh,900px);overflow-y:auto;box-sizing:border-box;border:1px solid #5a8094;border-radius:18px;background:linear-gradient(145deg,#202b38,#121924);box-shadow:0 28px 80px #000b;color:#f2f6fe;padding:25px;font:14px system-ui,-apple-system,'Segoe UI',sans-serif;position:relative}
+ #wrp-panel *,#wrp-panel *::before,#wrp-panel *::after{box-sizing:border-box}
+ #wrp-panel::before{content:'';position:absolute;top:0;left:22px;right:22px;height:3px;background:linear-gradient(90deg,#fc5266,#78f6ee,#f14e63)}
+ #wrp-panel h2{font-size:26px;margin:7px 0 10px;line-height:1.2}
+ #wrp-panel h3{font-size:17px;margin:18px 0 10px}
+ #wrp-panel p{color:#b8c9d7;line-height:1.5;margin:6px 0 12px}
+ #wrp-panel .wrp-eyebrow{font-size:11px;color:#75e9f5;font-weight:850;letter-spacing:.18em}
+ #wrp-panel .wrp-section{border-top:1px solid #455568;margin-top:18px;padding-top:13px}
+ #wrp-panel .wrp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ #wrp-panel label{display:block;font-weight:750;color:#c5d8e6;font-size:12px;margin:12px 0 5px}
+ #wrp-panel input{display:block;width:100%;padding:12px;background:#111823;border:1px solid #546b83;border-radius:9px;color:#fff;font:inherit;min-width:0}
+ #wrp-panel input:focus{outline:2px solid #68dce9;outline-offset:1px}
+ #wrp-panel input[type=file]{cursor:pointer}
+ #wrp-panel button{background:#f04457;color:white;border:0;border-radius:8px;padding:11px 15px;font-weight:750;cursor:pointer;font:inherit}
+ #wrp-panel button.wrp-secondary{background:#304555;border:1px solid #526b80}
+ #wrp-panel button:disabled{opacity:.5;cursor:wait}
+ #wrp-panel #wrp-close{position:absolute;right:14px;top:13px;font-size:18px;min-width:36px;padding:7px}
+ #wrp-panel .wrp-buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+ #wrp-panel .wrp-info{background:#10222d;border:1px solid #375e70;border-radius:9px;padding:11px 12px;font-size:12px;color:#c2e1ef;line-height:1.5;margin:12px 0}
+ #wrp-panel .wrp-small{color:#96aabb;font-size:11px}
+ #wrp-panel #wrp-status{min-height:24px;white-space:pre-line;overflow-wrap:anywhere;user-select:text}
+ #wrp-panel a{color:#78e5ed}
+ @media(max-width:530px){#wrp-panel{padding:18px}#wrp-panel .wrp-grid{grid-template-columns:1fr}}
+ `;document.head.appendChild(s);
+}
+function render(){
+ const c=previousConfig();modalCss();const root=document.createElement('div');root.id='wrp-overlay';
+ root.innerHTML=`<section id="wrp-panel" role="dialog" aria-modal="true" aria-label="Publicador de WORLD RIVALS">
+ <button id="wrp-close" type="button" class="wrp-secondary" aria-label="Cerrar">×</button>
+ <div class="wrp-eyebrow">WORLD//RIVALS · PUBLICADOR OFICIAL</div>
+ <h2>Publicador de WORLD RIVALS</h2>
+ <p>Publica una versión para todos tus amigos usando tu repositorio de GitHub.</p>
+ <div class="wrp-info">Versión de este juego: <strong id="wrp-current"></strong> · Destino: <strong id="wrp-source"></strong><br>El token solo se utiliza durante la publicación y no se guarda.</div>
+ <div class="wrp-section"><h3>1. Repositorio de actualizaciones</h3>
+ <p>El publicador actualiza <code>world-rivals/game.html</code> y <code>world-rivals/latest.json</code> en la rama configurada.</p>
+ <div class="wrp-grid"><div><label for="wrp-owner">Usuario de GitHub</label><input id="wrp-owner" type="text" autocomplete="off" spellcheck="false"></div>
+ <div><label for="wrp-repo">Nombre del repositorio</label><input id="wrp-repo" type="text" autocomplete="off" spellcheck="false"></div></div>
+ <label for="wrp-branch">Rama del repositorio</label><input id="wrp-branch" type="text" autocomplete="off" spellcheck="false">
+ <div class="wrp-buttons"><button type="button" id="wrp-save" class="wrp-secondary">Guardar dirección</button><button type="button" id="wrp-check" class="wrp-secondary">Buscar versión online</button></div>
+ <p id="wrp-remote" class="wrp-info" role="status">Puedes comprobar qué versión está publicada antes de subir una nueva.</p>
+ <button type="button" class="wrp-secondary" id="wrp-export">↓ Exportar launcher para amigos</button>
+ </div><div class="wrp-section"><h3>2. Publicar una versión para TODOS</h3>
+ <label for="wrp-file">Nuevo juego (.html)</label><input type="file" id="wrp-file" accept=".html,.htm,text/html">
+ <label for="wrp-version">Versión (admite V9 Beta, V10 RC1, etc.)</label><input id="wrp-version" type="text" placeholder="V8.5.0" spellcheck="false" autocomplete="off">
+ <label for="wrp-token">Token de GitHub (permiso Contents: Read and Write)</label><input id="wrp-token" type="password" placeholder="Se utiliza solo al publicar; no se guarda" autocomplete="off" spellcheck="false">
+ <p class="wrp-small">Configura el token para que solo tenga acceso a este repositorio. No lo compartas ni lo incluyas dentro del juego o launcher.</p>
+ <button id="wrp-publish" type="button" style="width:100%">Publicar versión oficial ↗</button>
+ <p class="wrp-small">La nueva versión sustituirá el archivo oficial. GitHub conserva el historial de versiones en sus commits.</p>
+ </div><div class="wrp-section"><button class="wrp-secondary" type="button" id="wrp-local">Instalación local / herramientas antiguas</button>
+ <p class="wrp-small">Las instalaciones locales no publican actualizaciones a tus amigos.</p></div>
+ <div id="wrp-status" role="status" aria-live="polite" class="wrp-info"></div>
+ </section>`;
+ document.body.appendChild(root);
+ q('wrp-owner').value=c.owner;q('wrp-repo').value=c.repo;q('wrp-branch').value=c.branch;
+ q('wrp-current').textContent=activeVersion();q('wrp-version').value='V'+activeVersion();
+ q('wrp-source').textContent=c.owner+'/'+c.repo;
+ q('wrp-close').addEventListener('click',close);
+ root.addEventListener('click',e=>{if(e.target===root)close();});
+ q('wrp-save').addEventListener('click',saveAddress);
+ q('wrp-check').addEventListener('click',checkOnline);
+ q('wrp-export').addEventListener('click',exportLauncher);
+ q('wrp-publish').addEventListener('click',publish);
+ q('wrp-local').addEventListener('click',()=>{close();window.WRLocalUpdater?.open?.();});
+ q('wrp-file').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;
+   if(f.size>12*1024*1024){toast('HTML demasiado grande (máximo 12 MB).');return;}
+   try{const txt=await f.text();const doc=new DOMParser().parseFromString(txt,'text/html');const v=doc.querySelector('meta[name="worldrivals-version"]')?.getAttribute('content');if(v)q('wrp-version').value='V'+v.replace(/^v/i,'');}catch{}
+ });
+ for(const id of ['wrp-owner','wrp-repo','wrp-branch'])q(id).addEventListener('input',()=>{try{q('wrp-source').textContent=config().owner+'/'+config().repo;}catch{q('wrp-source').textContent='Sin configurar';}});
+ window.addEventListener('keydown',e=>{if(e.key==='Escape'&&root.classList.contains('wrp-open')){e.stopPropagation();close();}},true);
+}
+function open(){q('wrp-overlay')?.classList.add('wrp-open');q('wrp-current').textContent=activeVersion();q('wrp-file').focus();}
+function close(){q('wrp-overlay')?.classList.remove('wrp-open');}
+function isVersion(str){return /^v?\d+(?:\.\d+){0,3}(?:[\s._-]*(?:alpha|beta|rc)(?:[\s._-]*\d+)?)?$/i.test(str.trim());}
+async function checkOnline(){
+ try{const c=config();const url=rawUrl(c,OFFICIAL_MANIFEST);
+  q('wrp-remote').textContent='Buscando versión en GitHub…';
+  const response=await fetch(url+'?t='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw Error('GitHub respondió '+response.status+'. Comprueba si el repositorio es público y ya tiene latest.json.');
+  const doc=await response.json();q('wrp-remote').textContent='Versión publicada: '+String(doc.version||'sin versión')+' · '+c.owner+'/'+c.repo+' · '+c.branch;
+ }catch(e){q('wrp-remote').textContent=sanitizeError(e);}
+}
+function toB64(content){
+ const bytes=new TextEncoder().encode(content);const parts=[];const chunk=24576;
+ for(let i=0;i<bytes.length;i+=chunk){parts.push(btoa(String.fromCharCode(...bytes.subarray(i,Math.min(i+chunk,bytes.length)))));}
+ return parts.join('');
+}
+async function apiFile(c,path,token){
+ const url='https://api.github.com/repos/'+encodeURIComponent(c.owner)+'/'+encodeURIComponent(c.repo)+'/contents/'+path.split('/').map(encodeURIComponent).join('/');
+ const headers={'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Authorization':'Bearer '+token};
+ const get=await fetch(url+'?ref='+encodeURIComponent(c.branch),{headers,cache:'no-store'});
+ if(get.status===404)return {url,headers,sha:null};
+ if(!get.ok)throw Error('No se pudo comprobar '+path+' (GitHub '+get.status+'). Verifica los permisos del token y el repositorio.');
+ const old=await get.json();if(old.type!=='file'||!old.sha)throw Error(path+' existe, pero no es un archivo normal.');
+ return {url,headers,sha:old.sha};
+}
+async function putFile(c,path,data,token,version){
+ const old=await apiFile(c,path,token);
+ const body={message:'WORLD RIVALS '+version+' · Actualización de '+path,content:toB64(data),branch:c.branch};
+ if(old.sha)body.sha=old.sha;
+ const res=await fetch(old.url,{method:'PUT',headers:{...old.headers,'Content-Type':'application/json'},body:JSON.stringify(body)});
+ if(!res.ok){let detail='';try{const result=await res.json();detail=String(result.message||'').slice(0,100);}catch{}
+  throw Error('GitHub rechazó '+path+' (HTTP '+res.status+')'+(detail?': '+detail:'')+'.');}
+}
+async function publish(){
+ if(processing)return;
+ let token='';const submit=q('wrp-publish');
+ try{
+  const c=config(),file=q('wrp-file').files?.[0],version=q('wrp-version').value.trim();
+  token=q('wrp-token').value.trim();
+  if(!file)throw Error('Selecciona primero el HTML del juego.');
+  if(!/\.html?$/i.test(file.name)||file.size>12*1024*1024)throw Error('Selecciona un archivo .html válido de menos de 12 MB.');
+  if(!isVersion(version))throw Error('Versión no válida. Usa V8.5.0, V9 Beta, V9 Beta 2 o V10 RC1.');
+  if(!token||token.length<15)throw Error('Introduce un token de GitHub con permisos Contents: Read and Write para este repositorio.');
+  const html=await file.text();
+  if(!/<html\b/i.test(html)||!/<body\b/i.test(html)||!/(?:world\s*rivals|world\s*\/\/\s*rivals)/i.test(html.slice(0,20000)))throw Error('El archivo no parece un HTML completo de WORLD RIVALS.');
+  if(!window.confirm('¿Publicar '+version+' en '+c.owner+'/'+c.repo+'? Esto reemplaza el juego y avisa a todos los launchers.'))return;
+  processing=true;submit.disabled=true;
+  // Keep a token only in this function; never put it in localStorage, messages or exported files.
+  toast('1/2 · Publicando el juego en GitHub…');
+  const updated=html.replace(/<meta\s+name=["']worldrivals-version["']\s+content=["'][^"']*["']\s*\/?\s*>/i,'<meta name="worldrivals-version" content="'+version.replace(/^v/i,'')+'">');
+  await putFile(c,OFFICIAL_GAME,updated,token,version);
+  toast('2/2 · Publicando el manifiesto de actualizaciones…');
+  const manifest=JSON.stringify({version,html_url:rawUrl(c,OFFICIAL_GAME),published_at:new Date().toISOString()},null,2)+'\n';
+  await putFile(c,OFFICIAL_MANIFEST,manifest,token,version);
+  localStorage.setItem(STORAGE,JSON.stringify(c));
+  localStorage.setItem(MANIFEST_STORAGE,rawUrl(c,OFFICIAL_MANIFEST));
+  toast('✅ '+version+' publicada oficialmente en '+c.owner+'/'+c.repo+'. Tus amigos podrán recibirla desde el launcher.');
+  q('wrp-remote').textContent='Versión publicada: '+version;
+ }catch(e){toast('❌ '+sanitizeError(e)+' Si el primer archivo se publicó, puedes repetir la operación para completar latest.json.');}
+ finally{token='';q('wrp-token').value='';processing=false;submit.disabled=false;}
+}
+function exportLauncher(){
+ try{
+ const c=config(),manifest=rawUrl(c,OFFICIAL_MANIFEST);
+ const source=`<!doctype html>\n<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WORLD RIVALS — Launcher Online</title><style>html,body{margin:0;min-height:100%;background:#0e141e;color:#fff;font-family:system-ui,sans-serif}main{min-height:100vh;display:grid;place-items:center;text-align:center;padding:20px;box-sizing:border-box}section{max-width:500px}h1{color:#fa4e63}button{border:0;background:#ef4755;color:white;padding:12px 20px;border-radius:8px;cursor:pointer}p{color:#bdd0de}</style></head><body><main><section><h1>🌍 WORLD RIVALS</h1><p id="state">Comprobando versión oficial en GitHub…</p><button id="retry" hidden>Reintentar</button></section></main><script>\n(function(){'use strict';const url=${JSON.stringify(manifest)};const state=document.getElementById('state'),retry=document.getElementById('retry');async function launch(){retry.hidden=true;state.textContent='Buscando la versión más reciente…';try{const response=await fetch(url+'?t='+Date.now(),{cache:'no-store'});if(!response.ok)throw Error('No se pudo obtener latest.json (HTTP '+response.status+')');const data=await response.json();const target=new URL(data.html_url,url);if(target.protocol!=='https:')throw Error('La versión debe usar HTTPS.');state.textContent='Cargando WORLD RIVALS '+(data.version||'')+'…';const r=await fetch(target.href+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('No se pudo descargar el juego (HTTP '+r.status+')');const text=await r.text();if(!/<html\\b/i.test(text)||!/<body\\b/i.test(text))throw Error('La versión descargada no es HTML válido.');document.open();document.write(text);document.close();}catch(e){state.textContent='No se pudo iniciar online: '+(e.message||e)+'. Comprueba tu conexión.';retry.hidden=false;}}retry.onclick=launch;launch();})();<\/script></body></html>`;
+ const blob=new Blob([source],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='World Rivals.html';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+ toast('Launcher exportado. Ábrelo con conexión a Internet para cargar la última versión oficial.');
+ }catch(e){toast(sanitizeError(e));}
+}
+function setup(){render();window.WRPublisher={open,close};}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
 })();
 
 </script>
