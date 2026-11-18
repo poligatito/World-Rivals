@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>WORLD RIVALS V8.1 — Amigos y pantalla completa real</title>
-<meta name="worldrivals-version" content="8.1.0">
+<title>WORLD RIVALS V8.2 — Editor de personajes Ultra</title>
+<meta name="worldrivals-version" content="8.2.0">
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 
 
@@ -400,6 +400,27 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 .setup-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin:19px 0 9px}
 @media(max-width:640px){.friend-row{align-items:flex-start;flex-direction:column}.friend-actions{width:100%;justify-content:flex-start}.top-actions #friendsBtn{padding:7px 9px;font-size:11px}.setup-actions .btn{flex:1}}
 
+
+/* WORLD RIVALS V8.2 — Ultra Avatar Lab, optimizado y adaptable */
+.wr-profile-modal{width:min(950px,96vw)!important;max-width:950px!important;max-height:min(94dvh,900px);overflow:auto;overscroll-behavior:contain}
+.wr-profile-modal .modal-head{align-items:flex-start}.wr-beta{font-size:10px;vertical-align:middle;display:inline-block;padding:5px 8px;border:1px solid #55ddec77;border-radius:9px;color:#64e3ee;letter-spacing:.12em}
+.wr-editor-layout{display:grid;grid-template-columns:minmax(180px,260px) minmax(0,1fr);gap:20px;margin-top:16px;align-items:start}
+.wr-editor-preview{position:sticky;top:0;background:linear-gradient(150deg,#101824,#191722);border:1px solid #52d4ed43;border-radius:18px;padding:25px 15px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;min-width:0}
+.wr-avatar-spot{display:grid;place-items:center;width:190px;height:190px;max-width:100%;aspect-ratio:1;background:radial-gradient(circle,#438ba123,transparent 70%);border-radius:50%}
+.wr-avatar-spot .avatar{width:158px!important;height:158px!important;max-width:90%;border:0;overflow:visible;flex-shrink:0}
+.wr-preview-name{font-size:20px;overflow-wrap:anywhere}.wr-editor-tip{font-size:11px;line-height:1.6;color:#b9bfcd;background:#ffffff09;padding:10px;border-radius:11px;border:1px solid #ffffff13}.wr-editor-tip + button{width:100%}
+.wr-editor-controls{min-width:0}.wr-edit-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:5px;background:#080b13;border-radius:14px;border:1px solid #ffffff22}
+.wr-edit-tab{border:1px solid transparent;background:transparent;color:#abb4c2;font:800 12px system-ui;cursor:pointer;border-radius:10px;padding:12px 6px;transition:transform .15s,background .15s,border-color .15s}.wr-edit-tab:hover{transform:translateY(-2px);background:#f0445025;border-color:#f0445068;color:white}.wr-edit-tab.active{color:white;background:linear-gradient(135deg,#c92c45,#632342);border-color:#ef6575}
+.wr-edit-caption{margin:17px 0 9px;font-size:10px;font-weight:900;letter-spacing:.16em;color:#64dfea}
+.wr-color-field{height:42px;padding:4px 6px;cursor:pointer;min-width:0;width:100%}
+.wr-emoji-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.wr-emoji-choice{background:#111722;border:1px solid #3a4656;border-radius:10px;display:grid;place-items:center;min-height:42px;font-size:24px;cursor:pointer;transition:transform .12s,border-color .12s}.wr-emoji-choice:hover{transform:scale(1.08);border-color:#55ddec}.wr-emoji-choice.active{border-color:#f04450;background:#7e233946;box-shadow:inset 0 0 0 1px #f04450}
+.wr-upload-box{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;border:2px dashed #55ddec88;background:#17303c35;color:#e5f8fd;padding:20px;border-radius:16px;cursor:pointer;margin-bottom:14px}.wr-upload-box:hover{background:#18415188}.wr-upload-box small{font-size:10px;color:#aab9c9}.wr-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;overflow:hidden!important}
+.wr-form-slider{margin:14px 0}.wr-form-slider label{display:flex;justify-content:space-between;color:#c7d1df;font-size:12px;margin-bottom:7px}.wr-form-slider input{width:100%;accent-color:#f04450;cursor:pointer}
+.wr-editor-actions{display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:-25px;padding:18px 0 0;margin-top:14px;background:linear-gradient(0deg,#191b23 72%,#191b2300)}.wr-editor-actions .btn:first-child{min-width:200px}
+@media(max-width:690px){.wr-profile-modal{max-height:96dvh;padding:15px!important}.wr-editor-layout{grid-template-columns:1fr;gap:13px}.wr-editor-preview{position:relative;display:grid;grid-template-columns:90px 1fr;text-align:left;padding:11px;column-gap:12px;justify-items:start}.wr-avatar-spot{grid-row:1/4;width:90px;height:90px}.wr-avatar-spot .avatar{width:83px!important;height:83px!important;max-width:83px}.wr-preview-name{font-size:17px}.wr-editor-tip{display:none}.wr-editor-preview>button{grid-column:2;width:auto!important}.wr-emoji-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.wr-editor-actions{bottom:-15px}.wr-editor-actions .btn:first-child{min-width:0;flex:1}}
+@media(max-width:400px){.wr-edit-tab{font-size:11px;padding:10px 2px}.wr-emoji-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.wr-edit-tab,.wr-emoji-choice{transition:none!important}}
 </style>
 </head>
 <body>
@@ -423,9 +444,9 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   <div class="hero-art"><div class="orbit"><div class="globe">🌐</div><div class="orbit-label one">📍 GOOGLE STREET VIEW</div><div class="orbit-label two">⚡ MULTIJUGADOR</div><div class="orbit-label three">✦ WORLD CHAMPION</div></div></div>
  </section>
  <section class="feature-strip">
-  <div class="feature"><div class="feature-icon">🎲</div><div><b>ARREGLADO · Mapas aleatorios</b><small>Corregido: las rondas ya no siguen siempre el mismo orden</small></div></div>
-  <div class="feature"><div class="feature-icon">🌍</div><div><b>NUEVO · Catálogo ampliable</b><small>Hasta 2.000 panorámicas públicas distintas, cuando estén disponibles</small></div></div>
-  <div class="feature"><div class="feature-icon">🔀</div><div><b>MEJORADO · Sin repeticiones</b><small>Sorteo independiente en cada ronda y memoria de lugares recientes</small></div></div>
+  <div class="feature"><div class="feature-icon">🎨</div><div><b>NUEVO · Personajes ultraeditables</b><small>Avatar clásico avanzado, emojis y fondos, marcos y accesorios</small></div></div>
+  <div class="feature"><div class="feature-icon">📸</div><div><b>NUEVO · Tu propia foto</b><small>Sube una imagen, encuádrala y úsala como personaje en las salas</small></div></div>
+  <div class="feature"><div class="feature-icon">⚡</div><div><b>OPTIMIZADO · Avatar ligero</b><small>Fotos reducidas, vistas vectoriales y editor adaptado a móviles</small></div></div>
  </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -443,7 +464,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   </article>
  </section>
   <section class="identity-panel"><div class="section-head"><div><h2>Tu identidad</h2><p>Que se note quién ha llegado a la partida.</p></div><button class="btn btn-secondary btn-small" id="editProfileBtn">✎ Personalizar</button></div>
- <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b></div><small class="muted">Tu personaje de WORLD RIVALS</small></div><button class="btn btn-secondary btn-small" id="homeFriendsBtn">👥 Mis amigos</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
+ <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b></div><small class="muted">Tu identidad Ultra · toca Personalizar</small></div><button class="btn btn-secondary btn-small" id="homeFriendsBtn">👥 Mis amigos</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
   </div>
 </main>
 <section id="lobbyScreen" class="main hidden"><div class="lobby-wrap"><button class="back-link" id="lobbyBack">← Volver al inicio</button><div class="lobby-card">
@@ -481,13 +502,35 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 </section>
 <footer class="footer-note"><span>WORLD//RIVALS · Un juego fan-made de exploración geográfica.</span><span>Imágenes: <a href="https://panoramax.fr/" target="_blank" rel="noopener">Panoramax (comunidad)</a> y <a href="https://www.google.com/maps/" target="_blank" rel="noopener">Google Maps (vínculos compartidos)</a> · Mapa: <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a></span></footer>
 </div>
-<div id="profileModal" class="modal-backdrop hidden"><div class="modal narrow"><div class="modal-head"><h2>🎨 Tu personaje</h2><button class="icon-btn" data-close="profileModal">✕</button></div><div class="avatar-preview-wrap"><div id="profilePreview" class="avatar"></div><div><div class="eyebrow">TU IDENTIDAD</div><div style="font-size:18px;margin:4px 0"><span id="previewFlag">🇪🇸</span> <b id="previewName">Invitado</b></div><small class="muted">Así te verán los demás jugadores.</small></div></div>
- <div class="form-row"><label>Nombre de jugador</label><input id="profileName" class="field" maxlength="18" placeholder="Tu nick"></div>
- <div class="form-grid"><div class="form-row"><label>Tu bandera</label><select id="profileFlag" class="field"></select></div><div class="form-row"><label>Color del nombre</label><div class="color-row"><input id="nameColor" type="color" value="#f3f4f7"><button class="btn btn-gold btn-small" id="goldToggle">✦ Dorado reflectante</button></div></div></div>
- <div class="form-grid"><div class="form-row"><label>Tono de piel</label><select id="skinColor" class="field"><option value="#f5c9a5">Claro</option><option value="#e6ad82">Medio claro</option><option value="#c9855c">Moreno</option><option value="#925b43">Oscuro</option><option value="#603c32">Muy oscuro</option></select></div><div class="form-row"><label>Peinado</label><select id="hairStyle" class="field"><option value="short">Corto</option><option value="spiky">Puntiagudo</option><option value="long">Largo</option><option value="cap">Gorra</option><option value="none">Sin pelo</option></select></div></div>
- <div class="form-grid"><div class="form-row"><label>Color del pelo</label><input id="hairColor" class="field" type="color" value="#34251f" style="height:43px;padding:5px"></div><div class="form-row"><label>Color de ropa</label><input id="shirtColor" class="field" type="color" value="#e34250" style="height:43px;padding:5px"></div></div>
- <div class="form-row"><label>Accesorio</label><select id="accessory" class="field"><option value="none">Ninguno</option><option value="glasses">Gafas</option><option value="headphones">Auriculares</option><option value="crown">Corona</option><option value="cap">Visera</option></select></div>
- <div style="display:flex;gap:9px;margin-top:20px"><button class="btn btn-primary" id="saveProfileBtn" style="flex:1">Guardar personaje</button><button class="btn btn-secondary" data-close="profileModal">Cancelar</button></div>
+<div id="profileModal" class="modal-backdrop hidden"><div class="modal wr-profile-modal" role="dialog" aria-modal="true" aria-label="Editor de personaje WORLD RIVALS">
+ <div class="modal-head"><div><div class="eyebrow">🎨 WORLD RIVALS · AVATAR LAB</div><h2>Personalización ULTRA <span class="wr-beta">V8.2</span></h2><p class="tiny muted">Tu identidad, totalmente a tu estilo. Los cambios se guardan al pulsar Guardar.</p></div><button class="icon-btn" data-close="profileModal" aria-label="Cerrar personalización">✕</button></div>
+ <div class="wr-editor-layout">
+  <aside class="wr-editor-preview">
+    <div class="wr-avatar-spot"><div id="profilePreview" class="avatar" aria-live="polite"></div></div>
+    <div class="wr-preview-name"><span id="previewFlag">🇪🇸</span> <b id="previewName">Invitado</b></div>
+    <small class="muted">Vista previa para las salas y clasificación</small>
+    <div class="wr-editor-tip">⚡ Los emojis y dibujos son vectoriales. Las fotos se comprimen y reducen automáticamente para no provocar lag.</div>
+    <button class="btn btn-secondary btn-small" type="button" id="randomAvatarBtn">🎲 Sorpréndeme</button>
+  </aside>
+  <section class="wr-editor-controls">
+   <div class="wr-edit-tabs" role="tablist" aria-label="Tipo de personaje"><button type="button" class="wr-edit-tab active" data-avatar-tab="classic" aria-selected="true">🧑 Clásico</button><button type="button" class="wr-edit-tab" data-avatar-tab="emoji" aria-selected="false">😎 Emojis</button><button type="button" class="wr-edit-tab" data-avatar-tab="photo" aria-selected="false">📸 Mi foto</button></div>
+   <div class="form-grid"><div class="form-row"><label for="profileName">Nombre de jugador</label><input id="profileName" class="field" maxlength="18" placeholder="Tu nick"></div><div class="form-row"><label for="profileFlag">Tu bandera</label><select id="profileFlag" class="field"></select></div></div>
+   <div id="wrClassicOptions" class="wr-mode-options">
+    <div class="wr-edit-caption">✦ APARIENCIA</div>
+    <div class="form-grid"><div class="form-row"><label for="skinColor">Tono de piel</label><select id="skinColor" class="field"><option value="#f5c9a5">Claro</option><option value="#e6ad82">Medio claro</option><option value="#c9855c">Moreno</option><option value="#925b43">Oscuro</option><option value="#603c32">Muy oscuro</option><option value="#bdd7f1">Azul fantasía</option><option value="#aa86db">Violeta fantasía</option><option value="#6bd6ab">Verde fantasía</option></select></div><div class="form-row"><label for="hairStyle">Peinado</label><select id="hairStyle" class="field"><option value="short">Corto</option><option value="spiky">Puntiagudo</option><option value="long">Largo</option><option value="cap">Con gorra</option><option value="curly">Rizado</option><option value="side">Con flequillo</option><option value="mohawk">Cresta</option><option value="bob">Bob</option><option value="bald">Sin pelo</option></select></div></div>
+    <div class="form-grid"><div class="form-row"><label for="eyesStyle">Ojos</label><select class="field" id="eyesStyle"><option value="normal">Normales</option><option value="happy">Alegres</option><option value="wink">Guiño</option><option value="sleepy">Relajados</option><option value="laser">Láser</option></select></div><div class="form-row"><label for="mouthStyle">Expresión</label><select class="field" id="mouthStyle"><option value="smile">Sonrisa</option><option value="grin">Carcajada</option><option value="serious">Serio</option><option value="surprised">Sorprendido</option><option value="cool">Chulo</option></select></div></div>
+    <div class="form-grid"><div class="form-row"><label for="hairColor">Color de pelo</label><input id="hairColor" class="field wr-color-field" type="color" value="#34251f"></div><div class="form-row"><label for="shirtColor">Color de ropa</label><input id="shirtColor" class="field wr-color-field" type="color" value="#e34250"></div></div>
+    <div class="form-grid"><div class="form-row"><label for="shirtAccentColor">Detalles de ropa</label><input id="shirtAccentColor" class="field wr-color-field" type="color" value="#191e30"></div><div class="form-row"><label for="accessory">Accesorio</label><select id="accessory" class="field"><option value="none">Sin accesorios</option><option value="glasses">Gafas</option><option value="shades">Gafas de sol</option><option value="headphones">Auriculares</option><option value="crown">Corona</option><option value="cap">Visera</option><option value="mask">Mascarilla</option><option value="halo">Halo</option><option value="bandana">Bandana</option></select></div></div>
+   </div>
+   <div id="wrEmojiOptions" class="wr-mode-options hidden"><div class="wr-edit-caption">✦ ESCOGE TU EMOJI</div><div id="wrEmojiGrid" class="wr-emoji-grid" role="group" aria-label="Elige un emoji"></div><div class="form-row"><label for="profileEmojiCustom">¿Otro emoji? Escríbelo aquí</label><input class="field" id="profileEmojiCustom" maxlength="20" placeholder="Ej. 🦊, 👻, 🎮" autocomplete="off"><small class="muted">Admite emojis combinados; se mostrarán en tu personaje.</small></div></div>
+   <div id="wrPhotoOptions" class="wr-mode-options hidden"><div class="wr-edit-caption">✦ PERSONALIZA CON UNA FOTO</div><label class="wr-upload-box" for="avatarPhotoFile">📷 <strong>Elegir foto desde tu dispositivo</strong><small>JPG, PNG, WebP · hasta 12 MB · se comprime antes de guardar</small></label><input id="avatarPhotoFile" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" class="wr-visually-hidden"><div id="wrPhotoTools" class="hidden"><div class="wr-form-slider"><label for="avatarZoom">Zoom de la imagen <output id="avatarZoomValue">100%</output></label><input type="range" id="avatarZoom" min="100" max="300" step="5" value="100"></div><div class="wr-form-slider"><label for="avatarPhotoX">Mover horizontalmente</label><input type="range" id="avatarPhotoX" min="-100" max="100" step="5" value="0"></div><div class="wr-form-slider"><label for="avatarPhotoY">Mover verticalmente</label><input type="range" id="avatarPhotoY" min="-100" max="100" step="5" value="0"></div><button id="avatarClearPhoto" type="button" class="btn btn-secondary btn-small">🗑 Quitar foto</button></div><p id="wrPhotoStatus" class="tiny muted">Tu foto se guarda en este navegador. Si entras a una sala, los otros jugadores podrán verla.</p></div>
+   <div class="wr-edit-caption">✦ ESTILO GLOBAL</div>
+   <div class="form-grid"><div class="form-row"><label for="avatarBg">Fondo</label><input id="avatarBg" class="field wr-color-field" type="color" value="#20263b"></div><div class="form-row"><label for="avatarFrame">Marco / brillo</label><input id="avatarFrame" class="field wr-color-field" type="color" value="#55ddec"></div></div>
+   <div class="form-grid"><div class="form-row"><label for="avatarPattern">Efecto del fondo</label><select id="avatarPattern" class="field"><option value="none">Liso</option><option value="stars">Estrellas</option><option value="dots">Puntos</option><option value="grid">Rejilla gamer</option><option value="rays">Rayos</option></select></div><div class="form-row"><label for="avatarBadge">Insignia</label><select id="avatarBadge" class="field"><option value="none">Ninguna</option><option value="bolt">⚡ Rayo</option><option value="star">⭐ Estrella</option><option value="fire">🔥 Fuego</option><option value="game">🎮 Gamer</option><option value="crown">👑 Corona</option></select></div></div>
+   <div class="form-grid"><div class="form-row"><label for="nameColor">Color del nombre</label><input id="nameColor" class="field wr-color-field" type="color" value="#f3f4f7"></div><div class="form-row"><label>Efecto de nombre</label><button class="btn btn-gold btn-small" type="button" id="goldToggle">✦ Dorado reflectante</button></div></div>
+  </section>
+ </div>
+ <div class="wr-editor-actions"><button class="btn btn-primary" type="button" id="saveProfileBtn">💾 Guardar personaje</button><button class="btn btn-secondary" type="button" data-close="profileModal">Cancelar</button></div>
  </div></div>
 <div id="setupModal" class="modal-backdrop hidden"><div class="modal">
  <div class="modal-head"><h2>⚙ Configuración WORLD RIVALS</h2><button class="icon-btn" data-close="setupModal">✕</button></div>
@@ -521,7 +564,7 @@ const $ = id => document.getElementById(id);
 const FLAGS = [
  ['🇪🇸','España'],['🇲🇽','México'],['🇦🇷','Argentina'],['🇨🇴','Colombia'],['🇨🇱','Chile'],['🇵🇪','Perú'],['🇻🇪','Venezuela'],['🇺🇸','Estados Unidos'],['🇨🇦','Canadá'],['🇧🇷','Brasil'],['🇵🇹','Portugal'],['🇫🇷','Francia'],['🇩🇪','Alemania'],['🇮🇹','Italia'],['🇬🇧','Reino Unido'],['🇮🇪','Irlanda'],['🇳🇱','Países Bajos'],['🇧🇪','Bélgica'],['🇨🇭','Suiza'],['🇦🇹','Austria'],['🇵🇱','Polonia'],['🇺🇦','Ucrania'],['🇷🇺','Rusia'],['🇸🇪','Suecia'],['🇳🇴','Noruega'],['🇫🇮','Finlandia'],['🇩🇰','Dinamarca'],['🇬🇷','Grecia'],['🇹🇷','Turquía'],['🇲🇦','Marruecos'],['🇩🇿','Argelia'],['🇪🇬','Egipto'],['🇿🇦','Sudáfrica'],['🇳🇬','Nigeria'],['🇰🇪','Kenia'],['🇯🇵','Japón'],['🇰🇷','Corea del Sur'],['🇨🇳','China'],['🇮🇳','India'],['🇹🇭','Tailandia'],['🇻🇳','Vietnam'],['🇮🇩','Indonesia'],['🇦🇺','Australia'],['🇳🇿','Nueva Zelanda'],['🇸🇦','Arabia Saudí'],['🇦🇪','Emiratos Árabes'],['🇮🇱','Israel'],['🇨🇺','Cuba'],['🇩🇴','República Dominicana'],['🇺🇾','Uruguay'],['🇪🇨','Ecuador'],['🇧🇴','Bolivia'],['🇵🇾','Paraguay'],['🇬🇹','Guatemala'],['🇨🇷','Costa Rica'],['🇵🇦','Panamá'],['🇮🇸','Islandia'],['🇷🇴','Rumanía'],['🇨🇿','Chequia'],['🇭🇺','Hungría']
 ];
-const defaultProfile = {name:'Invitado',flag:'🇪🇸',nameColor:'#f3f4f7',gold:false,skin:'#f5c9a5',hairStyle:'short',hair:'#34251f',shirt:'#e34250',accessory:'none'};
+const defaultProfile = {name:'Invitado',flag:'🇪🇸',nameColor:'#f3f4f7',gold:false,skin:'#f5c9a5',hairStyle:'short',hair:'#34251f',shirt:'#e34250',shirtAccent:'#191e30',eyes:'normal',mouth:'smile',accessory:'none',avatarMode:'classic',emoji:'😎',avatarBg:'#20263b',avatarFrame:'#55ddec',avatarPattern:'none',avatarBadge:'none',photoData:'',photoZoom:100,photoX:0,photoY:0};
 let profile = {...defaultProfile};
 let supabaseClient=null, accountUser=null, authMode='login', pendingSignupEmail='';
 let user=null,mapsReady=false,guessMap=null,miniGuessMap=null,guessMarker=null,miniGuessMarker=null,targetMarker=null,miniTargetMarker=null;
@@ -537,14 +580,87 @@ let panoRenderId=0;
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),3600)}
 function safeColor(c,fallback='#ffffff'){return /^#[0-9a-f]{6}$/i.test(c||'')?c:fallback}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function loadSaved(){try{profile={...defaultProfile,...JSON.parse(localStorage.getItem('wr_profile')||'{}')}}catch(e){profile={...defaultProfile}}}
-function saveProfile(){profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';profile.nameColor=safeColor(profile.nameColor);profile.skin=safeColor(profile.skin,'#f5c9a5');profile.hair=safeColor(profile.hair,'#34251f');profile.shirt=safeColor(profile.shirt,'#e34250');localStorage.setItem('wr_profile',JSON.stringify(profile));renderProfile();if(roomRef&&user)roomRef.collection('players').doc(user.uid).set(profileForPlayer(),{merge:true}).catch(()=>{});}
-function avatarSvg(p=profile){const skin=safeColor(p.skin,'#f5c9a5'),hair=safeColor(p.hair,'#34251f'),shirt=safeColor(p.shirt,'#e34250');let hairShape='';if(p.hairStyle==='short')hairShape=`<path d="M24 39Q23 12 49 13Q75 14 72 42L66 34Q48 27 30 37Z" fill="${hair}"/>`;if(p.hairStyle==='spiky')hairShape=`<path d="M24 39L21 21L35 28L38 10L49 26L60 10L63 29L78 20L70 44Q48 29 27 43Z" fill="${hair}"/>`;if(p.hairStyle==='long')hairShape=`<path d="M24 40Q20 12 49 13Q76 13 73 42L75 77L65 83L64 45Q49 30 31 43L30 79L20 73Z" fill="${hair}"/>`;if(p.hairStyle==='cap')hairShape=`<path d="M23 38Q24 14 49 14Q70 14 74 37L78 42Q51 38 20 45Z" fill="${hair}"/><path d="M27 31Q48 12 69 31L69 37Q48 29 27 39Z" fill="#d94a52"/>`;let acc='';if(p.accessory==='glasses')acc=`<g fill="none" stroke="#20222a" stroke-width="3"><rect x="29" y="41" width="16" height="11" rx="4"/><rect x="52" y="41" width="16" height="11" rx="4"/><path d="M45 45H52"/></g>`;if(p.accessory==='headphones')acc=`<path d="M21 47V40Q22 12 49 12Q76 12 77 40V49" stroke="#e6b64f" stroke-width="7" fill="none"/><rect x="18" y="43" width="9" height="20" rx="4" fill="#e6b64f"/><rect x="70" y="43" width="9" height="20" rx="4" fill="#e6b64f"/>`;if(p.accessory==='crown')acc=`<path d="M29 20L23 7L40 15L49 3L58 15L75 7L69 22Z" fill="#f3c64d" stroke="#7f5714" stroke-width="2"/>`;if(p.accessory==='cap')acc=`<path d="M22 31Q49 9 76 31L83 40Q48 37 16 43Z" fill="#e34d59" stroke="#9b2734" stroke-width="2"/>`;return `<svg viewBox="0 0 96 96" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="avbg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#383d4d"/><stop offset="1" stop-color="#1d202a"/></linearGradient></defs><circle cx="48" cy="48" r="47" fill="url(#avbg)"/><path d="M13 93Q15 67 38 64H58Q81 68 83 93Z" fill="${shirt}"/><path d="M40 60V70Q48 77 56 70V60Z" fill="${skin}"/><ellipse cx="49" cy="43" rx="23" ry="27" fill="${skin}"/><path d="M28 39Q25 18 49 17Q72 18 72 40Q63 30 50 31Q38 30 28 39Z" fill="${hair}"/>${p.hairStyle==='long'?'<path d="M27 36L22 75L33 80L35 46Z" fill="'+hair+'"/><path d="M70 34L76 74L65 80L63 45Z" fill="'+hair+'"/>':''}${hairShape}<ellipse cx="40" cy="46" rx="2" ry="2.5" fill="#24232a"/><ellipse cx="58" cy="46" rx="2" ry="2.5" fill="#24232a"/><path d="M43 57Q49 61 55 57" stroke="#8b4a43" stroke-width="2" fill="none" stroke-linecap="round"/>${acc}</svg>`}
+// V8.2: one lightweight avatar renderer for classic, emoji, and photo identities.
+// Images are downscaled to 192x192 before persistence or peer transfer.
+const WR_EMOJI_CHOICES=['😎','😀','😂','🥳','😈','🤖','👻','👽','🤠','🥷','🦊','🐱','🐺','🐸','🦁','🐼','🐯','🐵','🐲','🦄','🦖','🐧','🐢','🐙','🦉','🎮','🔥','⚡','💎','🌌','🚀','🌍','👑','⭐','💀','🥶','😱','❤️','🍕','🏎️','🍀','🎃','🧠','🛸','💥','🦇','🕹️','🐉'];
+const WR_ALLOWED_MODES=new Set(['classic','emoji','photo']);
+let workingAvatarMode='classic',photoImage=null,workingPhotoData='',photoTask=0,avatarRenderId=0,avatarEditing=false;
+const colorOr=(p,k,def)=>safeColor(p?.[k],def);
+function safeAvatarPhoto(value){return typeof value==='string'&&value.length<115000&&/^data:image\/(?:webp|jpeg|png);base64,[a-z0-9+/=]+$/i.test(value)?value:'';}
+function saneEnum(v,allowed,fallback){return allowed.includes(v)?v:fallback;}
+function loadSaved(){try{const obj=JSON.parse(localStorage.getItem('wr_profile')||'{}');profile={...defaultProfile,...obj};if(!WR_ALLOWED_MODES.has(profile.avatarMode))profile.avatarMode='classic';profile.photoData=safeAvatarPhoto(profile.photoData);}catch(e){profile={...defaultProfile};}}
+function avatarSvg(p=profile){
+ const mode=WR_ALLOWED_MODES.has(p.avatarMode)?p.avatarMode:'classic';
+ const skin=colorOr(p,'skin','#f5c9a5'),hair=colorOr(p,'hair','#34251f'),shirt=colorOr(p,'shirt','#e34250'),accent=colorOr(p,'shirtAccent','#191e30');
+ const bg=colorOr(p,'avatarBg','#20263b'),frame=colorOr(p,'avatarFrame','#55ddec'),badge=saneEnum(p.avatarBadge,['none','bolt','star','fire','game','crown'],'none');
+ const pattern=saneEnum(p.avatarPattern,['none','stars','dots','grid','rays'],'none');
+ const uid='wrav'+(++avatarRenderId);const shapes=[];
+ if(pattern==='stars')for(const [x,y,r] of [[17,21,3],[78,20,2],[14,61,2],[73,73,3],[50,12,2]])shapes.push(`<path d="M${x} ${y-r}l${r} ${r} ${-r} ${r} ${-r} ${-r}Z" fill="#ffffff80"/>`);
+ if(pattern==='dots')for(let y=16;y<91;y+=16)for(let x=13;x<95;x+=16)shapes.push(`<circle cx="${x}" cy="${y}" r="1.7" fill="#ffffff40"/>`);
+ if(pattern==='grid')for(let i=9;i<96;i+=14)shapes.push(`<path d="M${i} 7V89 M7 ${i}H89" stroke="#ffffff25" stroke-width=".7"/>`);
+ if(pattern==='rays')for(let a=0;a<360;a+=30)shapes.push(`<path d="M48 48L48 -4" transform="rotate(${a} 48 48)" stroke="#ffffff30" stroke-width="8"/>`);
+ let contents='';
+ if(mode==='photo'&&safeAvatarPhoto(p.photoData)){
+   const image=esc(p.photoData);
+   contents=`<image href="${image}" x="5" y="5" width="86" height="86" preserveAspectRatio="xMidYMid slice" clip-path="url(#${uid})"/>`;
+ }else if(mode==='emoji'||mode==='photo'){
+   const em=String(p.emoji||'😎').trim();const cleaned=Array.from(em).slice(0,10).join('')||'😎';
+   contents=`<text x="48" y="65" font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" text-anchor="middle" font-size="51">${esc(cleaned)}</text>`;
+ }else{
+   const hairstyle=saneEnum(p.hairStyle,['short','spiky','long','cap','curly','side','mohawk','bob','bald'],'short');
+   let hairpath='';
+   switch(hairstyle){
+    case 'short': hairpath=`<path d="M24 39Q23 12 49 13Q75 14 72 42L66 34Q48 27 30 37Z" fill="${hair}"/>`;break;
+    case 'spiky':hairpath=`<path d="M24 39L21 21L35 28L38 10L49 26L60 10L63 29L78 20L70 44Q48 29 27 43Z" fill="${hair}"/>`;break;
+    case 'long':hairpath=`<path d="M23 38Q20 8 49 12Q78 13 74 42L78 80L64 83L63 44Q49 33 33 42L32 82L20 77Z" fill="${hair}"/>`;break;
+    case 'cap':hairpath=`<path d="M24 38Q24 12 49 14Q75 15 73 38L82 43Q47 38 16 44Z" fill="${hair}"/>`;break;
+    case 'curly':hairpath=`<g fill="${hair}"><circle cx="28" cy="36" r="9"/><circle cx="31" cy="22" r="10"/><circle cx="46" cy="18" r="10"/><circle cx="61" cy="19" r="10"/><circle cx="70" cy="30" r="10"/><circle cx="57" cy="29" r="8"/></g>`;break;
+    case 'side':hairpath=`<path d="M24 38Q18 10 49 13Q76 9 73 39Q57 31 43 39L28 48Q29 35 24 38Z" fill="${hair}"/>`;break;
+    case 'mohawk':hairpath=`<path d="M38 29L43 9L49 15L53 5L61 30Z" fill="${hair}"/><path d="M25 38Q50 28 72 38" stroke="${hair}" stroke-width="8" fill="none"/>`;break;
+    case 'bob':hairpath=`<path d="M23 39Q22 12 49 14Q76 12 75 42L78 68Q69 76 60 70L65 43Q48 28 30 42L36 70Q25 76 19 68Z" fill="${hair}"/>`;break;
+   }
+   const eyes=saneEnum(p.eyes,['normal','happy','wink','sleepy','laser'],'normal');
+   const mouth=saneEnum(p.mouth,['smile','grin','serious','surprised','cool'],'smile');
+   let eyeParts= eyes==='happy'?'<path d="M36 47q4 -7 8 0M54 47q4 -7 8 0" stroke="#262430" stroke-width="2.5" fill="none" stroke-linecap="round"/>':
+    eyes==='wink'?'<path d="M34 46h11" stroke="#262430" stroke-width="2.5"/><ellipse cx="59" cy="46" rx="2.5" ry="3.2" fill="#262430"/>':
+    eyes==='sleepy'?'<path d="M35 45l10 2M54 47l10 -2" stroke="#262430" stroke-width="2.6" stroke-linecap="round"/>':
+    eyes==='laser'?'<path d="M33 45h13M53 45h13" stroke="#fc2849" stroke-width="3.2" stroke-linecap="round"/><circle cx="40" cy="45" r="2" fill="#fff"/><circle cx="59" cy="45" r="2" fill="#fff"/>':
+    '<ellipse cx="40" cy="46" rx="2.2" ry="2.8" fill="#24232a"/><ellipse cx="58" cy="46" rx="2.2" ry="2.8" fill="#24232a"/>';
+   let mouthParts=mouth==='grin'?'<path d="M40 56Q49 67 58 56Z" fill="#5a2637" stroke="#9e4e4b" stroke-width="1"/><path d="M43 57H55" stroke="#fff9" stroke-width="2"/>':
+    mouth==='serious'?'<path d="M43 59H55" stroke="#8b4a43" stroke-width="2" stroke-linecap="round"/>':
+    mouth==='surprised'?'<ellipse cx="49" cy="59" rx="4.5" ry="5.5" fill="#824642"/>':
+    mouth==='cool'?'<path d="M42 59Q49 62 56 57" stroke="#8b4a43" stroke-width="2.3" fill="none"/>':
+    '<path d="M42 57Q49 64 56 57" stroke="#8b4a43" stroke-width="2.3" fill="none" stroke-linecap="round"/>';
+   const accessory=saneEnum(p.accessory,['none','glasses','shades','headphones','crown','cap','mask','halo','bandana'],'none');
+   const items={
+    glasses:'<g fill="none" stroke="#20222a" stroke-width="3"><rect x="29" y="41" width="16" height="12" rx="4"/><rect x="53" y="41" width="16" height="12" rx="4"/><path d="M45 46H53"/></g>',
+    shades:'<path d="M28 42h19v10q-10 10-19-3ZM51 42h19v7q-8 12-19 3Z" fill="#111726" stroke="#5be6ed" stroke-width="1.5"/><path d="M47 46h4" stroke="#111726" stroke-width="3"/>',
+    headphones:'<path d="M21 49V39Q22 12 49 12Q76 12 77 40V49" stroke="#e6b64f" stroke-width="7" fill="none"/><rect x="18" y="42" width="9" height="21" rx="4" fill="#e6b64f"/><rect x="70" y="42" width="9" height="21" rx="4" fill="#e6b64f"/>',
+    crown:'<path d="M29 20L23 7L40 15L49 3L58 15L75 7L69 22Z" fill="#f3c64d" stroke="#7f5714" stroke-width="2"/>',
+    cap:'<path d="M22 30Q49 9 76 30L83 39Q48 36 16 42Z" fill="#e34d59" stroke="#9b2734" stroke-width="2"/>',
+    mask:'<path d="M32 50Q49 59 65 50L63 66Q49 73 35 66Z" fill="#d8e2f0" stroke="#5a6375" stroke-width="1.5"/><path d="M33 54l-9-5M65 54l8-5" stroke="#d8e2f0" stroke-width="2"/>',
+    halo:'<ellipse cx="49" cy="11" rx="23" ry="6" fill="none" stroke="#ffe384" stroke-width="5"/>',
+    bandana:'<path d="M24 36Q48 22 73 36L73 42Q49 30 25 42Z" fill="#e34453"/><path d="M70 39l12-3-7 14" fill="#e34453"/>'
+   };
+   contents=`<path d="M10 94Q12 66 38 64H59Q84 67 86 94Z" fill="${shirt}"/><path d="M31 72L46 91H52L67 72L57 69L49 81L40 69Z" fill="${accent}"/><path d="M40 59V70Q49 77 57 70V59Z" fill="${skin}"/><ellipse cx="49" cy="43" rx="23" ry="27" fill="${skin}"/>${hairpath}${eyeParts}${mouthParts}${items[accessory]||''}`;
+ }
+ const badges={bolt:'⚡',star:'⭐',fire:'🔥',game:'🎮',crown:'👑'};
+ const badgePart=badge==='none'?'':`<circle cx="77" cy="77" r="16" fill="#121725" stroke="${frame}" stroke-width="2"/><text x="77" y="85" font-size="19" text-anchor="middle">${badges[badge]}</text>`;
+ return `<svg role="img" aria-label="Avatar WORLD RIVALS" viewBox="0 0 96 96" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="${uid}"><circle cx="48" cy="48" r="43"/></clipPath></defs><circle cx="48" cy="48" r="46" fill="${bg}"/><g clip-path="url(#${uid})">${shapes.join('')}${contents}</g><circle cx="48" cy="48" r="45" fill="none" stroke="${frame}" stroke-width="3"/>${badgePart}</svg>`;
+}
 function nameHTML(p){return p.gold?`<span class="gold-name">${esc(p.name)}</span>`:`<span class="normal-name" style="color:${safeColor(p.nameColor)}">${esc(p.name)}</span>`}
-function renderProfile(){const a=avatarSvg();$('topAvatar').innerHTML=a;$('homeAvatar').innerHTML=a;$('topName').textContent=profile.name;$('homeName').className=profile.gold?'gold-name':'normal-name';$('homeName').style.color=profile.gold?'':safeColor(profile.nameColor);$('homeName').textContent=profile.name;$('homeFlag').textContent=profile.flag;$('previewFlag').textContent=profile.flag;$('previewName').className=profile.gold?'gold-name':'normal-name';$('previewName').style.color=profile.gold?'':safeColor(profile.nameColor);$('previewName').textContent=profile.name;$('profilePreview').innerHTML=a;}
+function renderProfile(){const a=avatarSvg(profile);for(const id of ['topAvatar','homeAvatar','profilePreview'])if($(id))$(id).innerHTML=a;for(const id of ['topName','homeName','previewName'])if($(id))$(id).textContent=profile.name;for(const id of ['homeName','previewName'])if($(id)){$(id).className=profile.gold?'gold-name':'normal-name';$(id).style.color=profile.gold?'':safeColor(profile.nameColor);}if($('homeFlag'))$('homeFlag').textContent=profile.flag;if($('previewFlag'))$('previewFlag').textContent=profile.flag;}
 function fillFlags(){const s=$('profileFlag');s.innerHTML=FLAGS.map(([f,n])=>`<option value="${f}">${f} ${n}</option>`).join('')}
-function openProfile(){ $('profileName').value=profile.name;$('profileFlag').value=profile.flag;$('nameColor').value=profile.nameColor;$('skinColor').value=profile.skin;$('hairStyle').value=profile.hairStyle;$('hairColor').value=profile.hair;$('shirtColor').value=profile.shirt;$('accessory').value=profile.accessory;$('profileModal').classList.remove('hidden');previewFromInputs() }
-function previewFromInputs(){const p={name:$('profileName').value||'Invitado',flag:$('profileFlag').value,nameColor:$('nameColor').value,gold:profile.gold,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,accessory:$('accessory').value};$('profilePreview').innerHTML=avatarSvg(p);$('previewFlag').textContent=p.flag;$('previewName').textContent=p.name;$('previewName').className=p.gold?'gold-name':'normal-name';$('previewName').style.color=p.gold?'':p.nameColor}
+function switchAvatarTab(mode){if(!WR_ALLOWED_MODES.has(mode))return;workingAvatarMode=mode;for(const id of ['wrClassicOptions','wrEmojiOptions','wrPhotoOptions'])$(id)?.classList.toggle('hidden',id!==({classic:'wrClassicOptions',emoji:'wrEmojiOptions',photo:'wrPhotoOptions'}[mode]));document.querySelectorAll('[data-avatar-tab]').forEach(b=>{const yes=b.dataset.avatarTab===mode;b.classList.toggle('active',yes);b.setAttribute('aria-selected',String(yes));});previewFromInputs()}
+function setEmojiSelection(emoji){if(!$('profileEmojiCustom'))return;$('profileEmojiCustom').value=emoji;document.querySelectorAll('[data-avatar-emoji]').forEach(btn=>btn.classList.toggle('active',btn.dataset.avatarEmoji===emoji));previewFromInputs();}
+function initAvatarEditor(){if(!$('wrEmojiGrid'))return;$('wrEmojiGrid').innerHTML=WR_EMOJI_CHOICES.map(e=>`<button type="button" class="wr-emoji-choice" data-avatar-emoji="${esc(e)}" aria-label="Emoji ${esc(e)}">${esc(e)}</button>`).join('');}
+function readAvatarInputs(){return {name:($('profileName').value||'Invitado'),flag:$('profileFlag').value,nameColor:$('nameColor').value,gold:profile.gold,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,shirtAccent:$('shirtAccentColor').value,eyes:$('eyesStyle').value,mouth:$('mouthStyle').value,accessory:$('accessory').value,avatarMode:workingAvatarMode,emoji:Array.from($('profileEmojiCustom').value.trim()||'😎').slice(0,10).join(''),avatarBg:$('avatarBg').value,avatarFrame:$('avatarFrame').value,avatarPattern:$('avatarPattern').value,avatarBadge:$('avatarBadge').value,photoData:workingPhotoData,photoZoom:Number($('avatarZoom').value),photoX:Number($('avatarPhotoX').value),photoY:Number($('avatarPhotoY').value)};}
+function openProfile(){avatarEditing=true;photoImage=null;workingPhotoData=safeAvatarPhoto(profile.photoData);const values={profileName:profile.name,profileFlag:profile.flag,nameColor:profile.nameColor,skinColor:profile.skin,hairStyle:profile.hairStyle,hairColor:profile.hair,shirtColor:profile.shirt,shirtAccentColor:profile.shirtAccent,eyesStyle:profile.eyes,mouthStyle:profile.mouth,accessory:profile.accessory,profileEmojiCustom:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,avatarZoom:profile.photoZoom,avatarPhotoX:profile.photoX,avatarPhotoY:profile.photoY};for(const [key,val] of Object.entries(values))if($(key))$(key).value=val;$('avatarPhotoFile').value='';$('wrPhotoStatus').textContent=workingPhotoData?'Foto lista. Puedes sustituirla o guardar.':'Tu foto se guarda en este navegador y se comparte con otros jugadores al entrar en salas.';$('wrPhotoTools').classList.toggle('hidden',!workingPhotoData);$('profileModal').classList.remove('hidden');switchAvatarTab(profile.avatarMode||'classic');}
+function previewFromInputs(){if(!avatarEditing)return;const p=readAvatarInputs();$('profilePreview').innerHTML=avatarSvg(p);$('previewFlag').textContent=p.flag;$('previewName').textContent=p.name;$('previewName').className=p.gold?'gold-name':'normal-name';$('previewName').style.color=p.gold?'':p.nameColor;$('avatarZoomValue').textContent=p.photoZoom+'%';document.querySelectorAll('[data-avatar-emoji]').forEach(el=>el.classList.toggle('active',el.dataset.avatarEmoji===p.emoji));}
+function cropAvatarPhoto(){if(!photoImage||!avatarEditing)return;try{const can=document.createElement('canvas');can.width=can.height=192;const ctx=can.getContext('2d',{alpha:false});if(!ctx)throw Error('Sin soporte de imágenes');const w=photoImage.naturalWidth,h=photoImage.naturalHeight,zoom=Math.max(1,Math.min(3,Number($('avatarZoom').value)/100)),side=Math.min(w,h)/zoom;const posX=Math.max(-100,Math.min(100,Number($('avatarPhotoX').value)))/100,posY=Math.max(-100,Math.min(100,Number($('avatarPhotoY').value)))/100;const sx=(w-side)*(posX+1)/2,sy=(h-side)*(posY+1)/2;ctx.drawImage(photoImage,sx,sy,side,side,0,0,192,192);let data=can.toDataURL('image/webp',.72);if(!data.startsWith('data:image/webp'))data=can.toDataURL('image/jpeg',.72);if(data.length>110000)data=can.toDataURL('image/jpeg',.55);if(!safeAvatarPhoto(data))throw Error('La foto es demasiado grande');workingPhotoData=data;$('wrPhotoTools').classList.remove('hidden');$('wrPhotoStatus').textContent='✅ Imagen optimizada a 192×192 para jugar sin lag.';previewFromInputs();}catch(e){toast('No se pudo procesar la foto: '+e.message)}}
+function requestPhotoCrop(){clearTimeout(photoTask);photoTask=setTimeout(cropAvatarPhoto,110)}
+function loadAvatarPhoto(file){if(!file)return;if(!/^image\/(jpeg|png|webp|heic|heif)$/.test(file.type)||file.size>12*1024*1024){toast('Selecciona JPG, PNG o WebP de hasta 12 MB.');return;}const objectUrl=URL.createObjectURL(file);const img=new Image();img.onload=()=>{URL.revokeObjectURL(objectUrl);if(!avatarEditing)return;photoImage=img;$('avatarZoom').value=100;$('avatarPhotoX').value=0;$('avatarPhotoY').value=0;cropAvatarPhoto()};img.onerror=()=>{URL.revokeObjectURL(objectUrl);toast('No se pudo leer la imagen. Prueba JPG, PNG o WebP.')};img.src=objectUrl;}
+function saveAvatarEditor(){const p=readAvatarInputs();if(p.avatarMode==='photo'&&!safeAvatarPhoto(p.photoData)){toast('Selecciona una foto antes de guardar o usa otro tipo de avatar.');return;}const previous={...profile};profile={...profile,...p};if(saveProfile()===false){profile=previous;renderProfile();return;}avatarEditing=false;photoImage=null;$('profileModal').classList.add('hidden');toast('¡Personaje ULTRA guardado! 🎨');}
 function syncGuessMarkers(){
   const pos=myGuess?[myGuess.lng,myGuess.lat]:null;
   if(pos){
@@ -581,7 +697,7 @@ function showTargetOnMap(guess){
 function distanceKm(a,b){const rad=x=>x*Math.PI/180,R=6371,dLat=rad(b.lat-a.lat),dLng=rad(b.lng-a.lng),x=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
 function pointsFor(km){return Math.round(5000*Math.pow(Math.max(0,1-km/20000),10))}
 function formatKm(km){return km<1?Math.round(km*1000)+' m':km.toLocaleString('es-ES',{maximumFractionDigits:1})+' km'}
-function profileForPlayer(){return {name:profile.name,flag:profile.flag,nameColor:profile.nameColor,gold:profile.gold,avatar:{skin:profile.skin,hairStyle:profile.hairStyle,hair:profile.hair,shirt:profile.shirt,accessory:profile.accessory},score:0,mic:voiceOn,joinedAt:Date.now()}}
+function profileForPlayer(){return {name:profile.name,flag:profile.flag,nameColor:profile.nameColor,gold:profile.gold,avatar:{skin:profile.skin,hairStyle:profile.hairStyle,hair:profile.hair,shirt:profile.shirt,shirtAccent:profile.shirtAccent,accessory:profile.accessory,eyes:profile.eyes,mouth:profile.mouth,avatarMode:profile.avatarMode,emoji:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,photoData:profile.avatarMode==='photo'?safeAvatarPhoto(profile.photoData):''},score:0,mic:voiceOn,joinedAt:Date.now()}}
 function paintPlayer(p){const av=avatarSvg({...defaultProfile,...p.avatar});return `<span class="avatar">${av}</span>`}
 function playerRow(p,host=false){return `<div class="player-row">${paintPlayer(p)}<div class="player-meta"><b>${p.flag||'🌐'} ${nameHTML(p)}</b><small>${p.uid===user?.uid?'Tú':'En la sala'}</small></div>${host?'<span class="host-mark">ANFITRIÓN</span>':''}</div>`}
 let loadedRoundKey='';
@@ -1460,11 +1576,11 @@ function exportFriendsGame(){
  doc.querySelector('#lobbyScreen')?.classList.add('hidden');
  doc.querySelector('#homeScreen')?.classList.remove('hidden');
  const result='<!doctype html>\n'+doc.outerHTML;
- const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([result],{type:'text/html;charset=utf-8'}));link.download='WorldRivals_V8.1_Amigos.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),2000);
+ const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([result],{type:'text/html;charset=utf-8'}));link.download='WorldRivals_V8.2_UltraAvatar.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),2000);
  toast('Juego exportado con configuración pública. Publícalo en GitHub para tus amigos.');
 }
 function saveProfile(){
- profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';profile.nameColor=safeColor(profile.nameColor);profile.skin=safeColor(profile.skin,'#f5c9a5');profile.hair=safeColor(profile.hair,'#34251f');profile.shirt=safeColor(profile.shirt,'#e34250');try{localStorage.setItem('wr_profile',JSON.stringify(profile));}catch(e){toast('No se pudo guardar en este navegador. Usa localhost o HTTPS.');}renderProfile();syncFriendProfile();
+ profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';for(const [k,def] of [['nameColor','#f3f4f7'],['skin','#f5c9a5'],['hair','#34251f'],['shirt','#e34250'],['shirtAccent','#191e30'],['avatarBg','#20263b'],['avatarFrame','#55ddec']])profile[k]=safeColor(profile[k],def);profile.photoData=safeAvatarPhoto(profile.photoData);let persisted=true;try{localStorage.setItem('wr_profile',JSON.stringify(profile));}catch(e){persisted=false;toast('No se pudo guardar en este navegador: almacenamiento lleno o bloqueado.');}renderProfile();if(!persisted)return false;syncFriendProfile();
  if(currentRoom&&p2pPeer){const updated={...profileForPlayer(),uid:p2pUid};if(p2pHost){const i=players.findIndex(p=>p.uid===p2pUid);if(i>=0)players[i]={...players[i],...updated};hostPublish();}else p2pSend(p2pHostConn,{type:'profile',player:updated});}
 }
 function playerRow(p,host=false){return `<div class="player-row">${paintPlayer(p)}<div class="player-meta"><b>${p.flag||'🌐'} ${nameHTML(p)}</b><small>${p.uid===p2pUid?'Tú':'En la sala'}</small></div>${host?'<span class="host-mark">ANFITRIÓN</span>':''}</div>`}
@@ -1526,8 +1642,10 @@ function runUiAction(label, fn){
 }
 document.addEventListener('click',ev=>{
  const closeBtn=ev.target.closest('[data-close]');
- if(closeBtn){const panel=$(closeBtn.dataset.close);if(panel)panel.classList.add('hidden');return;}
+ if(closeBtn){const panel=$(closeBtn.dataset.close);if(panel)panel.classList.add('hidden');if(closeBtn.dataset.close==='profileModal'){avatarEditing=false;photoImage=null;}return;}
   const b=ev.target.closest('button');if(!b)return;
+  if(b.dataset.avatarTab){ev.preventDefault();switchAvatarTab(b.dataset.avatarTab);return;}
+  if(b.dataset.avatarEmoji){ev.preventDefault();setEmojiSelection(b.dataset.avatarEmoji);return;}
   if(b.dataset.friendAction){ev.preventDefault();runUiAction('amigos',()=>handleFriendAction(b.dataset.friendAction,b));return;}
  const actions={
   setupBtn:()=>openSetup(), profileBtn:()=>openProfile(), editProfileBtn:()=>openProfile(),
@@ -1535,7 +1653,7 @@ document.addEventListener('click',ev=>{
   heroSolo:startSolo, retrySoloBtn:startSolo,
   joinRoomBtn:()=>joinRoom($('joinCode').value),
   goldToggle:()=>{profile.gold=!profile.gold;previewFromInputs();toast(profile.gold?'Efecto dorado activado ✨':'Color normal activado');},
-  saveProfileBtn:()=>{profile={...profile,name:$('profileName').value,flag:$('profileFlag').value,nameColor:$('nameColor').value,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,accessory:$('accessory').value};saveProfile();$('profileModal').classList.add('hidden');toast('¡Personaje guardado!');},
+  saveProfileBtn:saveAvatarEditor,randomAvatarBtn:()=>{const pick=(a)=>a[Math.floor(Math.random()*a.length)];switchAvatarTab(pick(['classic','emoji']));if(workingAvatarMode==='emoji')setEmojiSelection(pick(WR_EMOJI_CHOICES));else{ $('hairStyle').value=pick(['short','spiky','long','curly','side','mohawk','bob']);$('accessory').value=pick(['none','glasses','shades','headphones','crown','bandana']);$('eyesStyle').value=pick(['normal','happy','laser','wink']);$('mouthStyle').value=pick(['smile','grin','cool','surprised']);}for(const id of ['avatarBg','avatarFrame','shirtColor'])$(id).value=pick(['#19253a','#742a46','#34314b','#0f585f','#dd3a52','#55ddec','#f5c64d']);previewFromInputs();},
   saveSupabaseBtn:saveSupabaseConfig,
   exportFriendsGameBtn:exportFriendsGame,findFriendBtn:searchFriend,
   lobbyBack:()=>{cleanupRoom();setScreen('home');},
@@ -1556,8 +1674,11 @@ document.addEventListener('input',ev=>{
  if(t.id==='joinCode')t.value=t.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
  if(t.id==='authCode')t.value=t.value.replace(/\D/g,'').slice(0,6);
  if(t.id==='micGainSlider')setMicGain(t.value);
- if(['profileName','profileFlag','nameColor','skinColor','hairStyle','hairColor','shirtColor','accessory'].includes(t.id))runUiAction('preview',previewFromInputs);
+ if(['profileName','profileFlag','nameColor','skinColor','hairStyle','hairColor','shirtColor','shirtAccentColor','accessory','eyesStyle','mouthStyle','profileEmojiCustom','avatarBg','avatarFrame','avatarPattern','avatarBadge'].includes(t.id))previewFromInputs();
+ if(['avatarZoom','avatarPhotoX','avatarPhotoY'].includes(t.id)){if(photoImage)requestPhotoCrop();else previewFromInputs();}
 });
+document.getElementById('avatarPhotoFile')?.addEventListener('change',e=>loadAvatarPhoto(e.target.files?.[0]));
+document.getElementById('avatarClearPhoto')?.addEventListener('click',()=>{workingPhotoData='';photoImage=null;$('avatarPhotoFile').value='';$('wrPhotoTools').classList.add('hidden');$('wrPhotoStatus').textContent='Foto eliminada del editor. Guarda los cambios para confirmarlo.';previewFromInputs();});
 const roomCodeEl=$('roomCodeDisplay');
 if(roomCodeEl)roomCodeEl.addEventListener('click',()=>runUiAction('copiar código',()=>{
  if(!currentRoomId){toast('Todavía no hay un código de sala.');return;}
@@ -1576,6 +1697,7 @@ function initialiseWorldRivals(){
  safeInit('interfaz de juego',initGameHud);
   safeInit('banderas',fillFlags);
  safeInit('perfil',loadSaved);
+ safeInit('editor de avatares',initAvatarEditor);
  safeInit('vista del perfil',renderProfile);
  safeInit('estado de conexión',updateConnection);
  safeInit('ganancia del micrófono',()=>setMicGain(readMicGain()));
@@ -1592,7 +1714,7 @@ else initialiseWorldRivals();
    Local-only admin password is a convenience gate, NOT secure authentication. */
 (()=>{
 'use strict';
-const WR_BASE='8.1.0';
+const WR_BASE='8.2.0';
 const ADMIN_PASSWORD='Enrr_2013';
 const STABLE_DB='world-rivals-local-updates-v1';
 const LS_MANIFEST='wr_v7_manifest_url';
