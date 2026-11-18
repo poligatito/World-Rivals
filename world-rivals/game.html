@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>WORLD RIVALS V8 — Mapas realmente aleatorios</title>
-<meta name="worldrivals-version" content="8.0.0">
+<title>WORLD RIVALS V8.1 — Amigos y pantalla completa real</title>
+<meta name="worldrivals-version" content="8.1.0">
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 
 
@@ -366,6 +366,40 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
 .feature-strip .feature:hover{transform:translateY(-4px)!important;filter:drop-shadow(0 0 7px #4ad3e570)!important}
 .feature-strip .feature small{line-height:1.4!important}
 
+
+
+/* V8.1: modo real Fullscreen API y sin franja fija de WORLD RIVALS */
+#streetPanel:fullscreen,#streetPanel:-webkit-full-screen{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;min-height:0!important;border:0!important;border-radius:0!important;margin:0!important;z-index:2147480000!important;overflow:hidden!important;background:#050b14!important}
+#streetPanel:fullscreen::backdrop{background:#050b14}
+#streetPanel:fullscreen .pano,#streetPanel:-webkit-full-screen .pano{inset:0!important;height:100%!important;min-height:0!important}
+#gameScreen.fullscreen-mode #streetPanel{inset:0!important;border-radius:0!important;box-shadow:none!important}
+body:has(#streetPanel:fullscreen) .topbar,body:has(#streetPanel:fullscreen) .game-top{visibility:hidden!important}
+/* Botones globales: misma animación brillante que CREAR SALA, incluidos Novedades y acceso a amigos */
+button:not(:disabled){position:relative;overflow:hidden;transition:transform .20s cubic-bezier(.2,.85,.2,1),box-shadow .23s ease,filter .2s ease,border-color .2s ease!important}
+button:not(:disabled):hover{transform:translateY(-3px) scale(1.025);filter:brightness(1.17);box-shadow:0 7px 23px #fa355943,0 0 21px #46d8ff27!important}
+button:not(:disabled):active{transform:translateY(1px) scale(.975)}
+button:not(:disabled)::after{content:"";position:absolute;inset:-45% auto -45% -80%;width:37%;background:linear-gradient(90deg,transparent,#fff4,transparent);transform:skewX(-25deg) translateX(0);transition:transform .55s ease;pointer-events:none;z-index:2}
+button:not(:disabled):hover::after{transform:skewX(-25deg) translateX(650%)}
+button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
+.feature{transition:transform .25s ease,box-shadow .3s ease,filter .25s ease}
+.feature:hover{filter:brightness(1.15);transform:translateY(-5px) scale(1.013)}
+.lobby-friend-action{display:flex;justify-content:flex-end;margin:9px 0 18px}
+.friend-counter{display:inline-flex;align-items:center;justify-content:center;background:#fb3d58;color:#fff;min-width:19px;height:19px;padding:1px 5px;border-radius:99px;font-size:11px}
+.friends-modal{width:min(700px,100%)}
+.friends-header{display:flex;flex-direction:column;gap:6px;background:linear-gradient(100deg,#c92b4025,#3cbee91c);border:1px solid #6ccde54d;border-radius:16px;padding:16px;margin:12px 0 18px}
+.friends-header strong{font-size:20px;color:#fff;overflow-wrap:anywhere}
+.friends-search,.friends-group{margin-top:16px}
+.friends-result{margin-top:10px;min-height:35px;line-height:1.6}
+.friend-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:8px 0;border-radius:12px;border:1px solid #53647754;background:#101823}
+.friend-person{min-width:0;display:flex;flex-direction:column;gap:3px;overflow-wrap:anywhere}
+.friend-person b{font-size:14px}.friend-person small{font-size:10px;color:#98a6b7}
+.friend-actions{display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap;flex-shrink:0}
+.friends-list{max-height:255px;overflow:auto}
+.invites-title{color:#56e4fa;font-size:12px;font-weight:900;letter-spacing:.08em}
+.friends-invites:empty{display:none}.friends-invites:not(:empty){margin:16px 0;padding:10px;border:1px solid #5dd5ed66;border-radius:15px;background:#0a20294d}
+.setup-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin:19px 0 9px}
+@media(max-width:640px){.friend-row{align-items:flex-start;flex-direction:column}.friend-actions{width:100%;justify-content:flex-start}.top-actions #friendsBtn{padding:7px 9px;font-size:11px}.setup-actions .btn{flex:1}}
+
 </style>
 </head>
 <body>
@@ -374,7 +408,7 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
  <div class="brand"><div class="brand-mark">✦</div><span>WORLD<em>//</em>RIVALS</span></div>
  <div class="top-actions">
   <span id="connectionBadge" class="pill">● modo local</span>
-  <button class="icon-btn" id="setupBtn" title="Configurar">⚙</button>
+  <button class="btn btn-secondary btn-small" id="friendsBtn" type="button">👥 Amigos <span id="friendsCounter" class="friend-counter hidden">0</span></button><button class="icon-btn" id="setupBtn" title="Configurar">⚙</button>
   <button class="profile-chip" id="profileBtn"><span id="topAvatar" class="avatar"></span><b id="topName">Invitado</b><span>⌄</span></button>
  </div>
 </header>
@@ -383,8 +417,8 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
   <div>
    <div class="eyebrow">🌍 EL MUNDO ES TU TABLERO</div>
    <h1>¿SABES<br>DÓNDE <span class="accent">ESTÁS?</span></h1>
-   <p>Explora panorámicas reales de calles: gira, muévete cuando haya imágenes conectadas y haz zoom. Sin claves de pago. Prueba el modo invitado o crea una sala con tus amigos; cada ronda intenta descubrir una ubicación distinta entre imágenes públicas disponibles.</p>
-   <div class="hero-buttons"><button class="btn btn-primary" id="heroCreate">＋ CREAR SALA</button><button class="btn btn-secondary" id="heroSolo">▶ JUGAR COMO INVITADO</button></div>
+   <p>Explora panorámicas reales de calles: gira, muévete cuando haya imágenes conectadas y haz zoom. Sin claves de pago. Juega solo o crea una sala con tus amigos; cada ronda intenta descubrir una ubicación distinta entre imágenes públicas disponibles.</p>
+   <div class="hero-buttons"><button class="btn btn-primary" id="heroCreate">＋ CREAR SALA</button><button class="btn btn-secondary" id="heroSolo">▶ JUGAR SOLO</button></div>
   </div>
   <div class="hero-art"><div class="orbit"><div class="globe">🌐</div><div class="orbit-label one">📍 GOOGLE STREET VIEW</div><div class="orbit-label two">⚡ MULTIJUGADOR</div><div class="orbit-label three">✦ WORLD CHAMPION</div></div></div>
  </section>
@@ -398,7 +432,7 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
   <article class="play-card">
    <div class="card-tag">MULTIJUGADOR · ONLINE</div><h2>Crea una sala</h2>
    <p>Genera un código privado y compártelo con tus amigos. Hasta 8 jugadores pueden competir en la misma partida.</p>
-    <div class="scan-row"><div class="room-invite-callout"><div class="room-invite-faces" aria-hidden="true"><span>👤</span><span>👤</span><span>＋</span></div><div><strong>Juega partidas con tus amigos</strong><small>Invítalos con tu código privado</small></div></div><button class="btn btn-primary" id="createRoomBtn">Crear sala <span>↗</span></button></div>
+    <div class="scan-row"><div class="room-invite-callout"><div class="room-invite-faces" aria-hidden="true"><span>👤</span><span>👤</span><span>＋</span></div><div><strong>Juega partidas con tus amigos</strong><small>Invítalos desde amigos o con tu código privado</small></div></div><button class="btn btn-primary" id="createRoomBtn">Crear sala <span>↗</span></button></div>
    <div class="config-hint"><span>🔒</span><div><b>Partidas privadas</b><br>Las salas se conectan directamente entre jugadores con PeerJS. No necesitas registrarte ni introducir claves.</div></div>
   </article>
   <article class="play-card">
@@ -409,13 +443,13 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
   </article>
  </section>
   <section class="identity-panel"><div class="section-head"><div><h2>Tu identidad</h2><p>Que se note quién ha llegado a la partida.</p></div><button class="btn btn-secondary btn-small" id="editProfileBtn">✎ Personalizar</button></div>
- <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b></div><small class="muted">Tu personaje de WORLD RIVALS</small></div><button class="btn btn-secondary btn-small" id="accountBtn">👤 Crear cuenta / Iniciar sesión</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
+ <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b></div><small class="muted">Tu personaje de WORLD RIVALS</small></div><button class="btn btn-secondary btn-small" id="homeFriendsBtn">👥 Mis amigos</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
   </div>
 </main>
 <section id="lobbyScreen" class="main hidden"><div class="lobby-wrap"><button class="back-link" id="lobbyBack">← Volver al inicio</button><div class="lobby-card">
- <div class="lobby-top"><div><div class="eyebrow">SALA PRIVADA · <span id="lobbyState">ESPERANDO JUGADORES</span></div><h1>Prepara la partida</h1><div class="muted" style="font-size:12px">Comparte el código para que tus amigos se unan.</div></div><div><div class="tiny muted" style="margin-bottom:7px;text-align:center">CÓDIGO DE SALA · TOCA PARA COPIAR</div><div id="roomCodeDisplay" class="room-code">------</div></div></div>
+ <div class="lobby-top"><div><div class="eyebrow">SALA PRIVADA · <span id="lobbyState">ESPERANDO JUGADORES</span></div><h1>Prepara la partida</h1><div class="muted" style="font-size:12px">Invita desde Amigos o comparte el código de seis caracteres.</div></div><div><div class="tiny muted" style="margin-bottom:7px;text-align:center">CÓDIGO DE SALA · TOCA PARA COPIAR</div><div id="roomCodeDisplay" class="room-code">------</div></div></div>
  <div class="room-grid"><div><h3 class="subhead">JUGADORES <span id="playerCount">(1/8)</span></h3><div id="lobbyPlayers" class="player-list"></div><div id="lobbyEmpty" class="empty-note hidden">Comparte el código de arriba para invitar a tus amigos.</div></div><div><h3 class="subhead">AJUSTES DE PARTIDA</h3><div class="settings-row"><span>🌍 Número de rondas</span><select id="roundSelect"><option value="3">3 rondas</option><option value="5" selected>5 rondas</option><option value="7">7 rondas</option><option value="10">10 rondas</option></select></div><div class="settings-row"><span>⏱️ Tiempo por ronda</span><select id="timeSelect"><option value="45">45 segundos</option><option value="60">60 segundos</option><option value="90" selected>90 segundos</option><option value="120">120 segundos</option></select></div><div class="settings-row"><span>👥 Límite de jugadores</span><span class="muted">8 jugadores</span></div><div class="settings-row"><span>🗺️ Mapa de respuestas</span><span class="muted">OpenFreeMap</span></div></div></div>
- <div class="lobby-actions"><div class="muted" id="lobbyHint" style="font-size:11px">El anfitrión puede iniciar cuando todos estén listos. Las ubicaciones se mezclan y se buscan nuevas imágenes públicas cuando hay conexión.</div><button class="btn btn-primary" id="startGameBtn">🚀 Iniciar partida</button></div>
+ <div class="lobby-friend-action"><button type="button" class="btn btn-secondary" id="lobbyFriendsBtn">👥 Invitar amigos sin código</button></div><div class="lobby-actions"><div class="muted" id="lobbyHint" style="font-size:11px">El anfitrión puede iniciar cuando todos estén listos. Las ubicaciones se mezclan y se buscan nuevas imágenes públicas cuando hay conexión.</div><button class="btn btn-primary" id="startGameBtn">🚀 Iniciar partida</button></div>
  </div></div></section>
 <section id="gameScreen" class="game-shell hidden">
  <div class="game-top"><div class="round-info"><div class="brand-mark">✦</div><div><div id="roundLabel" class="round-number">RONDA 1 / 5</div><div class="game-title" id="gameRoomTitle">WORLD RIVALS · SALA</div></div></div><div class="game-controls"><span class="hud-top-label">⟡ GEO BATTLE · EXPLORA Y ADIVINA</span><button class="icon-btn" id="leaveGameBtn" title="Salir de la partida" aria-label="Salir de la partida">✕</button></div></div>
@@ -456,43 +490,30 @@ body::after{background:linear-gradient(95deg,rgba(1,5,14,.18) 0%,rgba(2,6,17,.07
  <div style="display:flex;gap:9px;margin-top:20px"><button class="btn btn-primary" id="saveProfileBtn" style="flex:1">Guardar personaje</button><button class="btn btn-secondary" data-close="profileModal">Cancelar</button></div>
  </div></div>
 <div id="setupModal" class="modal-backdrop hidden"><div class="modal">
- <div class="modal-head"><h2>⚙ Configuración de WORLD RIVALS</h2><button class="icon-btn" data-close="setupModal">✕</button></div>
-  <div class="setup-block"><h3>🌐 Google Maps (vínculos compartidos) · 360° sin token</h3><p>Esta versión conserva vistas compartidas de Google Maps como respaldo, sin usar su API; las nuevas rondas priorizan Panoramax público cuando está disponible. Combina panorámicas públicas guardadas con fotografías geolocalizadas buscadas aleatoriamente en Panoramax. Si no hay cobertura o conexión, usa una colección local de respaldo. La interfaz de Google puede mostrar algunas pistas, aunque esta versión tapa la zona superior izquierda del visor.</p></div>
- <div class="form-row"><label>Project URL</label><input id="supabaseUrlInput" class="field" placeholder="https://tu-proyecto.supabase.co" autocomplete="url"></div>
- <div class="form-row"><label>Publishable / anon key</label><input id="supabaseAnonInput" class="field" placeholder="sb_publishable_… o anon key" autocomplete="off"></div>
- <div class="setup-block"><h3>Configurar el código de seis dígitos</h3><p>En Supabase: Authentication → Email Templates → Confirm signup. Cambia la plantilla para incluir <code>{{ .Token }}</code>. Activa también la confirmación de correo en Authentication → Providers → Email.</p>
- <pre style="white-space:pre-wrap;background:#101218;padding:12px;border-radius:10px;color:#e8eaf0;font-size:11px;overflow-wrap:anywhere">&lt;h2&gt;Verifica tu cuenta de WORLD RIVALS&lt;/h2&gt;
-&lt;p&gt;Tu código de verificación es:&lt;/p&gt;
-&lt;h1&gt;{{ .Token }}&lt;/h1&gt;</pre>
- <p>El correo de prueba de Supabase tiene límites de envío. Para una publicación abierta tendrás que configurar SMTP propio.</p></div>
- <div style="display:flex;gap:9px;justify-content:flex-end;margin-top:18px"><button class="btn btn-secondary" data-close="setupModal">Cerrar</button><button class="btn btn-primary" id="saveSupabaseBtn">Guardar conexión</button></div>
+ <div class="modal-head"><h2>⚙ Configuración WORLD RIVALS</h2><button class="icon-btn" data-close="setupModal">✕</button></div>
+ <div class="setup-block"><h3>🌐 Panorámicas sin claves de pago</h3><p>Las vistas de Panoramax y las vistas públicas de Google Maps funcionan como en V8.</p></div>
+ <div class="setup-block"><h3>👥 Amigos e invitaciones entre dispositivos</h3><p>Para disponer de amigos reales en Internet, configura un proyecto Supabase con inicio de sesión anónimo y ejecuta el archivo <b>WORLD_RIVALS_AMIGOS.sql</b>. Los jugadores no tendrán que introducir correo ni contraseña. La misma configuración pública debe ir incluida en el HTML distribuido a tus amigos.</p></div>
+ <div class="form-row"><label for="supabaseUrlInput">Project URL de Supabase</label><input id="supabaseUrlInput" class="field" placeholder="https://tu-proyecto.supabase.co" autocomplete="url"></div>
+ <div class="form-row"><label for="supabaseAnonInput">Clave pública / publishable (nunca service_role)</label><input id="supabaseAnonInput" class="field" placeholder="sb_publishable_… o anon key" autocomplete="off"></div>
+ <p class="tiny muted">La clave de Supabase aquí es pública. <b>No pegues tu token de GitHub ni una clave secreta.</b></p>
+ <div class="setup-actions"><button class="btn btn-primary" type="button" id="saveSupabaseBtn">Guardar conexión</button><button class="btn btn-secondary" type="button" id="exportFriendsGameBtn">⬇ Exportar juego configurado</button></div>
+ <p id="cloudSetupStatus" class="tiny muted">Sin conexión a amigos: el modo Jugar solo y las salas por código siguen disponibles.</p>
  </div></div>
-<div id="authModal" class="modal-backdrop hidden"><div class="modal narrow">
- <div class="modal-head"><h2>👤 Cuenta WORLD RIVALS</h2><button class="icon-btn" data-close="authModal">✕</button></div>
- <div id="authStatus" class="muted" style="font-size:12px;line-height:1.6;margin-bottom:14px">Crea una cuenta o inicia sesión para guardar tu personaje y tus datos.</div>
- <div class="auth-intro"><b>Tu cuenta, tu progreso</b><p>Regístrate con correo y contraseña. Para activar la cuenta, introduce el código de seis dígitos que recibirás por email.</p></div><div id="authModeTabs" class="auth-mode-tabs"><button class="btn btn-primary btn-small" id="authLoginTab">Iniciar sesión</button><button class="btn btn-secondary btn-small" id="authRegisterTab">Crear cuenta</button></div>
- <div id="authFields">
-  <div class="form-row"><label>Correo electrónico</label><input id="authEmail" class="field" type="email" autocomplete="email" placeholder="tu@correo.com"></div>
-  <div class="form-row"><label>Contraseña</label><input id="authPassword" class="field" type="password" autocomplete="current-password" minlength="8" placeholder="Mínimo 8 caracteres"></div>
-  <div class="form-row hidden" id="authPasswordConfirmRow"><label>Repite la contraseña</label><input id="authPasswordConfirm" class="field" type="password" autocomplete="new-password" minlength="8" placeholder="Repite la contraseña"></div>
-  <button class="btn btn-primary" id="authSubmitBtn" style="width:100%;margin-top:10px">Iniciar sesión</button>
-  <button class="btn btn-secondary btn-small" id="forgotPasswordBtn" style="width:100%;margin-top:9px">He olvidado mi contraseña</button>
- </div>
- <div id="verifyFields" class="hidden">
-  <div class="eyebrow">VERIFICACIÓN DE CORREO</div><p class="muted" style="font-size:12px;line-height:1.6">Te hemos enviado un código de seis dígitos. Escríbelo aquí para activar tu cuenta.</p>
-  <div class="form-row"><label>Código de verificación</label><input id="authCode" class="field code-input" inputmode="numeric" maxlength="6" placeholder="000000" autocomplete="one-time-code"></div>
-  <button class="btn btn-primary" id="verifyCodeBtn" style="width:100%">Verificar cuenta</button>
-  <button class="btn btn-secondary btn-small" id="resendCodeBtn" style="width:100%;margin-top:9px">Enviar otro código</button>
- </div>
- <div id="authAccountFields" class="hidden"><p id="signedInAs" class="muted" style="font-size:13px"></p><button class="btn btn-secondary" id="signOutBtn" style="width:100%">Cerrar sesión</button></div>
- <div class="config-hint"><span>🔒</span><div>Tu contraseña la gestiona Supabase Auth; WORLD RIVALS no la guarda en texto plano. El modo invitado sigue disponible sin correo ni registro.</div></div>
- <div class="tiny muted" style="margin-top:12px">¿Aún no has conectado tu proyecto? <button id="authOpenSetup" style="background:none;color:#ff9299;text-decoration:underline;padding:0">Configurar Supabase</button></div>
+<div id="friendsModal" class="modal-backdrop hidden"><div class="modal friends-modal">
+ <div class="modal-head"><div><h2>👥 Amigos e invitaciones</h2><p class="tiny muted" id="friendsCloudStatus">Conectando con el servicio de amigos…</p></div><button class="icon-btn" data-close="friendsModal" aria-label="Cerrar amigos">✕</button></div>
+ <div class="friends-header"><span class="eyebrow">TU USUARIO</span><strong id="myFriendHandle">—</strong><small class="muted">Puedes cambiar tu nombre en Personalizar. Tus amigos seguirán guardados por tu identificador.</small></div>
+ <div class="friends-invites" id="friendInvites"></div>
+ <div class="friends-search"><label for="friendSearchInput" class="subhead">BUSCAR USUARIO</label><div class="join-row"><input class="field" id="friendSearchInput" maxlength="18" placeholder="Nombre exacto del jugador" autocomplete="off"><button type="button" class="btn btn-primary" id="findFriendBtn">Buscar</button></div><div id="friendSearchResult" class="friends-result muted tiny" aria-live="polite">Busca a alguien por su nick para enviar una solicitud.</div></div>
+ <div class="friends-group"><h3 class="subhead">SOLICITUDES RECIBIDAS</h3><div id="friendRequests" class="friends-list"><p class="muted tiny">Sin solicitudes pendientes.</p></div></div>
+ <div class="friends-group"><h3 class="subhead">MIS AMIGOS</h3><div id="friendList" class="friends-list"><p class="muted tiny">Todavía no tienes amigos agregados.</p></div></div>
+ <p class="tiny muted">Las invitaciones llegan mientras WORLD RIVALS está abierto. Puedes seguir entrando con el código de sala de siempre. La identidad anónima se guarda en este navegador; si borras los datos del navegador, perderás esa identidad.</p>
  </div></div>
 <div id="toast" class="toast"></div>
 <script defer src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script defer src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@panoramax/web-viewer@5.0.0/build/cjs/index_photoviewer.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script id="wrCloudConfig" type="application/json">{"url":"","anonKey":""}</script>
 
 <script>
 'use strict';
@@ -630,12 +651,6 @@ function setScreen(s){
  if(s==='game')requestAnimationFrame(()=>{if(guessMap)guessMap.resize()}); else closeGamePanels();
   const miniSubmit=$('miniSubmitGuessBtn');if(miniSubmit)miniSubmit.disabled=false;
 }
-function openSetup(){
- const saved=readSupabaseConfig();
- $('supabaseUrlInput').value=saved.url||'';
- $('supabaseAnonInput').value=saved.anonKey||'';
- $('setupModal').classList.remove('hidden');
-}
 function updateConnection(){
  const el=$('connectionBadge');if(el){el.textContent='● Vistas públicas · sin claves de pago';el.style.color='#63dfaa';}
 }
@@ -701,20 +716,29 @@ function updateFullscreenVisuals(next){
   if(streetFullscreen&&myGuess&&miniGuessMap)miniGuessMap.easeTo({center:[myGuess.lng,myGuess.lat],zoom:3.2});
  }
  async function toggleStreetFullscreen(force){
-  const next=typeof force==='boolean'?force:!streetFullscreen;
-  const panel=$('streetPanel');if(!panel)return;
-  closeGamePanels();
-  if(next){
-   updateFullscreenVisuals(true);
-   if(!document.fullscreenElement&&panel.requestFullscreen){try{await panel.requestFullscreen({navigationUI:'hide'});}catch(e){console.warn('Pantalla completa nativa no disponible, usando modo inmersivo',e);toast('Modo inmersivo activado. Tu navegador no permitió pantalla completa real.');}}
-  }else{
-   if(document.fullscreenElement===panel){try{await document.exitFullscreen();}catch(e){console.warn(e);}}
-   updateFullscreenVisuals(false);
-  }
+   const next=typeof force==='boolean'?force:!streetFullscreen;
+   const panel=$('streetPanel');if(!panel)return;
+   if(next){
+     if(document.fullscreenElement===panel){updateFullscreenVisuals(true);return;}
+     if(!panel.requestFullscreen){toast('Tu navegador no permite pantalla completa real para esta página.');return;}
+     // Importante: la petición nativa se hace directamente desde el clic, ANTES de cambiar el diseño.
+     try{
+       await panel.requestFullscreen({navigationUI:'hide'});
+       closeGamePanels();
+       updateFullscreenVisuals(document.fullscreenElement===panel);
+     }catch(e){
+       console.warn('Fullscreen API rechazada',e);
+       updateFullscreenVisuals(false);
+       toast('El navegador ha bloqueado la pantalla completa real. Prueba F11 o abre el juego desde HTTPS.');
+     }
+   }else{
+     if(document.fullscreenElement===panel){try{await document.exitFullscreen();}catch(e){console.warn(e)}}
+     updateFullscreenVisuals(false);
+   }
  }
  document.addEventListener('fullscreenchange',()=>{
-  if(document.fullscreenElement===$('streetPanel')){if(!streetFullscreen)updateFullscreenVisuals(true);}
-  else if(streetFullscreen)updateFullscreenVisuals(false);
+   const active=document.fullscreenElement===$('streetPanel');
+   if(streetFullscreen!==active)updateFullscreenVisuals(active);
  });
 async function waitForMap(){
  initGuessMap();if(offlineMapReady)return true;if(guessMap&&guessMap.loaded())return true;
@@ -1243,86 +1267,204 @@ async function nextSolo(){
  localRound++;$('resultBanner').classList.add('hidden');showPanoLoading('Explorando nuevas ubicaciones disponibles.');try{const target=await randomPanorama();currentRoom.target=target;currentRoom.round=localRound;currentRoom.roundStatus='playing';loadedRoundKey='';$('roundLabel').textContent=`RONDA ${localRound} / ${localRounds}`;$('resultBanner').classList.add('hidden');$('submitGuessBtn').disabled=false;$('submitGuessBtn').textContent='Confirmar →';if(targetMarker){targetMarker.remove();targetMarker=null;}clearGuess();if(guessMap)guessMap.easeTo({center:[0,20],zoom:1.35});loadRoomRound();setupSoloClock();}catch(e){showPanoError(e.message||'No se pudo cargar la siguiente ronda.',true);toast(e.message||'No se pudo cargar la siguiente ronda.');}
 }
 function leaveGame(){if(streetFullscreen)toggleStreetFullscreen(false);if(isSolo){isSolo=false;cleanupRoom();setScreen('home');return;}cleanupRoom();setScreen('home');toast('Has salido de la sala.');}
-function readSupabaseConfig(){try{return JSON.parse(localStorage.getItem('wr_auth_config')||'{}')}catch(e){return {}}}
-function updateAccountUI(){
- const btn=$('accountBtn');if(btn)btn.textContent=accountUser?('👤 '+(accountUser.email||'Cuenta')):'👤 Crear cuenta / Iniciar sesión';
- const status=$('authStatus');if(!status)return;
- const waitingForCode=!!pendingSignupEmail&&!accountUser;
- $('authFields').classList.toggle('hidden',!!accountUser||!supabaseClient||waitingForCode);
- $('authModeTabs').classList.toggle('hidden',!!accountUser||!supabaseClient||waitingForCode);
- $('verifyFields').classList.toggle('hidden',!waitingForCode||!supabaseClient);
- $('authAccountFields').classList.toggle('hidden',!accountUser);
- if(accountUser){status.textContent='Sesión iniciada. Tu personaje se guarda en tu cuenta.';$('signedInAs').textContent='Conectado como '+accountUser.email;}
- else if(waitingForCode&&supabaseClient){status.textContent='Código enviado a '+pendingSignupEmail+'. Revisa tu correo y escribe los seis dígitos.';}
- else if(!supabaseClient){status.textContent='Para crear cuentas con correo y contraseña, conecta tu proyecto Supabase. Puedes seguir jugando como invitado mientras tanto.';$('authFields').classList.add('hidden');$('authModeTabs').classList.add('hidden');$('verifyFields').classList.add('hidden');}
- else status.textContent='Crea una cuenta o inicia sesión para guardar tu personaje.';
+// ===== WORLD RIVALS / INVITACIONES ENTRE AMIGOS (sin correos ni contraseñas) =====
+let socialUser=null,socialReady=false,socialTimer=null,socialBusy=false,friendCache=[],knownInviteIds=new Set(),socialLastError='';
+function publicCloudConfig(){try{return JSON.parse($('wrCloudConfig')?.textContent||'{}')}catch(e){return {}}}
+function readSupabaseConfig(){
+ const pub=publicCloudConfig();if(pub.url&&pub.anonKey)return pub;
+ try{return JSON.parse(localStorage.getItem('wr_auth_config')||'{}')}catch(e){return {}}
 }
-function initSupabase(){
- try{pendingSignupEmail=localStorage.getItem('wr_pending_signup')||''}catch(e){}
+function updateSocialStatus(message){
+ socialLastError=message||'';
+ const text=socialReady?'● Amigos conectados':message||'Sin configurar: las salas con código sí funcionan.';
+ if($('friendsCloudStatus'))$('friendsCloudStatus').textContent=text;
+ if($('cloudSetupStatus'))$('cloudSetupStatus').textContent=text;
+ if($('myFriendHandle'))$('myFriendHandle').textContent=socialUser?'@'+profile.name:'—';
+}
+async function initSupabase(){
+ const config=readSupabaseConfig();socialReady=false;socialUser=null;
+ if(socialTimer){clearInterval(socialTimer);socialTimer=null;}
+ if(!config.url||!config.anonKey){updateSocialStatus('Configura Supabase para activar amigos sin registro.');return;}
+ if(!window.supabase?.createClient){updateSocialStatus('No se cargó la librería de Supabase. Comprueba Internet.');return;}
+ try{
+   supabaseClient=window.supabase.createClient(config.url,config.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+   let {data,error}=await supabaseClient.auth.getSession();if(error)throw error;
+   if(!data?.session){const signed=await supabaseClient.auth.signInAnonymously();if(signed.error)throw signed.error;data={session:signed.data.session};}
+   socialUser=data.session.user;
+   if(!socialUser?.id)throw new Error('No se obtuvo identidad anónima');
+   if(!profile.name||profile.name==='Invitado'){
+     profile.name='Jugador'+String(Math.floor(1000+Math.random()*9000));
+     try{localStorage.setItem('wr_profile',JSON.stringify(profile))}catch(e){}
+     renderProfile();
+   }
+   const result=await supabaseClient.from('wr_players').select('id,username').eq('id',socialUser.id).maybeSingle();
+   if(result.error)throw result.error;
+   if(result.data){
+     // Restablece el nick asociado al ID al abrir otra sesión en el mismo navegador.
+     profile.name=result.data.username;
+     try{localStorage.setItem('wr_profile',JSON.stringify(profile))}catch(e){}
+     renderProfile();
+   }else{
+     await syncFriendProfile(true);
+   }
+   socialReady=true;updateSocialStatus();
+   await refreshFriends();
+   socialTimer=setInterval(()=>refreshFriends().catch(e=>console.warn('Amigos:',e)),8000);
+ }catch(e){socialReady=false;console.error('Configuración amigos',e);updateSocialStatus('Amigos no disponibles: '+(e?.message||'revisa configuración y SQL.'));}
+}
+async function syncFriendProfile(initial=false){
+ if(!supabaseClient||!socialUser)return;
+ const clean=(profile.name||'').trim().slice(0,18);
+ if(clean.length<3){if(!initial)toast('Tu nombre debe tener entre 3 y 18 caracteres para ser visible en amigos.');return;}
+ const values={id:socialUser.id,username:clean,flag:profile.flag};
+ const {error}=await supabaseClient.from('wr_players').upsert(values,{onConflict:'id'});
+ if(error){
+   if(error.code==='23505'){if(initial){profile.name='Jugador'+String(Math.floor(100000+Math.random()*900000));renderProfile();return syncFriendProfile(false);}toast('Ese nombre ya lo usa otra persona. Prueba uno diferente.');}
+   else {console.warn('Guardando nick',error);toast('No se sincronizó tu nick: '+error.message);}
+   return false;
+ }
+ if(socialReady)refreshFriends();
+ return true;
+}
+function openFriends(){
+ $('friendsModal')?.classList.remove('hidden');
+ if(!socialReady){updateSocialStatus(socialLastError||'Configura Supabase en ⚙ para activar amigos.');return;}
+ refreshFriends();
+}
+function friendRow(uid,name,flag,buttons){
+ return `<div class="friend-row"><div class="friend-person"><b>${esc(flag||'🌐')} ${esc(name||'Jugador')}</b><small>${uid===socialUser?.id?'Tú':'WORLD RIVALS'}</small></div><div class="friend-actions">${buttons||''}</div></div>`;
+}
+function renderFriends(records,people,invites){
+ const myId=socialUser.id;
+ const lookup=id=>people[id]||{username:'Jugador',flag:'🌐'};
+ friendCache=[];
+ const received=records.filter(r=>r.receiver_id===myId&&r.status==='pending');
+ const accepted=records.filter(r=>r.status==='accepted');
+ const sent=records.filter(r=>r.sender_id===myId&&r.status==='pending');
+ $('friendRequests').innerHTML=received.length?received.map(r=>{
+  const p=lookup(r.sender_id);
+  return friendRow(r.sender_id,p.username,p.flag,`<button class="btn btn-primary btn-small" data-friend-action="accept" data-request-id="${esc(r.id)}">Aceptar</button><button class="btn btn-secondary btn-small" data-friend-action="decline" data-request-id="${esc(r.id)}">Rechazar</button>`);
+ }).join(''):'<p class="tiny muted">Sin solicitudes pendientes.</p>';
+ $('friendList').innerHTML=(accepted.length?accepted.map(r=>{
+  const uid=r.sender_id===myId?r.receiver_id:r.sender_id,p=lookup(uid);
+  friendCache.push({id:uid,name:p.username,flag:p.flag});
+  const canInvite=p2pHost&&currentRoomId&&currentRoom?.status!=='finished';
+  return friendRow(uid,p.username,p.flag,canInvite?`<button class="btn btn-primary btn-small" data-friend-action="invite" data-user-id="${esc(uid)}">Invitar ↗</button>`:'<span class="tiny muted">Crea una sala para invitar</span>');
+ }).join(''):'<p class="tiny muted">Todavía no tienes amigos. Busca su nick arriba.</p>')+
+ (sent.length?`<div class="tiny muted" style="margin-top:12px">Solicitudes enviadas: ${sent.map(r=>esc(lookup(r.receiver_id).username)).join(', ')}</div>`:'');
+ $('friendInvites').innerHTML=invites.length?`<div class="invites-title">✉ INVITACIONES A SALAS</div>`+invites.map(i=>{
+   const p=lookup(i.sender_id);
+   return friendRow(i.sender_id,p.username,p.flag,`<button class="btn btn-primary btn-small" data-friend-action="join-invite" data-invite-id="${esc(i.id)}" data-room-code="${esc(i.room_code)}">Unirme</button><button class="btn btn-secondary btn-small" data-friend-action="reject-invite" data-invite-id="${esc(i.id)}">No</button>`);
+ }).join(''):'';
+ const count=received.length+invites.length, el=$('friendsCounter');
+ if(el){el.textContent=String(count);el.classList.toggle('hidden',count===0)}
+ for(const i of invites){if(!knownInviteIds.has(i.id)&&!$('friendsModal').classList.contains('hidden')){/* visible in friends panel */}else if(!knownInviteIds.has(i.id))toast('✉ Invitación de '+lookup(i.sender_id).username+'. Abre 👥 Amigos para unirte.');knownInviteIds.add(i.id)}
+}
+async function refreshFriends(){
+ if(!socialReady||!socialUser||socialBusy)return;
+ socialBusy=true;
+ try{
+  const uid=socialUser.id;
+  const [requests,invitations]=await Promise.all([
+   supabaseClient.from('wr_friend_requests').select('id,sender_id,receiver_id,status').or(`sender_id.eq.${uid},receiver_id.eq.${uid}`),
+   supabaseClient.from('wr_invites').select('id,sender_id,receiver_id,room_code,status,expires_at').eq('receiver_id',uid).eq('status','pending').gt('expires_at',new Date().toISOString()).order('created_at',{ascending:false}).limit(20)
+  ]);
+  if(requests.error)throw requests.error;if(invitations.error)throw invitations.error;
+  const records=requests.data||[],invites=invitations.data||[];
+  const ids=[...new Set([...records.flatMap(r=>[r.sender_id,r.receiver_id]),...invites.map(i=>i.sender_id)])].filter(Boolean);
+  const people={};
+  if(ids.length){const users=await supabaseClient.from('wr_players').select('id,username,flag').in('id',ids);if(users.error)throw users.error;for(const p of users.data||[])people[p.id]=p;}
+  renderFriends(records,people,invites);
+  updateSocialStatus();
+ }catch(e){console.warn('Refrescando amigos',e);updateSocialStatus('No se pudieron consultar los amigos: '+e.message)}
+ finally{socialBusy=false;}
+}
+async function searchFriend(){
+ if(!socialReady){toast('Primero configura el servicio de amigos en ⚙.');return;}
+ const name=$('friendSearchInput').value.trim();
+ if(!name){$('friendSearchResult').textContent='Escribe el nick exacto de tu amigo.';return;}
+ const {data,error}=await supabaseClient.from('wr_players').select('id,username,flag').eq('username_key',name.toLowerCase()).maybeSingle();
+ if(error){$('friendSearchResult').textContent='Error: '+error.message;return;}
+ if(!data){$('friendSearchResult').textContent='No se encontró ese usuario. Comprueba cómo lo escribe.';return;}
+ if(data.id===socialUser.id){$('friendSearchResult').textContent='Ese eres tú 😎';return;}
+ if(friendCache.some(f=>f.id===data.id)){$('friendSearchResult').textContent='Ya está en tu lista de amigos.';return;}
+ $('friendSearchResult').innerHTML=friendRow(data.id,data.username,data.flag,`<button class="btn btn-primary btn-small" data-friend-action="add" data-user-id="${esc(data.id)}">＋ Agregar amigo</button>`);
+}
+async function sendFriendRequest(receiver){
+ if(!socialReady)return;
+ const reverse=await supabaseClient.from('wr_friend_requests').select('id,status').eq('sender_id',receiver).eq('receiver_id',socialUser.id).maybeSingle();
+ if(reverse.error)throw reverse.error;
+ if(reverse.data?.status==='pending'){await respondFriend(reverse.data.id,true);toast('¡Ya sois amigos!');return;}
+ const {error}=await supabaseClient.from('wr_friend_requests').insert({sender_id:socialUser.id,receiver_id:receiver,status:'pending'});
+ if(error){toast(error.code==='23505'?'La solicitud ya está enviada.':'No se pudo enviar: '+error.message);return;}
+ toast('Solicitud de amistad enviada.');$('friendSearchResult').textContent='Solicitud enviada. Cuando la acepten, aparecerá en Mis amigos.';
+ await refreshFriends();
+}
+async function respondFriend(id,accept){
+ const {error}=await supabaseClient.from('wr_friend_requests').update({status:accept?'accepted':'declined'}).eq('id',id).eq('receiver_id',socialUser.id);
+ if(error)throw error;toast(accept?'¡Amigo agregado!':'Solicitud rechazada.');await refreshFriends();
+}
+async function sendFriendInvite(id){
+ if(!p2pHost||!currentRoomId||!currentRoom||currentRoom.status==='finished'){toast('Primero crea una sala para invitar a tus amigos.');return;}
+ const {error}=await supabaseClient.from('wr_invites').insert({sender_id:socialUser.id,receiver_id:id,room_code:currentRoomId,status:'pending'});
+ if(error)throw error;toast('✉ Invitación enviada. Tu amigo podrá unirse sin escribir el código.');
+}
+async function handleFriendAction(action,btn){
+ if(!socialReady){toast('Los amigos necesitan un servidor de Supabase configurado.');return;}
+ switch(action){
+ case 'add':await sendFriendRequest(btn.dataset.userId);break;
+ case 'accept':await respondFriend(btn.dataset.requestId,true);break;
+ case 'decline':await respondFriend(btn.dataset.requestId,false);break;
+ case 'invite':await sendFriendInvite(btn.dataset.userId);break;
+ case 'join-invite':{
+  const code=btn.dataset.roomCode;
+  const {error}=await supabaseClient.from('wr_invites').update({status:'accepted'}).eq('id',btn.dataset.inviteId).eq('receiver_id',socialUser.id);
+  if(error)throw error;
+  $('friendsModal').classList.add('hidden');
+  await joinRoom(code);
+  await refreshFriends();
+  break;
+ }
+ case 'reject-invite':{
+  const {error}=await supabaseClient.from('wr_invites').update({status:'declined'}).eq('id',btn.dataset.inviteId).eq('receiver_id',socialUser.id);
+  if(error)throw error;await refreshFriends();break;
+ }
+ }
+}
+function openSetup(){
  const c=readSupabaseConfig();
- if(!c.url||!c.anonKey||!window.supabase?.createClient){supabaseClient=null;updateAccountUI();return;}
- try{
-  supabaseClient=window.supabase.createClient(c.url,c.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-  supabaseClient.auth.getSession().then(({data,error})=>{if(error)console.warn(error);accountUser=data?.session?.user||null;applyAccountProfile();updateAccountUI();});
-  supabaseClient.auth.onAuthStateChange((event,session)=>{accountUser=session?.user||null;applyAccountProfile();updateAccountUI();});
- }catch(e){supabaseClient=null;console.error(e);toast('No se pudo conectar con Supabase: '+e.message);updateAccountUI();}
+ if($('supabaseUrlInput'))$('supabaseUrlInput').value=c.url||'';
+ if($('supabaseAnonInput'))$('supabaseAnonInput').value=c.anonKey||'';
+ $('setupModal').classList.remove('hidden');updateSocialStatus(socialLastError);
 }
-function applyAccountProfile(){
- const saved=accountUser?.user_metadata?.wr_profile;
- if(saved&&typeof saved==='object'){profile={...defaultProfile,...saved};try{localStorage.setItem('wr_profile',JSON.stringify(profile))}catch(e){}renderProfile();}
-}
-function openAuth(){updateAccountUI();$('authModal').classList.remove('hidden');}
-function setAuthMode(mode){
- authMode=mode;const isRegister=mode==='register';
- $('authLoginTab').className=isRegister?'btn btn-secondary btn-small':'btn btn-primary btn-small';
- $('authRegisterTab').className=isRegister?'btn btn-primary btn-small':'btn btn-secondary btn-small';
- $('authSubmitBtn').textContent=isRegister?'Crear cuenta':'Iniciar sesión';
- $('authPasswordConfirmRow').classList.toggle('hidden',!isRegister);
- $('authPassword').autocomplete=isRegister?'new-password':'current-password';
- $('forgotPasswordBtn').classList.toggle('hidden',isRegister);
-}
-function setAuthMessage(message,isError=false){const el=$('authStatus');el.textContent=message;el.style.color=isError?'#ff9098':'#aeb3c0';}
-async function authSubmit(){
- if(!supabaseClient){setAuthMessage('Primero conecta tu proyecto Supabase en Configurar Supabase.',true);return;}
- const email=$('authEmail').value.trim().toLowerCase(),password=$('authPassword').value;
- if(!/^\S+@\S+\.\S+$/.test(email)){setAuthMessage('Escribe un correo electrónico válido.',true);return;}
- if(password.length<8){setAuthMessage('La contraseña debe tener al menos 8 caracteres.',true);return;}
- const btn=$('authSubmitBtn');btn.disabled=true;btn.textContent='Conectando…';
- try{
-  if(authMode==='register'){
-   if(password!==$('authPasswordConfirm').value)throw new Error('Las contraseñas no coinciden.');
-   const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{wr_profile:profile}}});if(error)throw error;
-   pendingSignupEmail=email;try{localStorage.setItem('wr_pending_signup',email)}catch(e){}
-   if(data.session){pendingSignupEmail='';try{localStorage.removeItem('wr_pending_signup')}catch(e){}accountUser=data.user;applyAccountProfile();updateAccountUI();setAuthMessage('Cuenta creada y sesión iniciada.');toast('¡Cuenta creada!');}
-   else{$('authFields').classList.add('hidden');$('authModeTabs').classList.add('hidden');$('verifyFields').classList.remove('hidden');$('authCode').value='';setAuthMessage('Supabase ha creado la solicitud para '+email+'. Revisa tu correo y escribe aquí el código de confirmación.');$('authCode').focus();}
-  }else{
-   const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;
-   accountUser=data.user;applyAccountProfile();updateAccountUI();setAuthMessage('Sesión iniciada.');toast('¡Bienvenido a WORLD RIVALS!');
-  }
- }catch(e){setAuthMessage(e.message||'No se pudo completar la operación.',true);}
- finally{btn.disabled=false;btn.textContent=authMode==='register'?'Crear cuenta':'Iniciar sesión';}
-}
-async function verifySignupCode(){
- const token=$('authCode').value.trim();if(!supabaseClient||!pendingSignupEmail){setAuthMessage('Primero solicita un código de registro.',true);return;}
- if(!/^\d{6}$/.test(token)){setAuthMessage('El código debe tener seis dígitos.',true);return;}
- const btn=$('verifyCodeBtn');btn.disabled=true;
- try{const {data,error}=await supabaseClient.auth.verifyOtp({email:pendingSignupEmail,token,type:'email'});if(error)throw error;accountUser=data.user;pendingSignupEmail='';try{localStorage.removeItem('wr_pending_signup')}catch(e){}applyAccountProfile();updateAccountUI();setAuthMessage('Correo verificado. Tu cuenta ya está activa.');toast('¡Correo verificado!');$('authCode').value='';}
- catch(e){setAuthMessage(e.message||'El código no es válido o ha caducado.',true);}
- finally{btn.disabled=false;}
-}
-async function resendSignupCode(){if(!supabaseClient||!pendingSignupEmail)return;try{const {error}=await supabaseClient.auth.resend({type:'signup',email:pendingSignupEmail});if(error)throw error;setAuthMessage('Hemos solicitado otro código. Revisa tu correo.');}catch(e){setAuthMessage(e.message||'No se pudo reenviar el código.',true);}}
-async function resetAccountPassword(){if(!supabaseClient){setAuthMessage('Conecta Supabase primero.',true);return;}const email=$('authEmail').value.trim().toLowerCase();if(!email){setAuthMessage('Escribe tu correo primero.',true);return;}try{const {error}=await supabaseClient.auth.resetPasswordForEmail(email);if(error)throw error;setAuthMessage('Te hemos enviado un correo para restablecer la contraseña.');}catch(e){setAuthMessage(e.message||'No se pudo enviar el correo.',true);}}
-async function signOutAccount(){if(!supabaseClient)return;const {error}=await supabaseClient.auth.signOut();if(error){toast(error.message);return;}accountUser=null;setAuthMessage('Has cerrado sesión.');updateAccountUI();toast('Sesión cerrada.');}
 async function saveSupabaseConfig(){
  const url=$('supabaseUrlInput').value.trim().replace(/\/$/,''),anonKey=$('supabaseAnonInput').value.trim();
- if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){toast('La URL debe tener el formato https://tu-proyecto.supabase.co');return;}
- if(anonKey.length<20){toast('La clave pública de Supabase parece incompleta.');return;}
- try{localStorage.setItem('wr_auth_config',JSON.stringify({url,anonKey}));}catch(e){toast('No se puede guardar la configuración en este navegador. Abre el juego desde localhost o HTTPS.');return;}$('setupModal').classList.add('hidden');initSupabase();toast('Conexión de cuentas guardada.');
+ if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)){toast('URL incorrecta. Usa https://tu-proyecto.supabase.co');return;}
+ if(anonKey.length<20||/^(?:github_pat_|ghp_|sb_secret_|eyJ.*service_role)/i.test(anonKey)){toast('Introduce SOLO la clave pública (anon / publishable) de Supabase.');return;}
+ try{localStorage.setItem('wr_auth_config',JSON.stringify({url,anonKey}));}catch(e){toast('No se pudo guardar en este navegador.');return;}
+ await initSupabase();
+ if(socialReady){$('setupModal').classList.add('hidden');toast('Amigos conectados. ¡Sin crear cuentas!');}
+ else toast('Config guardada, pero falta habilitar el acceso anónimo o ejecutar el SQL.');
 }
-async function syncAccountProfile(){if(!supabaseClient||!accountUser)return;try{const {data,error}=await supabaseClient.auth.updateUser({data:{wr_profile:profile}});if(error)throw error;accountUser=data.user;}catch(e){console.warn('Profile sync',e);toast('No se pudo sincronizar el personaje con tu cuenta.');}}
-
+function exportFriendsGame(){
+ const url=$('supabaseUrlInput').value.trim().replace(/\/$/,''),anonKey=$('supabaseAnonInput').value.trim();
+ if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url)||anonKey.length<20||/^(?:github_pat_|ghp_|sb_secret_)/i.test(anonKey)){toast('Primero introduce una URL y una clave PÚBLICA válidas de Supabase.');return;}
+ // Exportar solo URL y publishable key, NUNCA credenciales privadas del editor.
+ const doc=document.documentElement.cloneNode(true);
+ const config=doc.querySelector('#wrCloudConfig');
+ config.textContent=JSON.stringify({url,anonKey}).replace(/</g,'\\u003c');
+ doc.querySelectorAll('canvas,iframe,video,audio').forEach(n=>n.remove());
+ for(const id of ['guessMap','miniGuessMap']){const el=doc.querySelector('#'+id);if(el){el.replaceChildren();el.classList.remove('maplibregl-map');el.removeAttribute('aria-label');}}
+ doc.querySelectorAll('.modal-backdrop').forEach(n=>n.classList.add('hidden'));
+ doc.querySelector('#gameScreen')?.classList.add('hidden');
+ doc.querySelector('#lobbyScreen')?.classList.add('hidden');
+ doc.querySelector('#homeScreen')?.classList.remove('hidden');
+ const result='<!doctype html>\n'+doc.outerHTML;
+ const link=document.createElement('a');link.href=URL.createObjectURL(new Blob([result],{type:'text/html;charset=utf-8'}));link.download='WorldRivals_V8.1_Amigos.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),2000);
+ toast('Juego exportado con configuración pública. Publícalo en GitHub para tus amigos.');
+}
 function saveProfile(){
- profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';profile.nameColor=safeColor(profile.nameColor);profile.skin=safeColor(profile.skin,'#f5c9a5');profile.hair=safeColor(profile.hair,'#34251f');profile.shirt=safeColor(profile.shirt,'#e34250');try{localStorage.setItem('wr_profile',JSON.stringify(profile));}catch(e){toast('No se pudo guardar en este navegador. Usa localhost o HTTPS.');}renderProfile();syncAccountProfile();
+ profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';profile.nameColor=safeColor(profile.nameColor);profile.skin=safeColor(profile.skin,'#f5c9a5');profile.hair=safeColor(profile.hair,'#34251f');profile.shirt=safeColor(profile.shirt,'#e34250');try{localStorage.setItem('wr_profile',JSON.stringify(profile));}catch(e){toast('No se pudo guardar en este navegador. Usa localhost o HTTPS.');}renderProfile();syncFriendProfile();
  if(currentRoom&&p2pPeer){const updated={...profileForPlayer(),uid:p2pUid};if(p2pHost){const i=players.findIndex(p=>p.uid===p2pUid);if(i>=0)players[i]={...players[i],...updated};hostPublish();}else p2pSend(p2pHostConn,{type:'profile',player:updated});}
 }
 function playerRow(p,host=false){return `<div class="player-row">${paintPlayer(p)}<div class="player-meta"><b>${p.flag||'🌐'} ${nameHTML(p)}</b><small>${p.uid===p2pUid?'Tú':'En la sala'}</small></div>${host?'<span class="host-mark">ANFITRIÓN</span>':''}</div>`}
@@ -1385,19 +1527,17 @@ function runUiAction(label, fn){
 document.addEventListener('click',ev=>{
  const closeBtn=ev.target.closest('[data-close]');
  if(closeBtn){const panel=$(closeBtn.dataset.close);if(panel)panel.classList.add('hidden');return;}
- const b=ev.target.closest('button');if(!b)return;
+  const b=ev.target.closest('button');if(!b)return;
+  if(b.dataset.friendAction){ev.preventDefault();runUiAction('amigos',()=>handleFriendAction(b.dataset.friendAction,b));return;}
  const actions={
   setupBtn:()=>openSetup(), profileBtn:()=>openProfile(), editProfileBtn:()=>openProfile(),
-  accountBtn:openAuth, heroCreate:createRoom, createRoomBtn:createRoom,
+  friendsBtn:openFriends, homeFriendsBtn:openFriends, lobbyFriendsBtn:openFriends, heroCreate:createRoom, createRoomBtn:createRoom,
   heroSolo:startSolo, retrySoloBtn:startSolo,
   joinRoomBtn:()=>joinRoom($('joinCode').value),
   goldToggle:()=>{profile.gold=!profile.gold;previewFromInputs();toast(profile.gold?'Efecto dorado activado ✨':'Color normal activado');},
   saveProfileBtn:()=>{profile={...profile,name:$('profileName').value,flag:$('profileFlag').value,nameColor:$('nameColor').value,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,accessory:$('accessory').value};saveProfile();$('profileModal').classList.add('hidden');toast('¡Personaje guardado!');},
   saveSupabaseBtn:saveSupabaseConfig,
-  authOpenSetup:()=>{$('authModal').classList.add('hidden');openSetup();},
-  authLoginTab:()=>setAuthMode('login'),authRegisterTab:()=>setAuthMode('register'),
-  authSubmitBtn:authSubmit,verifyCodeBtn:verifySignupCode,resendCodeBtn:resendSignupCode,
-  forgotPasswordBtn:resetAccountPassword,signOutBtn:signOutAccount,
+  exportFriendsGameBtn:exportFriendsGame,findFriendBtn:searchFriend,
   lobbyBack:()=>{cleanupRoom();setScreen('home');},
   startGameBtn:()=>startOnlineRound(),micBtn:()=>toggleMic(),leaveGameBtn:()=>leaveGame(),
   nextRoundBtn:()=>{if(isSolo)nextSolo();else if(currentRoom?.status==='finished'){cleanupRoom();setScreen('home');}else hostNextRound();},
@@ -1406,7 +1546,8 @@ document.addEventListener('click',ev=>{
  if(actions[b.id]){ev.preventDefault();runUiAction(b.id,actions[b.id]);}
 });
 document.addEventListener('submit',ev=>{
- if(ev.target && ev.target.id==='chatForm'){
+  if(ev.target && ev.target.id==='friendSearchForm'){ev.preventDefault();runUiAction('buscar usuario',searchFriend);return;}
+  if(ev.target && ev.target.id==='chatForm'){
   ev.preventDefault();sendMessage($('chatInput').value);$('chatInput').value='';
  }
 });
@@ -1437,11 +1578,9 @@ function initialiseWorldRivals(){
  safeInit('perfil',loadSaved);
  safeInit('vista del perfil',renderProfile);
  safeInit('estado de conexión',updateConnection);
- safeInit('selector de cuenta',()=>setAuthMode('login'));
  safeInit('ganancia del micrófono',()=>setMicGain(readMicGain()));
  safeInit('mapa',initGuessMap);
- safeInit('cuentas',initSupabase);
- safeInit('estado de cuenta',updateAccountUI);
+  safeInit('amigos',initSupabase);
 }
 // Deferred vendor scripts execute before DOMContentLoaded. Initialize services here,
 // not while the parser is still executing this inline script.
@@ -1453,7 +1592,7 @@ else initialiseWorldRivals();
    Local-only admin password is a convenience gate, NOT secure authentication. */
 (()=>{
 'use strict';
-const WR_BASE='8.0.0';
+const WR_BASE='8.1.0';
 const ADMIN_PASSWORD='Enrr_2013';
 const STABLE_DB='world-rivals-local-updates-v1';
 const LS_MANIFEST='wr_v7_manifest_url';
