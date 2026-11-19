@@ -481,7 +481,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
  <section class="feature-strip">
   <div class="feature"><div class="feature-icon">🔥</div><div><b>V2 Stable · Diario con rachas</b><small>Solo una partida por fecha local. Desbloqueo a las 00:00 y contador de días consecutivos completados</small></div></div>
   <div class="feature"><div class="feature-icon">👥</div><div><b>V3 Stable · Amigos desde la sala</b><small>Agrega desde la clasificación o la sala con un toque; el anfitrión puede expulsar con confirmación</small></div></div>
-  <div class="feature"><div class="feature-icon">⚡</div><div><b>V3 Stable · ELO y pantalla completa</b><small>Todos empiezan con 100 ELO; cambios moderados y resumen al terminar. La pantalla completa se cierra únicamente al acabar la partida</small></div></div>
+  <div class="feature"><div class="feature-icon">⚡</div><div><b>V3 Stable · Street View y ELO</b><small>Corregido el error de API desactivada al mostrar panorámicas; comprobación de IDs y visor Street View conservado. ELO inicial de 100 y salida de pantalla completa al terminar</small></div></div>
  </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -1144,7 +1144,7 @@ async function wrFindGooglePanorama(service,point,country,signal,stats){
   const ll=wrLatLngData(loc);
   const lat=Number.isFinite(ll.lat)?ll.lat:Number(point.lat);
   const lng=Number.isFinite(ll.lng)?ll.lng:Number(point.lng);
-  if(!pano||!Number.isFinite(lat)||!Number.isFinite(lng)||!wrInCountry(lng,lat,country)){
+  if(!wrCanEmbedGooglePanoId(pano)||!Number.isFinite(lat)||!Number.isFinite(lng)||!wrInCountry(lng,lat,country)){
    if(stats)stats.unavailable++;
    return null;
   }
@@ -1168,25 +1168,30 @@ async function wrFindGooglePanorama(service,point,country,signal,stats){
  }
 }
 function wrRemoveWarmFrame(){if(wrWarmFrame){try{wrWarmFrame.remove()}catch(e){}wrWarmFrame=null;}wrWarmPano='';}
+/* V3 Stable · Fix Street View: no mezclar el visor compartido con Maps Embed API.
+   El verificador obtiene un panorama valido de StreetViewService, pero el modo
+   /embed/v1/streetview requiere OTRO servicio activado en Google Cloud. Un error de
+   API NO se corrige cambiando coordenadas. Rechazamos IDs inutilizables antes de
+   entregar una ronda, sin dejar que el iframe caiga en el modo que muestra el error. */
+function wrCanEmbedGooglePanoId(pano){
+ return typeof pano==='string' && pano.length>=4 && pano.length<=400 && !/[\u0000-\u001f\u007f]/.test(pano);
+}
+function wrEncodeGooglePanoId(pano){
+ return encodeURIComponent(pano).replace(/[!'()*]/g,ch=>'%'+ch.charCodeAt(0).toString(16).toUpperCase());
+}
 function wrGoogleEmbedUrl(t){
- // Mantiene primero el mismo iframe PUBLICO de Google Street View de la V8.6.
- // Si el ID no se puede representar con el enlace compartido, usa como respaldo
- // el modo streetview de Google Maps Embed API, siempre Google Street View.
  if(!t || !Number.isFinite(Number(t.lat)) || !Number.isFinite(Number(t.lng)))
    throw Error('Coordenadas de Street View incorrectas.');
  const lat=Number(t.lat),lng=Number(t.lng),heading=Number.isFinite(Number(t.heading))?Number(t.heading):0;
- const pano= t.source==='google-public-embed'
+ const pano=t.source==='google-public-embed'
     ? (GOOGLE_FREE_PANOS.find(x=>x.pano===t.pano)?.pano||'')
     : (t.googlePanoId||String(t.pano||'').replace(/^gm:/,''));
- if(pano && /^[A-Za-z0-9_-]{4,250}$/.test(pano)){
-   return 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s'+encodeURIComponent(pano)+
+ if(!wrCanEmbedGooglePanoId(pano))
+   throw Error('Identificador de panorámica no compatible con el visor de Google; hay que elegir otra calle.');
+ // Mantiene EXACTAMENTE la familia de enlace de Street View de la V8.6.
+ // No recurre nunca a /embed/v1/streetview en el navegador.
+ return 'https://www.google.com/maps/embed?pb=!4v1!6m8!1m7!1s'+wrEncodeGooglePanoId(pano)+
      '!2m2!1d'+lat+'!2d'+lng+'!3f'+heading+'!4f0!5f0.7820865974627469';
- }
- if(t.source==='google'&&wrMapsKey()){
-  return 'https://www.google.com/maps/embed/v1/streetview?key='+encodeURIComponent(wrMapsKey())+
-    '&location='+encodeURIComponent(lat+','+lng)+'&heading='+encodeURIComponent(heading)+'&pitch=0&fov=80';
- }
- throw Error('Google no devolvió una panorámica identificable. Prueba otra coordenada.');
 }
 function wrWarmNextGoogleEmbed(target){
  if(!target||!['google','google-public-embed'].includes(target.source))return;
@@ -1200,7 +1205,7 @@ function wrWarmNextGoogleEmbed(target){
 function wrAcceptNextPreload(msg){
  if(!currentRoom||currentRoom.status!=='playing'||currentRoom.roundStatus!=='playing'||!Number.isInteger(msg?.round)||msg.round!==currentRoom.round+1||!['google','google-public-embed'].includes(msg.source))return;
  const t=msg.target;
- if(!t||!Number.isFinite(t.lat)||!Number.isFinite(t.lng)||!((msg.source==='google'&&/^gm:[\w-]{5,200}$/.test(t.pano))||(msg.source==='google-public-embed'&&GOOGLE_FREE_PANOS.some(p=>p.pano===t.pano))))return;
+ if(!t||!Number.isFinite(t.lat)||!Number.isFinite(t.lng)||!((msg.source==='google'&&typeof t.pano==='string'&&t.pano.startsWith('gm:')&&wrCanEmbedGooglePanoId(t.googlePanoId||t.pano.slice(3)))||(msg.source==='google-public-embed'&&GOOGLE_FREE_PANOS.some(p=>p.pano===t.pano))))return;
  // Solo se entrega el panorama de R+1; no se genera ni se descubre R+2.
  wrWarmNextGoogleEmbed({...t,source:msg.source});
 }
@@ -1279,7 +1284,7 @@ function wrStartNextPrefetch(){
  pending.promise=(async()=>{
   const target=await randomPanorama({signal:controller.signal});
   if(controller.signal.aborted||generation!==wrPrefetchGeneration)return null;
-  pending.target=target;wrWarmNextGoogleEmbed(target);wrPreloadStatus(target.validated?'✅ Ronda '+next+' · calle navegable verificada':'✅ Ronda '+next+' preparada (modo compatible)');
+  pending.target=target;wrWarmNextGoogleEmbed(target);wrPreloadStatus(target.validated?'✅ Ronda '+next+' · ubicación y enlaces comprobados':'✅ Ronda '+next+' preparada (modo compatible)');
   if(!isSolo&&p2pHost)p2pBroadcast({type:'next-preload',round:next,source:target.source,target:{pano:target.pano,googlePanoId:target.googlePanoId,lat:target.lat,lng:target.lng,heading:target.heading}});
   return target;
  })().catch(e=>{if(!controller.signal.aborted&&generation===wrPrefetchGeneration){wrPreloadStatus('⚠️ No se preparó la ronda '+next);console.warn('Precarga',e);}return null;});
@@ -1304,7 +1309,7 @@ function showPanoError(message){
 async function showPano(target){
  if(!target)return;
  clearStreetViewer();
- if(target.source==='google'&&target.validated==='outdoor-and-moveable')$('gameFootStatus').textContent='🤖 Exterior y movimiento comprobados';
+ if(target.source==='google'&&target.validated==='outdoor-and-moveable')$('gameFootStatus').textContent='🤖 Panorámica y movimiento encontrados · visor cargando';
  const root=$('pano'),rid=panoRequestId;
  try{
   const source=wrGoogleEmbedUrl(target);
