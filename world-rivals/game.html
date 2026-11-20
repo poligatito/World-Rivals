@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>World Rivals V3 Stable — Amigos, moderación, ELO y Diario</title>
-<meta name="worldrivals-version" content="3.0.0">
+<title>World Rivals V4 Stable — Pase gratuito y tienda renovada</title>
+<meta name="worldrivals-version" content="4.0.0">
 <meta name="worldrivals-build-type" content="full-standalone-game">
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 
@@ -471,6 +471,60 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 .wr-map-local-note span,.wr-map-local-note button{background:#fffffff0;color:#334251;border:0;border-radius:12px;padding:3px 6px;pointer-events:auto}
 .wr-map-local-note button{text-decoration:underline;cursor:pointer}
 .wr-map-local svg .wr-pin-ring{filter:drop-shadow(0 1px 4px #4a000099)}
+
+</style>
+<style id="wr4Style">
+/* WORLD RIVALS V4 STABLE — PASS & STORE */
+.wr4-entrances{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,1fr);gap:14px;margin:20px 0 26px}
+.wr4-pass-stack{display:grid;gap:11px}.wr4-feature,.wr4-shop-entry{border:1px solid #7287a652;border-radius:16px;background:linear-gradient(120deg,#151e2fe8,#101522f1);color:#f6f7fb;text-align:left;padding:17px 20px;cursor:pointer;display:flex;gap:14px;align-items:center;min-height:83px;box-shadow:inset 0 2px 0 #ffffff10,0 7px 25px #0006;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;font:inherit}
+.wr4-feature:hover,.wr4-shop-entry:hover{transform:translateY(-3px);border-color:#ebbb70;box-shadow:0 14px 30px #0009,0 0 25px #f6bd451f}.wr4-feature:focus-visible,.wr4-shop-entry:focus-visible{outline:2px solid #fff}.wr4-feature strong,.wr4-shop-entry strong{display:block;font-size:16px;letter-spacing:.06em}.wr4-feature small,.wr4-shop-entry small{color:#c1c8d6;display:block;margin-top:5px;font-size:12px;line-height:1.45}.wr4-feature .wr4-entry-icon,.wr4-shop-entry .wr4-entry-icon{flex:0 0 57px;display:grid;place-items:center;font-size:31px;width:57px;height:57px;border:1px solid #ffffff45;border-radius:14px;background:linear-gradient(140deg,#37445b,#161f35);box-shadow:0 0 14px #0005}.wr4-premium{background:linear-gradient(100deg,#513d1fee,#221925ee,#171a28)!important;border-color:#eebc704d}.wr4-premium .wr4-entry-icon{background:linear-gradient(135deg,#8b5316,#5d2842);box-shadow:0 0 20px #f0a7454d}.wr4-shop-entry{height:100%;align-items:center;background:linear-gradient(130deg,#163043ee,#1b1b32ee)}.wr4-shop-entry .wr4-entry-icon{background:linear-gradient(145deg,#185768,#27315f)}.wr4-currency-chip{background:#0c1924cc;border:1px solid #ffe29a4b;color:#ffe29a;border-radius:20px;padding:7px 11px;font-size:12px;font-weight:800;white-space:nowrap}.wr4-top-coins{display:inline-flex;align-items:center;gap:6px;margin-left:7px}
+.wr4-overlay{position:fixed;inset:0;z-index:2147483000;background:#020713dd;backdrop-filter:blur(9px);display:none;align-items:center;justify-content:center;padding:13px}.wr4-overlay.wr4-open{display:flex}.wr4-dialog{width:min(1180px,99vw);max-height:min(92dvh,940px);display:flex;flex-direction:column;overflow:hidden;border:1px solid #72c6dc73;border-radius:19px;background:radial-gradient(circle at 85% 2%,#302135 0,transparent 38%),linear-gradient(145deg,#101a29,#11131e 80%);box-shadow:0 28px 130px #000e;color:#f4f8ff}.wr4-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:19px 22px;border-bottom:1px solid #ffffff23;background:#0d1623b0}.wr4-header h2{font-size:22px;letter-spacing:.06em;margin:0}.wr4-header small{font-size:11px;display:block;color:#94aebe;margin-top:4px}.wr4-close{border:1px solid #576271;background:#252d3a;color:white;border-radius:10px;padding:9px 15px;font-size:16px;cursor:pointer}.wr4-scroll{overflow:auto;overscroll-behavior:contain;padding:20px 22px 24px;min-height:0}.wr4-dashboard{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border:1px solid #fff2;padding:13px 15px;border-radius:13px;background:#0d1928;margin-bottom:18px}.wr4-progress{height:9px;border-radius:20px;background:#293445;overflow:hidden;margin-top:8px;min-width:180px}.wr4-progress>i{height:100%;display:block;background:linear-gradient(90deg,#f05a4f,#ffc66e);transition:width .4s}.wr4-track-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.wr4-tab{border-radius:10px;background:#1c2a3b;color:#d5e7f7;border:1px solid #56708565;padding:10px 16px;cursor:pointer;font-weight:800}.wr4-tab[aria-selected=true]{background:#963e42;border-color:#ffb873;color:white}.wr4-tier-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(177px,1fr));gap:12px}.wr4-tier{border:1px solid #384756;border-radius:14px;padding:12px;display:flex;flex-direction:column;min-height:212px;background:linear-gradient(145deg,#19283a,#101723);text-align:center}.wr4-tier.wr4-locked{filter:saturate(.75);opacity:.74}.wr4-tier.wr4-rare{border-color:#8459ca8a;background:linear-gradient(125deg,#262143,#141827)}.wr4-tier.wr4-legend{border-color:#e5a65291;background:linear-gradient(125deg,#4a351d,#1a1d28)}.wr4-tier-top{font-size:11px;color:#bfcddd;letter-spacing:.08em;font-weight:900;text-align:left}.wr4-item-emoji{font-size:39px;display:block;margin:11px auto;filter:drop-shadow(0 0 9px #ffd27855)}.wr4-tier h3{font-size:13px;line-height:1.3;margin:4px 0 6px;min-height:37px}.wr4-tier .wr4-tier-meta{font-size:10px;color:#b6c5d2;min-height:25px}.wr4-btn{padding:9px 10px;border:0;border-radius:9px;background:linear-gradient(90deg,#f44862,#ce2447);color:white;font-weight:900;cursor:pointer;font-size:12px;margin-top:auto}.wr4-btn:disabled{opacity:.5;cursor:default}.wr4-btn.wr4-claimed{background:#24463f;color:#9df4cc}.wr4-btn.wr4-neutral{background:#364559}.wr4-plus-warning{background:#221d21;border:1px solid #b18e585f;border-radius:12px;padding:13px 15px;margin-bottom:17px;font-size:12px;line-height:1.6}.wr4-plus-form{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}.wr4-plus-form input{padding:10px 12px;background:#0b1522;color:white;border:1px solid #c6a15c;border-radius:10px;letter-spacing:.16em;font-weight:900;width:180px}.wr4-coin-big{color:#ffe1a0;font-weight:900}.wr4-store-filters{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 18px}.wr4-inventory{border:1px solid #4b67836b;background:#102034;border-radius:12px;padding:12px;margin-bottom:16px}.wr4-inventory summary{cursor:pointer;font-weight:800}.wr4-inventory-row{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:9px;border-bottom:1px solid #fff2;font-size:12px}.wr4-inventory-row:last-child{border:0}.wr4-credits-pill{background:#172f38;border:1px solid #e8ba5b55;border-radius:7px;padding:4px 6px;color:#f6cc76;font-size:11px}.wr4-loot{position:fixed;inset:0;z-index:2147483500;display:none;align-items:center;justify-content:center;background:#03070cf2;padding:15px}.wr4-loot.wr4-visible{display:flex}.wr4-loot-box{text-align:center;width:min(460px,94vw);padding:25px 14px;border:1px solid #ffce8f8c;border-radius:25px;background:radial-gradient(circle at 50% 40%,#614069,#171c29 75%);box-shadow:0 0 75px #e6b24b5c}.wr4-loot-art{font-size:95px;margin:8px auto 15px;display:block;animation:wr4-float 1.8s ease-in-out infinite;filter:drop-shadow(0 0 22px #fe8e3fb5)}.wr4-loot-opened .wr4-loot-art{animation:wr4-burst .9s cubic-bezier(.15,.7,.25,1) both}.wr4-stars{font-size:28px;letter-spacing:7px;color:#ffd17b;animation:wr4-spark 1.4s ease-in-out infinite}.wr4-claim-fx{animation:wr4-reveal .6s ease-out both}@keyframes wr4-float{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-12px) rotate(6deg)}}@keyframes wr4-burst{0%{transform:scale(.65) rotate(-30deg);opacity:.5}50%{transform:scale(1.42) rotate(14deg);filter:brightness(1.8)}100%{transform:scale(1) rotate(0);opacity:1}}@keyframes wr4-spark{0%,100%{opacity:.7;filter:drop-shadow(0 0 4px #ffc550)}50%{opacity:1;filter:drop-shadow(0 0 22px #ffc550)}}@keyframes wr4-reveal{from{opacity:0;transform:scale(.75) translateY(17px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.wr4-equipped-aura{filter:drop-shadow(0 0 9px var(--wr4-glow)) drop-shadow(0 0 18px var(--wr4-glow))!important}.wr4-equipped-aura svg{border-radius:50%}.wr4-display-title{display:inline-block;padding:3px 7px;border:1px solid #ffc17f88;background:#3b2d298a;color:#ffe5a2;border-radius:8px;font:700 10px system-ui,sans-serif;margin-left:7px;vertical-align:middle}.wr4-toast{color:#ffdda5;font-size:12px}
+@media(max-width:680px){.wr4-entrances{grid-template-columns:1fr}.wr4-feature,.wr4-shop-entry{min-height:75px}.wr4-scroll{padding:13px}.wr4-header{padding:13px}.wr4-header h2{font-size:17px}.wr4-tier-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.wr4-tier{min-height:197px;padding:9px}.wr4-tier h3{font-size:12px}}@media(prefers-reduced-motion:reduce){.wr4-loot-art,.wr4-stars,.wr4-claim-fx{animation:none}}
+
+</style>
+<style id="wr4NeoUI">
+/* WORLD RIVALS V4 Stable — original futuristic navigation and illustrated cosmetics */
+.wr4-entrances{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:20px;margin:5px 0 30px;align-items:stretch}
+.wr4-feature,.wr4-shop-entry{position:relative;isolation:isolate;display:flex;align-items:center;gap:22px;width:100%;min-width:0;min-height:218px;padding:28px 30px!important;border-radius:22px!important;border:3px solid transparent!important;box-shadow:0 20px 34px #0007, inset 0 2px 0 #fff2!important;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease;overflow:hidden!important;text-align:left!important}
+.wr4-feature::before,.wr4-shop-entry::before{content:'';position:absolute;z-index:-2;inset:0;border:3px solid;border-radius:19px;pointer-events:none}
+.wr4-feature::after,.wr4-shop-entry::after{content:'';position:absolute;pointer-events:none;inset:12px;z-index:-1;border-radius:12px;filter:none;background:linear-gradient(90deg,transparent 0 5%,#fff4 5% 8%,transparent 8% 91%,#fff4 91% 94%,transparent 94%) top/100% 2px no-repeat,linear-gradient(90deg,#04d7f7,#ce70fb,#ffc261) bottom/100% 3px no-repeat}
+.wr4-worldpass-panel{background:radial-gradient(ellipse at 15% 30%,#0ca8e838,transparent 45%),linear-gradient(124deg,#0e2737 3%,#0d192b 49%,#101323 100%)!important;box-shadow:0 15px 40px #0009,0 0 26px #1abdf530,inset 0 0 38px #16bbff12!important}
+.wr4-worldpass-panel::before{border-color:#24cef9;box-shadow:inset 0 0 11px #25d7ff99,0 0 15px #0bd0ff60}
+.wr4-shop-panel{background:radial-gradient(ellipse at 75% 20%,#a75cff29,transparent 42%),linear-gradient(130deg,#271d43,#17172f 55%,#171322)!important;box-shadow:0 15px 40px #0009,0 0 28px #9347e936,inset 0 0 36px #9d56f020!important}
+.wr4-shop-panel::before{border-color:#bc75ff;box-shadow:inset 0 0 12px #d170ff8a,0 0 16px #b04af080}
+.wr4-feature:hover,.wr4-shop-entry:hover{transform:translateY(-4px) scale(1.008);filter:brightness(1.09);box-shadow:0 23px 42px #0009,0 0 36px #7bc9ff55!important}
+.wr4-feature .wr4-entry-icon,.wr4-shop-entry .wr4-entry-icon{display:grid;place-items:center;flex:0 0 112px!important;width:112px!important;height:112px!important;font-size:57px!important;border-radius:24px!important;border:3px solid #9ceeffab!important;background:linear-gradient(150deg,#21557d,#161a39)!important;box-shadow:0 0 0 7px #050e2080,0 0 24px #12bffe84,inset 0 0 22px #6fe1ff39!important;filter:drop-shadow(0 6px 4px #0005)}
+.wr4-shop-panel .wr4-entry-icon{background:linear-gradient(150deg,#235f90,#33205e)!important;border-color:#c89bff!important;box-shadow:0 0 0 7px #130d2580,0 0 24px #a24aff84,inset 0 0 22px #cc95ff39!important}
+.wr4-feature strong,.wr4-shop-entry strong{font-size:clamp(19px,1.65vw,30px)!important;line-height:1.16!important;font-weight:950;letter-spacing:.01em!important;text-shadow:0 3px 7px #000c}
+.wr4-feature small,.wr4-shop-entry small{font-size:clamp(12px,.92vw,16px)!important;line-height:1.55!important;max-width:40ch;margin-top:10px!important;color:#cbd5e8}
+.wr4-shop-entry .wr4-currency-chip{display:inline-flex;gap:7px;margin:17px 0 0;padding:10px 15px;border-radius:9px;background:linear-gradient(180deg,#654414,#2e2513);color:#ffe18c;border:2px solid #f7b747;box-shadow:inset 0 1px 1px #fff4,0 0 20px #f5ad3360,0 7px 14px #0009;font-size:14px;letter-spacing:.06em}
+.wr4-store-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:11px 0 15px;color:#b8cde2;font-size:12px}
+.wr4-searchrow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:15px}
+.wr4-searchrow input{background:#101a2e;color:white;border:1px solid #527b997a;border-radius:10px;padding:12px;min-width:190px;flex:1;font:inherit}
+.wr4-searchrow input:focus{outline:2px solid #39cee5}
+.wr4-art-shell{position:relative;margin:8px auto 11px;width:100%;max-width:195px;height:128px;border-radius:12px;overflow:hidden;box-shadow:0 10px 15px #0007,0 0 20px color-mix(in srgb,var(--wr4-accent,#38b5eb) 22%,transparent)}
+.wr4-art-svg{display:block;width:100%;height:100%}
+.wr4-tier .wr4-tier-meta{font-size:11px;min-height:27px}
+.wr4-tier-list{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:13px}
+.wr4-tier{min-height:296px;padding:13px;border:1px solid #455c76!important;background:linear-gradient(155deg,#1b273d,#101523)!important;transition:transform .17s ease,border-color .17s ease}
+.wr4-tier:hover{transform:translateY(-2px);border-color:#72c8fb!important}
+.wr4-tier.wr4-legend{background:linear-gradient(155deg,#352820,#171b2b)!important;border-color:#deaf6b!important}
+.wr4-tier.wr4-rare{background:linear-gradient(155deg,#242039,#131a29)!important;border-color:#8466c2aa!important}
+.wr4-tier h3{min-height:33px;font-size:14px;letter-spacing:.01em}
+.wr4-tier-top{font-size:10px!important}
+.wr4-shop-desc{margin-top:8px;color:#b4c9da!important}
+.wr4-tier .wr4-btn{min-height:35px;transition:filter .18s}
+.wr4-tier .wr4-btn:hover:not(:disabled){filter:brightness(1.15)}
+.wr4-more{display:block;margin:21px auto 3px;padding:13px 31px;background:#223c58;border:1px solid #68c9f4;color:white;border-radius:12px;cursor:pointer;font-weight:850}
+.wr4-inventory-thumb{display:inline-flex;vertical-align:middle;width:50px;height:39px;flex:0 0 50px;margin-right:8px}
+.wr4-inventory-thumb .wr4-art-svg{width:100%;height:100%}
+.wr4-inventory-row>span{display:flex;align-items:center;gap:8px}
+.wr4-entrances+.feature-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:1020px){.wr4-entrances{grid-template-columns:1fr;gap:16px}.wr4-feature,.wr4-shop-entry{min-height:178px}.wr4-entrances+.feature-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:650px){.wr4-entrances{gap:11px}.wr4-feature,.wr4-shop-entry{min-height:138px!important;padding:17px 14px!important;gap:14px!important;border-width:2px!important;border-radius:16px!important}.wr4-feature .wr4-entry-icon,.wr4-shop-entry .wr4-entry-icon{flex-basis:64px!important;width:64px!important;height:64px!important;font-size:36px!important;border-width:2px!important;border-radius:13px!important}.wr4-feature strong,.wr4-shop-entry strong{font-size:17px!important}.wr4-feature small,.wr4-shop-entry small{font-size:11px!important;line-height:1.35!important}.wr4-shop-entry .wr4-currency-chip{font-size:11px;padding:7px;margin-top:10px}.wr4-entrances+.feature-strip{grid-template-columns:1fr!important}.wr4-art-shell{height:102px}.wr4-tier{min-height:266px}}
+@media(prefers-reduced-motion:reduce){.wr4-tier,.wr4-feature,.wr4-shop-entry{transition:none!important}}
+
 </style>
 </head>
 <body>
@@ -481,7 +535,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   <span class="wr-elo-badge" id="wrEloBadge" aria-label="Tu puntuación ELO actual">🏆 <b id="wrEloValue">100</b> <small>ELO</small></span>
   <span id="connectionBadge" class="pill">● modo local</span>
   <button class="btn btn-secondary btn-small" id="friendsBtn" type="button">👥 Amigos <span id="friendsCounter" class="friend-counter hidden">0</span></button><button class="icon-btn" id="setupBtn" title="Configurar">⚙</button>
-  <button class="profile-chip" id="profileBtn"><span id="topAvatar" class="avatar"></span><b id="topName">Invitado</b><span>⌄</span></button>
+  <button class="profile-chip" id="profileBtn"><span id="topAvatar" class="avatar"></span><b id="topName">Invitado</b><span id="wr4TitleBadgeTop" class="wr4-display-title" style="display:none"></span><span>⌄</span></button>
  </div>
 </header>
 <main id="homeScreen" class="main">
@@ -494,11 +548,20 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   </div>
   <div class="hero-art"><div class="orbit"><div class="globe">🌐</div><div class="orbit-label one">📍 CALLES DEL MUNDO</div><div class="orbit-label two">⚡ MULTIJUGADOR</div><div class="orbit-label three">✦ WORLD CHAMPION</div></div></div>
  </section>
- <section class="feature-strip">
-  <div class="feature"><div class="feature-icon">🔥</div><div><b>V2 Stable · Diario con rachas</b><small>Solo una partida por fecha local. Desbloqueo a las 00:00 y contador de días consecutivos completados</small></div></div>
-  <div class="feature"><div class="feature-icon">👥</div><div><b>V3 Stable · Amigos desde la sala</b><small>Agrega desde la clasificación o la sala con un toque; el anfitrión puede expulsar con confirmación</small></div></div>
-  <div class="feature"><div class="feature-icon">⚡</div><div><b>V3 Stable · Mapa desbloqueado y ELO progresivo</b><small>Si OpenFreeMap falla se prueba un mapa claro alternativo y, si tampoco carga, aparece un mapa local interactivo para colocar el pin. Más fácil ganar ELO al empezar con 100; dificultad gradual cada 400 ELO y límite de +30 por partida. Se mantiene el mapa claro OpenFreeMap Liberty y el reintento del Diario al salir antes de terminar las 5 rondas, sin gastar el Diario del día ni perder la racha.</small></div></div>
+
+
+<style id="wr4-v4-ui-hotfix">
+.wr4-entrances{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;margin:0 0 26px!important}.wr4-feature,.wr4-shop-entry{min-height:206px!important;padding:22px 22px 22px 24px!important;border-radius:26px!important;border:1px solid rgba(149,176,214,.34)!important;background:linear-gradient(135deg,rgba(18,22,36,.98),rgba(15,18,31,.95))!important;box-shadow:0 18px 38px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)!important;align-items:flex-start!important;position:relative!important;overflow:hidden!important}.wr4-feature::before,.wr4-shop-entry::before{content:"";position:absolute;inset:12px;border-radius:19px;border:1px solid rgba(255,255,255,.08);pointer-events:none}.wr4-feature::after,.wr4-shop-entry::after{content:"";position:absolute;left:18px;right:18px;bottom:12px;height:8px;border-radius:999px;background:linear-gradient(90deg,rgba(50,245,255,.14),rgba(157,92,255,.35),rgba(255,204,89,.2))}.wr4-worldpass-panel{border-color:rgba(93,230,255,.45)!important;background:radial-gradient(circle at 15% 18%,rgba(0,208,255,.18),transparent 28%),linear-gradient(135deg,rgba(15,28,44,.98),rgba(13,18,31,.97))!important}.wr4-shop-panel{border-color:rgba(187,111,255,.40)!important;background:radial-gradient(circle at 85% 18%,rgba(182,74,255,.17),transparent 25%),linear-gradient(135deg,rgba(26,20,47,.98),rgba(19,17,33,.97))!important}.wr4-feature .wr4-entry-icon,.wr4-shop-entry .wr4-entry-icon{width:94px!important;height:94px!important;font-size:48px!important;border-radius:24px!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 12px 30px rgba(0,0,0,.32),0 0 20px rgba(122,173,255,.20)!important}.wr4-worldpass-panel .wr4-entry-icon{background:linear-gradient(145deg,#20395c,#11243a)!important}.wr4-shop-panel .wr4-entry-icon{background:linear-gradient(145deg,#224467,#292560)!important}.wr4-feature strong,.wr4-shop-entry strong{font-size:23px!important;line-height:1.08!important;letter-spacing:.03em!important;margin-top:3px!important}.wr4-feature small,.wr4-shop-entry small{font-size:13px!important;line-height:1.45!important;color:#d2d9e5!important;max-width:38ch!important}.wr4-shop-entry .wr4-currency-chip{margin-top:18px!important;display:inline-flex!important;font-size:15px!important;padding:10px 16px!important;border-radius:16px!important;background:linear-gradient(180deg,#583e14,#2f2410)!important;border-color:rgba(255,217,107,.55)!important;box-shadow:0 10px 22px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.14)!important}.feature-strip{grid-template-columns:repeat(4,minmax(0,1fr))!important}.wr4-tier-meta .wr4-shop-desc{display:block;margin-top:8px;color:#bfc8d8;font-size:11px;line-height:1.35}.wr4-item-emoji{font-size:44px!important}@media(max-width:980px){.wr4-entrances{grid-template-columns:1fr!important}.feature-strip{grid-template-columns:1fr 1fr!important}}@media(max-width:680px){.wr4-feature,.wr4-shop-entry{min-height:168px!important;padding:18px!important}.wr4-feature .wr4-entry-icon,.wr4-shop-entry .wr4-entry-icon{width:74px!important;height:74px!important;font-size:38px!important}.wr4-feature strong,.wr4-shop-entry strong{font-size:18px!important}.feature-strip{grid-template-columns:1fr!important}}
+</style>
+ <section class="wr4-entrances" aria-label="World Pass y Tienda">
+  <button type="button" class="wr4-feature wr4-worldpass-panel" data-wr4-open="free"><span class="wr4-entry-icon">🌍</span><span><strong>WORLD PASS · 50 NIVELES</strong><small>Gratis con tus partidas · el nivel 50 desbloquea el nombre dorado 👑</small></span></button>
+  <button type="button" class="wr4-shop-entry wr4-shop-panel" data-wr4-open="shop"><span class="wr4-entry-icon">🛒</span><span><strong>TIENDA · 200 COSMÉTICOS</strong><small>Skins, auras, estelas, marcos y mucho más. Solo artículos prémium, sin premios comunes del World Pass.</small><span class="wr4-currency-chip wr4-top-coins">🪙 <span data-wr4-credits>0</span> CRÉDITOS</span></span></button>
  </section>
+ <section class="feature-strip">
+  <div class="feature"><div class="feature-icon">🌍</div><div><b>V4 Stable · World Pass de 50 niveles</b><small>Pase gratuito ligado a tus partidas; estrellas y cajas animadas; nombre dorado en el nivel 50.</small></div></div>
+  <div class="feature"><div class="feature-icon">🛒</div><div><b>V4 Stable · Tienda de 200 artículos</b><small>Tienda de 200 cosméticos con ilustraciones originales y diferentes: armaduras, auras, efectos, marcos y mucho más.</small></div></div>
+  <div class="feature"><div class="feature-icon">🔥</div><div><b>V2 Stable · Diario con rachas</b><small>Solo una partida por fecha local. Desbloqueo a las 00:00 y contador de días consecutivos completados.</small></div></div>
+  </section>
   <div class="home-dashboard">
   <section class="play-grid">
   <article class="play-card">
@@ -515,7 +578,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
   </article>
  </section>
   <section class="identity-panel"><div class="section-head"><div><h2>Tu identidad</h2><p>Que se note quién ha llegado a la partida.</p></div><button class="btn btn-secondary btn-small" id="editProfileBtn">✎ Personalizar</button></div>
- <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b></div><small class="muted">Tu identidad Ultra · toca Personalizar</small></div><button class="btn btn-secondary btn-small" id="homeFriendsBtn">👥 Mis amigos</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
+ <div class="play-card identity-card"><div id="homeAvatar" class="avatar"></div><div style="flex:1;min-width:0"><div><span id="homeFlag">🇪🇸</span> <b id="homeName" class="normal-name">Invitado</b><span id="wr4TitleBadge" class="wr4-display-title" style="display:none"></span></div><small class="muted">Tu identidad Ultra · toca Personalizar</small></div><button class="btn btn-secondary btn-small" id="homeFriendsBtn">👥 Mis amigos</button></div><div class="identity-footer">◈ IDENTIDAD // WORLD RIVALS</div></section>
   </div>
 </main>
 <section id="lobbyScreen" class="main hidden"><div class="lobby-wrap"><button class="back-link" id="lobbyBack">← Volver al inicio</button><div class="lobby-card">
@@ -542,7 +605,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 <div id="chatDock" class="hud-panel chat-dock" aria-hidden="true">
 <div class="panel-top"><b>💬 CHAT DE SALA</b><button class="hud-close" type="button" data-ui-close="true" aria-label="Cerrar chat">✕</button></div>
 <div id="chatMessages" class="chat-messages"><div class="muted tiny">Los mensajes de la sala aparecerán aquí.</div></div>
-<form id="chatForm" class="chat-form"><input id="chatInput" class="field" maxlength="300" placeholder="Escribe un mensaje..." autocomplete="off" aria-label="Mensaje"><button class="btn btn-primary" type="submit" aria-label="Enviar mensaje">➤</button></form></div><div id="miniMapDock" class="mini-map-dock hidden" aria-label="Minimapa de respuestas 2D"><div class="mini-map-head"><b>🗺️ TU MAPA 2D</b><span>↗ PASA EL RATÓN PARA AMPLIAR</span></div><div id="miniGuessMap"></div><div class="mini-map-actions"><button type="button" id="miniClearGuessBtn" class="mini-clear-btn">⌫ BORRAR</button><button type="button" id="miniSubmitGuessBtn" class="mini-submit-btn">CONFIRMAR PIN ➜</button></div></div><div id="streetModeTip" class="mode-tip hidden"><b>Modo exploración</b>Algunos proveedores incluyen sus propios controles o rótulos, pero he tapado la pista más fuerte de arriba a la izquierda.</div><div id="waitingBanner" class="wait-banner hidden" aria-live="polite"><div class="wait-spinner"></div><div class="eyebrow">RONDA EN CURSO</div><h2 id="waitingTitle">¡Respuesta enviada!</h2><p id="waitingText">Esperando a los demás jugadores...</p><div class="wait-progress"><div id="waitingProgressBar"></div></div><div id="waitingCount" class="wait-count">0 / 0 jugadores han respondido</div><div id="waitingPlayers" class="wait-players"></div></div><div id="resultBanner" class="result-banner hidden"><div class="result-inner"><div class="result-icon">🏁</div><div class="eyebrow">RONDA COMPLETADA</div><h2 id="resultTitle">¡Buen intento!</h2><div class="result-score" id="resultScore">0 pts</div><p id="resultText">Tu estimación ha sido registrada.</p><div id="wrEloResults" class="wr-elo-results hidden" aria-live="polite"></div><button class="btn btn-primary" id="nextRoundBtn">Siguiente ronda →</button></div></div></section>
+<form id="chatForm" class="chat-form"><input id="chatInput" class="field" maxlength="300" placeholder="Escribe un mensaje..." autocomplete="off" aria-label="Mensaje"><button class="btn btn-primary" type="submit" aria-label="Enviar mensaje">➤</button></form></div><div id="miniMapDock" class="mini-map-dock hidden" aria-label="Minimapa de respuestas 2D"><div class="mini-map-head"><b>🗺️ TU MAPA 2D</b><span>↗ PASA EL RATÓN PARA AMPLIAR</span></div><div id="miniGuessMap"></div><div class="mini-map-actions"><button type="button" id="miniClearGuessBtn" class="mini-clear-btn">⌫ BORRAR</button><button type="button" id="miniSubmitGuessBtn" class="mini-submit-btn">CONFIRMAR PIN ➜</button></div></div><div id="streetModeTip" class="mode-tip hidden"><b>Modo exploración</b>Algunos proveedores incluyen sus propios controles o rótulos, pero he tapado la pista más fuerte de arriba a la izquierda.</div><div id="waitingBanner" class="wait-banner hidden" aria-live="polite"><div class="wait-spinner"></div><div class="eyebrow">RONDA EN CURSO</div><h2 id="waitingTitle">¡Respuesta enviada!</h2><p id="waitingText">Esperando a los demás jugadores...</p><div class="wait-progress"><div id="waitingProgressBar"></div></div><div id="waitingCount" class="wait-count">0 / 0 jugadores han respondido</div><div id="waitingPlayers" class="wait-players"></div></div><div id="resultBanner" class="result-banner hidden"><div class="result-inner"><div class="result-icon">🏁</div><div class="eyebrow">RONDA COMPLETADA</div><h2 id="resultTitle">¡Buen intento!</h2><div class="result-score" id="resultScore">0 pts</div><p id="resultText">Tu estimación ha sido registrada.</p><div id="wrEloResults" class="wr-elo-results hidden" aria-live="polite"></div><div id="wr4MatchXP" style="display:none;color:#ffe09a;font-size:12px;text-align:center;padding:8px 0"></div><button class="btn btn-primary" id="nextRoundBtn">Siguiente ronda →</button></div></div></section>
   <aside class="game-side">
    <div class="map-card"><div class="map-head"><b>📍 ¿DÓNDE ESTÁS?</b><span>Haz clic para colocar tu pin</span></div><div id="guessMap"></div><div class="map-actions"><button class="btn btn-secondary btn-small" id="clearGuessBtn">Borrar pin</button><button class="btn btn-primary btn-small" id="submitGuessBtn">Confirmar →</button></div></div>
    <div class="score-card"><div class="score-card-head"><b>🏆 CLASIFICACIÓN</b><span id="scorePlayersCount">0 jugadores</span></div><div id="scorePlayers"></div></div>
@@ -552,6 +615,17 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
  <div class="game-footer"><div class="left"><span>🌍 Google Maps · Street View</span><span>·</span><span>🗺️ OpenFreeMap</span></div><span id="wrNextStatus" role="status" aria-live="polite" style="color:#7ee7c2;font-size:11px;max-width:45%;text-align:right"> </span><span id="gameFootStatus">Modo de práctica</span></div>
 </section>
 <footer class="footer-note"><span>WORLD//RIVALS · Un juego fan-made de exploración geográfica.</span><span>Panorámicas: <a href="https://www.google.com/maps/" target="_blank" rel="noopener">Google Maps · Street View</a> · Mapa: <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a></span></footer>
+</div>
+
+<div id="wr4Overlay" class="wr4-overlay" role="presentation">
+ <div class="wr4-dialog" role="dialog" aria-modal="true" aria-label="World Pass y Tienda">
+  <header class="wr4-header"><div><h2 id="wr4Title">🌍 WORLD PASS</h2><small>WORLD RIVALS V4 STABLE · TEMPORADA 1</small></div><button class="wr4-close" type="button" data-wr4-close="1" aria-label="Cerrar pase o tienda">✕ Cerrar</button></header>
+  <div id="wr4Content" class="wr4-scroll"></div>
+  <div id="wr4Notice" role="status" aria-live="polite" style="padding:0 20px 12px;color:#f5ca7e"></div>
+ </div>
+</div>
+<div id="wr4Loot" class="wr4-loot" role="dialog" aria-modal="true" aria-label="Abrir recompensa">
+ <div id="wr4LootBody" class="wr4-loot-box"><div class="wr4-stars">✦ ✦ ✦</div><span id="wr4LootArt" class="wr4-loot-art">🌟</span><h2 id="wr4LootMessage">¡Recompensa desbloqueada!</h2><p style="font-size:12px;color:#d8cbd7">Recompensa garantizada, sin apuestas ni compras de azar.</p><button id="wr4LootContinue" class="wr4-btn" style="padding:14px 27px">ABRIR</button></div>
 </div>
 <div id="profileModal" class="modal-backdrop hidden"><div class="modal wr-profile-modal" role="dialog" aria-modal="true" aria-label="Editor de personaje WORLD RIVALS">
  <div class="modal-head"><div><div class="eyebrow">🎨 WORLD RIVALS · AVATAR LAB</div><h2>Personalización ULTRA <span class="wr-beta">V9.3 · GOOGLE STREET VIEW</span></h2><p class="tiny muted">Tu identidad, totalmente a tu estilo. Los cambios se guardan al pulsar Guardar.</p></div><button class="icon-btn" data-close="profileModal" aria-label="Cerrar personalización">✕</button></div>
@@ -2926,13 +3000,195 @@ function exportLauncher(){
   if(markup.length<150000 || !markup.includes('worldrivals-build-type') || !markup.includes('createModeSelect'))throw Error('No se pudo generar una copia completa del juego.');
   const blob=new Blob([markup],{type:'text/html;charset=utf-8'});
   const blobUrl=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=blobUrl;a.download='World Rivals V2 Stable.html';document.body.appendChild(a);a.click();a.remove();
+  a.href=blobUrl;a.download='World Rivals V4 Stable.html';document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(blobUrl),30000);
   toast('✅ Juego completo exportado, sin launcher ni redirección a V8.4.');
  }catch(e){toast(sanitizeError(e));}
 }
 function setup(){render();window.WRPublisher={open,close};}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup,{once:true});else setup();
+})();
+
+</script>
+<script id="wr4Logic">
+/* WORLD RIVALS V4 STABLE — Temporada 1 con World Pass gratuito y tienda cosmética.
+   Créditos virtuales ganados al completar partidas; sin pagos reales ni loot de pago. */
+(function(){'use strict';
+const KEY='wr_v4_season1',LEVELS=50,STEP=550;
+const $4=id=>document.getElementById(id);
+const h=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const themes=['Dragón Solar','Nebulosa Roja','Hielo Cósmico','Circuito Carmesí','Cometa Azul','Fénix Digital','Aurora Ámbar','Tormenta Neón','Eclipse Lunar','Titán Galáctico','Rayo Violeta','Samurái Estelar','Pixel Salvaje','Volcán Ártico','Meteoro Rosa','Ninja Orbital','Coral Cuántico','Holograma Zen','Océano Eléctrico','Sombra Prisma','Centella Dorada','Dragón Abisal','Portal de Cristal','Furia Cibernética','Rey del Cosmos'];
+const families=[
+ {type:'skin',label:'Skin',icons:['🐉','🤖','🦊','🦁','🐺','👾','🧬','🦅'], nouns:['Armadura','Traje','Operador','Piloto'], desc:['diseño completo del explorador','acabado legendario para tu avatar','estilo exclusivo para tus partidas']},
+ {type:'aura',label:'Aura',icons:['🔥','❄️','⚡','🌪️','🌌','🌊','☢️','💫'], nouns:['Aura','Halo','Pulso','Resplandor'], desc:['energía que rodea tu perfil','brillo envolvente con partículas','halo reactivo al equiparlo']},
+ {type:'trail',label:'Estela',icons:['☄️','🌠','🎇','🌀','💥','🌈','🛰️','🧪'], nouns:['Estela','Rastro','Cometa','Trazado'], desc:['huella luminosa al destacar','partículas cinéticas para tu perfil','efecto dinámico con movimiento']},
+ {type:'frame',label:'Marco',icons:['🪞','💠','🧩','🛡️','🔲','📡','🛸','🧿'], nouns:['Marco','Borde','Anillo','Contorno'], desc:['contorno decorado para tu avatar','diseño premium para destacar','acabado metálico y brillante']},
+ {type:'badge',label:'Insignia',icons:['🏅','🎖️','🧭','🛰️','🪙','🔱','🦄','🃏'], nouns:['Insignia','Medalla','Sello','Emblema'], desc:['símbolo coleccionable del perfil','detalle distintivo para tu cuenta','pieza compacta pero llamativa']},
+ {type:'title',label:'Título',icons:['👑','⚜️','🪽','📛','🔰','🪐','🌍','🎯'], nouns:['Título','Rango','Alias','Distintivo'], desc:['texto decorativo bajo tu nombre','apodo especial para presumir','rango estilizado para tu perfil']},
+ {type:'background',label:'Fondo',icons:['🌌','🏙️','🌋','🏜️','🌊','🧊','🌃','🌠'], nouns:['Fondo','Escenario','Paisaje','Panorama'], desc:['escena completa para el perfil','paisaje premium de alta energía','fondo temático para tu identidad']},
+ {type:'effect',label:'Efecto',icons:['✨','💥','🔮','🫧','🌟','🧿','⚛️','🎆'], nouns:['Efecto','Impacto','Destello','Pulso'], desc:['animación visual al equiparlo','acabado especial para tu nombre','detalle final con mucha presencia']}];
+const colorFor=(n)=>`hsl(${(n*137.508)%360} 83% 59%)`;
+const store=Object.freeze(families.flatMap((f,j)=>themes.map((theme,i)=>({
+ id:'wr4-shop-'+f.type+'-'+String(i+1).padStart(2,'0'),
+ type:f.type,
+ name:`${f.nouns[(i+j)%f.nouns.length]} ${theme}`,
+ icon:f.icons[(i*3+j)%f.icons.length],
+ rarity:i%8===7?'ULTRA':i%4===3?'LEGENDARIA':i%2?'ÉPICA':'RARA',
+ color:colorFor(i+j*11),
+ price:150+((i*73+j*147)%17)*75+(i%8===7?550:0),
+ desc:`${f.desc[(i+j)%f.desc.length]} · colección ${theme.toLowerCase()}`
+ }))));
+function fReward(n){
+ if(n===50)return {kind:'gold',icon:'👑',name:'NOMBRE DORADO',meta:'Recompensa final exclusiva',rarity:'LEGENDARIA'};
+ if(n%10===0)return{kind:'box',icon:'📦',name:'Caja del Explorador',meta:'100 créditos + marco exclusivo',rarity:'RARA',credit:100};
+ if(n%5===0)return{kind:'star',icon:'🌟',name:'Estrella del Mundo',meta:'Insignia fija + 75 créditos',rarity:'RARA',credit:75};
+ if(n%3===0)return{kind:'cosmetic',icon:'🧢',name:'Accesorio Terranova '+n,meta:'Cosmético gratuito',rarity:'COMÚN',type:'badge',color:colorFor(n)};
+ return{kind:'credit',icon:'🪙',name:(65+n*3)+' créditos',meta:'Moneda virtual del juego',credit:65+n*3,rarity:'COMÚN'};
+}
+function initial(){return {xp:0,credits:0,free:[],owned:[],equip:{},finished:[],season:'s1'};}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(!x||x.season!=='s1')return initial();const z={...initial(),...x};for(const k of ['free','owned','finished'])if(!Array.isArray(z[k]))z[k]=[];if(!z.equip||typeof z.equip!=='object')z.equip={};z.credits=Math.max(0,Math.min(1e9,Math.trunc(Number(z.credits)||0)));z.xp=Math.max(0,Math.min(1e9,Math.trunc(Number(z.xp)||0)));return z;}catch{return initial();}}
+let state=load(),view='free',active='free',filter='Todos',lootLocked=false,shopShown=30,shopQuery='';
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){console.warn('No se pudo guardar pase/tienda:',e);}}
+const level=()=>Math.min(LEVELS,1+Math.floor(state.xp/STEP));
+function currency(){for(const el of document.querySelectorAll('[data-wr4-credits]'))el.textContent=state.credits.toLocaleString('es-ES');}
+function quickToast(t){try{if(typeof window.toast==='function')window.toast(t);else{const el=$4('wr4Notice');if(el)el.textContent=t;}}catch{const el=$4('wr4Notice');if(el)el.textContent=t;}}
+function rewardId(track,tier){return 'wr4-pass-'+track+'-'+tier;}
+function grant(reward,id){state.credits+=reward.credit||0;if(reward.kind==='gold'){state.owned.push('wr4-gold-name');try{profile.gold=true;saveProfile();}catch{}}else if(reward.kind!=='credit'){
+   state.owned.push(id);state.ownNames=state.ownNames||{};state.ownNames[id]={name:reward.name,icon:reward.icon,type:reward.type||(reward.kind==='star'?'badge':reward.kind==='megabox'?'aura':'frame'),color:reward.color||colorFor(Number(id.replace(/\D/g,''))||3),rarity:reward.rarity};
+ }
+ state.owned=[...new Set(state.owned)];save();currency();applyCosmetic();}
+function tierCard(tier,track){const reward=fReward(tier),claimed=state.free.includes(tier),ready=tier<=level();
+ const rare=reward.rarity==='ULTRA'||reward.rarity==='LEGENDARIA'?'wr4-legend':reward.rarity==='RARA'||reward.rarity==='ÉPICA'?'wr4-rare':'';
+ const disabled=!ready||claimed;
+ const label=claimed?'✓ RECOGIDO':!ready?'🔒 NIVEL '+tier:'RECLAMAR';
+ return `<article class="wr4-tier ${rare} ${!ready?'wr4-locked':''}"><div class="wr4-tier-top">NIVEL ${tier} · WORLD PASS</div><span class="wr4-item-emoji">${reward.icon}</span><h3>${h(reward.name)}</h3><div class="wr4-tier-meta">${h(reward.rarity)} · ${h(reward.meta)}</div><button class="wr4-btn ${claimed?'wr4-claimed':''}" data-wr4-claim="free:${tier}" ${disabled?'disabled':''}>${label}</button></article>`;}
+function dashboard(){const l=level(),within=state.xp%STEP,pct=l===50?100:Math.round(within/STEP*100);return `<div class="wr4-dashboard"><div style="flex:1;min-width:210px"><strong>⚡ NIVEL ${l} / 50</strong><span style="margin-left:10px;color:#afbac8;font-size:12px">${state.xp.toLocaleString('es-ES')} XP</span><div class="wr4-progress"><i style="width:${pct}%"></i></div><small style="color:#aabac8">${l===50?'¡Nivel final alcanzado!':(STEP-within)+' XP para el próximo nivel'}. Gana XP al terminar partidas completas.</small></div><strong class="wr4-coin-big">🪙 <span data-wr4-credits>${state.credits.toLocaleString('es-ES')}</span> créditos</strong></div>`;}
+
+function passHtml(){return dashboard()+`<div class="wr4-plus-warning"><strong>🌍 WORLD PASS · 50 NIVELES</strong><div>Completa partidas para ganar XP y subir niveles. El pase es <b>gratuito</b>, se guarda en este dispositivo y la recompensa final del nivel 50 es el <b>nombre dorado</b>. Las cajas y estrellas tienen premios definidos, no son pagos ni sorteos.</div></div><div class="wr4-tier-list">${Array.from({length:LEVELS},(_,i)=>tierCard(i+1,'free')).join('')}</div><p style="margin-top:15px;color:#9eacbb;font-size:12px">Temporada 1 del World Pass: todo se gana jugando y reclamando tus niveles.</p>`;}
+/* Original, deterministic vector illustration for each of the 200 cosmetic items. */
+function cosmeticArt(item){
+ const parts=item.id.split('-'),index=Math.max(0,(Number(parts[parts.length-1])||1)-1);
+ const type=item.type, c=item.color, alt=colorFor((index*7+36)%200), seed=index+1;
+ const uid='wr4art'+item.id.replace(/[^a-z0-9]/gi,'');
+ const r=(seed*19)%21, y=(seed*13)%17;
+ const sparks=Array.from({length:7},(_,k)=>{const x=14+((seed*19+k*43)%130), sy=12+((seed*31+k*37)%95);return `<path d="M${x-3} ${sy}h6 M${x} ${sy-3}v6" stroke="${k%2?alt:c}" stroke-width="${k%3===0?1.9:1}" opacity="${k%2?.62:.45}"/>`}).join('');
+ const backgrounds=[`<path d="M0 100Q35 78 65 97T160 80V125H0Z" fill="${c}" opacity=".15"/>`,`<path d="M0 120L35 44 60 86 93 34 160 118Z" fill="${alt}" opacity=".21"/>`,`<circle cx="82" cy="62" r="48" stroke="${c}" stroke-width="1.5" fill="none" opacity=".18"/>`];
+ const emblem=(cx=80,cy=59,scale=1)=>{const d=`translate(${cx} ${cy}) scale(${scale})`;switch(index%12){
+  case 0:return `<g transform="${d}"><path d="M0-18L13-3 5 12 -5 7 -13 17 -9-4Z" fill="${c}" stroke="#fff" stroke-width="1.5"/></g>`;
+  case 1:return `<g transform="${d}"><path d="M0-18C20-11 21 7 0 18 -21 7-20-11 0-18Z" fill="${alt}" opacity=".75"/><circle r="7" fill="${c}" stroke="white" stroke-width="1.7"/></g>`;
+  case 2:return `<g transform="${d}" stroke="${c}" stroke-width="3" stroke-linecap="round"><path d="M-17 0H17M0-17V17M-12-12L12 12M12-12L-12 12"/></g>`;
+  case 3:return `<g transform="${d}"><path d="M-18 10L-8-18 0-5 12-13 17 12Z" fill="${c}"/><path d="M-15 13L0 5 16 15" stroke="white" fill="none" stroke-width="2"/></g>`;
+  case 4:return `<g transform="${d}"><path d="M-19 8L0-17 20-4 2 19Z" fill="${alt}" stroke="${c}" stroke-width="2.2"/></g>`;
+  case 5:return `<g transform="${d}"><path d="M-18 10Q-10-15 3-18Q7-1 19 6L0 18Z" fill="${c}" stroke="white" stroke-width="1.5"/></g>`;
+  case 6:return `<g transform="${d}"><circle r="17" stroke="${c}" stroke-width="3" fill="none"/><circle r="7" fill="${alt}"/><path d="M-21 0H21M0-21V21" stroke="white" stroke-width="1.2" opacity=".8"/></g>`;
+  case 7:return `<g transform="${d}"><path d="M-16-12L0-20 16-12 13 9 0 20-13 9Z" fill="${c}" stroke="white" stroke-width="1.5"/><path d="M-9 1L-2 8 10-8" stroke="#132439" stroke-width="4" fill="none"/></g>`;
+  case 8:return `<g transform="${d}"><path d="M-17 11Q-15-17 8-15Q-4-1 17 10Z" fill="${c}"/><circle cx="10" cy="-10" r="3" fill="white"/></g>`;
+  case 9:return `<g transform="${d}"><path d="M0-20L7-6 20 0 6 7 0 20-7 6-20 0-6-7Z" fill="${c}" stroke="white" stroke-width="1.5"/></g>`;
+  case 10:return `<g transform="${d}"><path d="M-18-6Q0-22 18-6Q10 17-3 18Q-8 4-18-6Z" fill="${alt}"/><path d="M-12-4L4 9 12-8" stroke="${c}" stroke-width="4" fill="none"/></g>`;
+  default:return `<g transform="${d}"><path d="M0-19L18-8 17 10 0 19-17 10-18-8Z" fill="none" stroke="${c}" stroke-width="4"/><circle r="7" fill="${alt}"/></g>`;
+ }};
+ let drawing='';
+ if(type==='skin'){
+  const crown=[`<path d="M47 47l-7-22 22 12 18-23 19 23 22-12-7 23" fill="${c}" stroke="#e4eaf7" stroke-width="2"/>`,`<path d="M41 46q-1-34 39-38 42 7 39 38" fill="${c}" stroke="#eaf3ff" stroke-width="3"/><path d="M53 32h55" stroke="#0f192e" stroke-width="4"/>`,`<path d="M37 42l13-29 21 18 9-20 10 20 19-18 14 29" fill="${c}" stroke="#eaf3ff" stroke-width="2"/>`,`<path d="M43 37L35 17 60 23 80 9 100 23 125 17 118 37" fill="${c}" stroke="white" stroke-width="2"/>`,`<path d="M35 42Q80-3 125 42l-15-22-16 7-15-15-15 15-15-7Z" fill="${c}" stroke="white" stroke-width="1.3"/>`][index%5];
+  const face=[`<rect x="47" y="35" width="66" height="60" rx="29"/>`,`<path d="M48 43Q80 16 112 43L105 84 80 100 55 84Z"/>`,`<path d="M46 42L64 30H97L114 42L105 91 80 104 55 91Z"/>`,`<rect x="49" y="34" width="63" height="66" rx="11"/>`][index%4];
+  const eyes=index%3===0?`<path d="M55 59l19 3m12 0 19-3" stroke="${c}" stroke-width="5"/>`:index%3===1?`<path d="M54 61q12-13 23 0m5 0q12-13 23 0" stroke="${c}" stroke-width="4" fill="none"/>`:`<rect x="54" y="53" width="52" height="16" rx="6" fill="${c}"/><path d="M60 58h41" stroke="white" stroke-width="2" opacity=".7"/>`;
+  drawing=`<path d="M25 122Q26 88 57 89H103Q134 88 135 122Z" fill="url(#${uid}metal)" stroke="${c}" stroke-width="3"/><path d="M41 117L55 98 73 110 87 110 107 98 121 117" stroke="${alt}" stroke-width="4" opacity=".75" fill="none"/><g fill="#25304d" stroke="#deeafc" stroke-width="2">${face}</g>${crown}<path d="M52 47q28-19 56 0" fill="none" stroke="${alt}" stroke-width="3"/>${eyes}${emblem(80,100,.34)}`;
+ }
+ else if(type==='aura'){
+  drawing=`<circle cx="80" cy="62" r="39" stroke="${c}" stroke-width="11" stroke-dasharray="${18+seed%17} ${10+seed%9}" fill="none" opacity=".7"/><circle cx="80" cy="62" r="49" stroke="${alt}" stroke-width="3" stroke-dasharray="${8+seed%5} 13" fill="none"/><ellipse cx="80" cy="62" rx="53" ry="21" stroke="#edf5ff" stroke-width="2" fill="none" transform="rotate(${20+(seed*11)%135} 80 62)" opacity=".55"/><circle cx="80" cy="62" r="28" fill="${c}" opacity=".18"/>${emblem(80,62,.84)}`;
+ }
+ else if(type==='trail'){
+  drawing=`<path d="M-5 ${94+r}Q37 ${16+y} 87 ${68-r}T167 ${27+r}" stroke="${c}" stroke-width="16" fill="none" opacity=".17" stroke-linecap="round"/><path d="M-5 ${94+r}Q37 ${16+y} 87 ${68-r}T167 ${27+r}" stroke="url(#${uid}metal)" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M4 ${91+r}Q37 ${17+y} 87 ${65-r}T168 ${24+r}" stroke="#ffffff" stroke-width="1.5" fill="none" opacity=".8"/>${emblem(116,49+(seed%22),.8)}<g fill="${alt}"><circle cx="25" cy="61" r="5"/><circle cx="51" cy="29" r="3"/><circle cx="135" cy="84" r="3"/></g>`;
+ }
+ else if(type==='frame'){
+  const shapes=[`<rect x="37" y="15" width="86" height="91" rx="14"/>`,`<path d="M53 12h54l20 24v49l-20 24H53L33 85V36Z"/>`,`<circle cx="80" cy="61" r="47"/>`,`<path d="M80 8L130 61 80 114 30 61Z"/>`,`<path d="M80 8l44 23v61l-44 23-44-23V31Z"/>`][index%5];
+  drawing=`<g fill="#0e1528" stroke="${c}" stroke-width="7">${shapes}</g><g fill="none" stroke="${alt}" stroke-width="2" transform="translate(80 61) scale(.78) translate(-80 -61)">${shapes}</g><circle cx="80" cy="50" r="13" fill="#cad9f4" opacity=".8"/><path d="M56 83q4-27 24-27t24 27Z" fill="${alt}" opacity=".55"/>${emblem(80,95,.45)}`;
+ }
+ else if(type==='badge'){
+  const base=[`<path d="M80 10L118 28v44L80 102 42 72V28Z"/>`,`<path d="M80 10L129 61 80 112 31 61Z"/>`,`<circle cx="80" cy="60" r="47"/>`,`<path d="M46 22H114L129 42 115 103H45L31 42Z"/>`,`<path d="M80 8L96 40 130 45 106 70 113 107 80 89 47 107 54 70 30 45 64 40Z"/>`][index%5];
+  drawing=`<path d="M62 88L49 120 77 109 82 95M96 86l15 34-28-12-6-13" fill="${c}" opacity=".8"/><g fill="url(#${uid}metal)" stroke="${c}" stroke-width="5">${base}</g><g fill="none" stroke="#ffffff" stroke-width="1" transform="translate(80 61) scale(.82) translate(-80 -61)">${base}</g>${emblem(80,58,.9)}`;
+ }
+ else if(type==='title'){
+  const short=themes[index].split(' ')[0].toUpperCase().slice(0,10);
+  drawing=`<path d="M16 36L34 18H126L145 36V88L126 106H34L16 88Z" fill="#101c30" stroke="${c}" stroke-width="5"/><path d="M27 41L40 29H119L133 41M27 82L40 94H119L133 82" stroke="${alt}" stroke-width="2" fill="none"/><text x="80" y="65" text-anchor="middle" fill="#f8faff" font-family="Arial, sans-serif" font-size="${short.length>8?11:14}" font-weight="900" letter-spacing=".6">${h(short)}</text><path d="M44 73H116" stroke="${c}" stroke-width="2"/>${emblem(80,18,.26)}`;
+ }
+ else if(type==='background'){
+  const scenes=[`<circle cx="116" cy="33" r="20" fill="${c}" opacity=".8"/><path d="M0 104L36 44 62 88 96 29 160 101V125H0Z" fill="${alt}" opacity=".74"/><path d="M0 117L51 68 80 112 120 75 160 106V125H0Z" fill="#203b56"/>`,`<path d="M0 120V73h21V48h15v33h17V33h16v54h17V41h17v46h17V57h20v63Z" fill="${alt}" opacity=".65"/><path d="M0 116V85h17v-23h21v32h18V61h17v33h20V51h19v44h28v21Z" fill="#101f37"/>`,`<path d="M0 74Q35 62 80 76T160 64V125H0Z" fill="${alt}" opacity=".7"/><path d="M0 94Q43 78 88 93T160 90" stroke="white" stroke-width="3" fill="none" opacity=".7"/><path d="M0 113Q70 102 160 113" stroke="${c}" stroke-width="4" fill="none"/>`,`<ellipse cx="80" cy="51" rx="40" ry="29" stroke="${c}" stroke-width="7" fill="none"/><path d="M26 115L80 68 132 115" stroke="${alt}" stroke-width="9" fill="none"/>`][index%4];
+  drawing=`<rect x="9" y="9" width="142" height="109" rx="9" fill="#14283b" stroke="${c}" stroke-width="3"/>${scenes}<path d="M20 21h120" stroke="#ffffff" opacity=".2"/>${emblem(30,31,.4)}`;
+ }
+ else {
+  drawing=`<circle cx="80" cy="61" r="39" fill="${c}" opacity=".13"/><g stroke="${c}" stroke-linecap="round">${Array.from({length:12},(_,k)=>`<path d="M80 13V${22+k%3}" stroke-width="${2+(k%3)}" transform="rotate(${k*30+(seed*13)%30} 80 61)"/>`).join('')}</g><path d="M47 89Q24 69 49 43M112 37Q137 64 114 87" fill="none" stroke="${alt}" stroke-width="5" stroke-dasharray="7 6"/>${emblem(80,61,1.18)}`;
+ }
+ return `<svg class="wr4-art-svg" viewBox="0 0 160 125" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración de ${h(item.name)}"><defs><linearGradient id="${uid}bg" x2="1" y2="1"><stop stop-color="#1f2648"/><stop offset="1" stop-color="#081322"/></linearGradient><linearGradient id="${uid}metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${c}"/><stop offset=".42" stop-color="${alt}"/><stop offset="1" stop-color="#1d2a47"/></linearGradient></defs><rect x="1" y="1" width="158" height="123" rx="13" fill="url(#${uid}bg)"/><g opacity=".46">${backgrounds[seed%backgrounds.length]}${sparks}</g>${drawing}<path d="M11 15V9h16M133 9h16v6M11 109v7h16M133 116h16v-7" fill="none" stroke="${c}" stroke-width="2" opacity=".85"/></svg>`;
+}
+
+function shopHtml(){
+ const q=shopQuery.trim().toLocaleLowerCase('es');
+ const filtered=store.filter(i=>(filter==='Todos'||i.type===filter)&&(!q||i.name.toLocaleLowerCase('es').includes(q)||i.desc.toLocaleLowerCase('es').includes(q)));
+ const shown=filtered.slice(0,shopShown);
+ const inventory=state.owned.slice().reverse().map(id=>{
+  if(id==='wr4-gold-name')return '<div class="wr4-inventory-row">👑 Nombre dorado <b>Desbloqueado</b></div>';
+  const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item)return '';
+  const thumb=store.some(x=>x.id===id)?`<span class="wr4-inventory-thumb">${cosmeticArt(item)}</span>`:`<span style="font-size:25px">${h(item.icon)}</span>`;
+  return `<div class="wr4-inventory-row"><span>${thumb}${h(item.name)}</span><button class="wr4-btn" style="margin:0" data-wr4-equip="${h(id)}">${state.equip[item.type]===id?'✓ Equipado':'Equipar'}</button></div>`;
+ }).join('');
+ return dashboard()+`<div class="wr4-plus-warning" style="border-color:#7d5cce88;background:linear-gradient(120deg,#251e3c,#111b2c)"><strong>🛒 TIENDA · 200 COSMÉTICOS ILUSTRADOS</strong><div>Diseños exclusivos de armaduras, halos, estelas, marcos, insignias, títulos, escenarios y efectos. <b>Sin artículos comunes del World Pass ni compras con dinero real.</b> Consigue créditos jugando y con recompensas gratuitas.</div></div>
+ <details class="wr4-inventory"><summary>🎒 Inventario (${state.owned.length} desbloqueos) · pulsa para equipar</summary><div>${inventory||'<p style="color:#afc0ce">Completa partidas y reclama recompensas para empezar tu colección.</p>'}</div></details>
+ <div class="wr4-store-filters">${['Todos',...families.map(f=>f.type)].map(t=>`<button class="wr4-tab" data-wr4-filter="${t}" aria-selected="${t===filter}">${h(t==='Todos'?'Todos':families.find(x=>x.type===t).label)}</button>`).join('')}</div>
+ <form class="wr4-searchrow" data-wr4-search-form="1"><input id="wr4ShopSearch" aria-label="Buscar cosmético" type="search" placeholder="Buscar por nombre o temática…" value="${h(shopQuery)}"><button class="wr4-btn" type="submit" style="margin:0;padding:12px 18px">BUSCAR</button>${shopQuery?'<button type="button" class="wr4-btn wr4-neutral" data-wr4-clearsearch="1" style="margin:0;padding:12px">Limpiar</button>':''}</form>
+ <div class="wr4-store-head"><strong>${filtered.length.toLocaleString('es-ES')} artículos encontrados</strong><span>Mostrando ${shown.length} de ${filtered.length} · Imágenes originales del juego</span></div>
+ <div class="wr4-tier-list">${shown.map(i=>{const own=state.owned.includes(i.id);return `<article class="wr4-tier ${i.rarity==='ULTRA'||i.rarity==='LEGENDARIA'?'wr4-legend':'wr4-rare'}" style="--wr4-accent:${i.color}"><div class="wr4-tier-top">${h(i.rarity)} · ${h(families.find(x=>x.type===i.type).label)}</div><div class="wr4-art-shell">${cosmeticArt(i)}</div><h3>${h(i.name)}</h3><div class="wr4-tier-meta"><span class="wr4-credits-pill">🪙 ${i.price.toLocaleString('es-ES')}</span><span class="wr4-shop-desc">${h(i.desc)}</span></div><button class="wr4-btn" data-wr4-buy="${i.id}" ${own?'disabled':''}>${own?'✓ EN INVENTARIO':'COMPRAR CON CRÉDITOS'}</button></article>`;}).join('')||'<p style="color:#bfcbd5">No hay artículos con ese filtro.</p>'}</div>
+ ${filtered.length>shown.length?`<button type="button" class="wr4-more" data-wr4-more="1">VER MÁS COSMÉTICOS (${filtered.length-shown.length} restantes)</button>`:''}`;
+}
+function open(which='free'){view=which==='pass'?'free':which;active='free';if(view==='shop')shopShown=30;$4('wr4Overlay').classList.add('wr4-open');document.body.style.overflow='hidden';draw();}
+function close(){const el=$4('wr4Overlay');if(el)el.classList.remove('wr4-open');document.body.style.overflow='';}
+function draw(){const content=$4('wr4Content'),title=$4('wr4Title');if(!content)return;title.textContent=view==='shop'?'🛒 TIENDA WORLD RIVALS':'🌍 WORLD PASS';content.innerHTML=view==='shop'?shopHtml():passHtml();currency();}
+function awardGame(id,score,rounds){if(!id||state.finished.includes(id))return;state.finished.push(id);state.finished=state.finished.slice(-170);const gain=Math.min(900,110+Math.round(Math.max(0,score)/28)+Math.max(1,rounds)*50);state.xp+=gain;save();const line=$4('wr4MatchXP');if(line){line.innerHTML=`⚡ Pase: <b>+${gain} XP</b> · Nivel ${level()} · <button type="button" data-wr4-open="pass" class="wr4-btn" style="margin:0">Ver recompensas</button>`;line.style.display='block';}quickToast('⚡ Has ganado '+gain+' XP para el World Pass.');}
+function claim(track,n){const reward=fReward(n),list=state.free;if(n<1||n>LEVELS||n>level()||list.includes(n))return;list.push(n);grant(reward,rewardId('free',n));draw();if(['star','box','megabox','superbox'].includes(reward.kind))showLoot(reward);else quickToast('🎁 Recompensa desbloqueada: '+reward.name);}
+function showLoot(reward){lootLocked=false;const panel=$4('wr4Loot'),art=$4('wr4LootArt'),msg=$4('wr4LootMessage'),btn=$4('wr4LootContinue');panel.classList.add('wr4-visible');$4('wr4LootBody').classList.remove('wr4-loot-opened');art.textContent=reward.icon;msg.textContent='¡Has desbloqueado una recompensa!';btn.textContent='ABRIR '+(reward.kind==='star'?'ESTRELLA':'CAJA');btn.disabled=false;btn.onclick=()=>{if(!lootLocked){lootLocked=true;$4('wr4LootBody').classList.add('wr4-loot-opened');btn.disabled=true;msg.textContent='✨ '+reward.name+' — '+reward.meta;setTimeout(()=>{btn.disabled=false;btn.textContent='CONTINUAR';},850);}else{panel.classList.remove('wr4-visible');}};}
+function buy(id){const item=store.find(x=>x.id===id);if(!item||state.owned.includes(id))return;if(state.credits<item.price){quickToast('Necesitas '+(item.price-state.credits)+' créditos más. ¡Juega para conseguirlos!');return;}state.credits-=item.price;state.owned.push(id);save();draw();quickToast('✅ Has comprado '+item.name+'. Está en tu inventario.');}
+function hex(hsl){const el=document.createElement('span');el.style.color=hsl;document.body.appendChild(el);const rgb=getComputedStyle(el).color;el.remove();const parts=(rgb.match(/\d+/g)||[]).slice(0,3).map(v=>(+v).toString(16).padStart(2,'0'));return parts.length===3?'#'+parts.join(''):'#ed5568';}
+function applyCosmetic(){
+ let glow=null;for(const [type,id] of Object.entries(state.equip)){const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item||!state.owned.includes(id))continue;const color=hex(item.color||'#fa5269');try{
+ if(type==='skin'){profile.shirt=color;profile.shirtAccent=hex(colorFor(Number(id.split('-').pop())+37));profile.avatarPattern=['stars','grid','rays','dots'][Number(id.split('-').pop())%4];}
+ if(type==='frame')profile.avatarFrame=color;
+ if(type==='background'){profile.avatarBg=color;profile.avatarPattern=['stars','grid','dots','rays'][Number(id.split('-').pop())%4];}
+ if(type==='effect'){profile.nameColor=color;profile.avatarFrame=color;}
+ if(type==='badge')profile.avatarBadge=['bolt','star','fire','game','crown'][id.length%5];
+ if(type==='trail'||type==='aura')glow=color;
+ if(type==='title')state.displayTitle=item.name;
+ }catch{}
+ }
+ if(glow){document.documentElement.style.setProperty('--wr4-glow',glow);for(const id of ['topAvatar','homeAvatar','profilePreview'])$4(id)?.classList.add('wr4-equipped-aura');}
+ else for(const id of ['topAvatar','homeAvatar','profilePreview'])$4(id)?.classList.remove('wr4-equipped-aura');
+ for(const el of [$4('wr4TitleBadge'),$4('wr4TitleBadgeTop')])if(el){el.textContent=state.displayTitle||'';el.style.display=state.displayTitle?'inline-block':'none';}
+ try{if(typeof window.saveProfile==='function')saveProfile();else if(typeof window.renderProfile==='function')renderProfile();}catch{}
+}
+function equip(id){const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item||!state.owned.includes(id))return;state.equip[item.type]=id;save();applyCosmetic();draw();quickToast('✨ Equipado: '+item.name);}
+function bind(){const overlay=$4('wr4Overlay');if(!overlay)return;document.addEventListener('click',e=>{
+ const openButton=e.target.closest('[data-wr4-open]');if(openButton){e.preventDefault();open(openButton.dataset.wr4Open);return;}
+ if(e.target.closest('[data-wr4-close]')){close();return;}
+ const f=e.target.closest('[data-wr4-filter]');if(f){filter=f.dataset.wr4Filter;shopShown=30;draw();return;}
+ if(e.target.closest('[data-wr4-more]')){shopShown+=30;draw();return;}
+ if(e.target.closest('[data-wr4-clearsearch]')){shopQuery='';shopShown=30;draw();return;}
+ const c=e.target.closest('[data-wr4-claim]');if(c){const [track,n]=c.dataset.wr4Claim.split(':');claim(track,Number(n));return;}
+ const b=e.target.closest('[data-wr4-buy]');if(b){buy(b.dataset.wr4Buy);return;}
+ const equipB=e.target.closest('[data-wr4-equip]');if(equipB){equip(equipB.dataset.wr4Equip);return;}
+ if(e.target===overlay)close();
+ },true);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('wr4-open'))close();});
+ overlay.addEventListener('submit',e=>{if(e.target.matches('[data-wr4-search-form]')){e.preventDefault();shopQuery=($4('wr4ShopSearch')?.value||'').slice(0,80);shopShown=30;draw();}});
+ // Golden name is earned with the free pass tier 50; stop V3's unrestricted toggle.
+ document.addEventListener('click',e=>{if(e.target.closest('#goldToggle')&&!state.owned.includes('wr4-gold-name')){e.preventDefault();e.stopImmediatePropagation();quickToast('👑 Desbloquea el nombre dorado en el nivel 50 del World Pass.');}},true);
+ const goldBtn=$4('goldToggle');if(goldBtn&&!state.owned.includes('wr4-gold-name')){goldBtn.textContent='🔒 Nombre dorado · nivel 50 del pase';try{if(typeof profile!=='undefined'&&profile.gold){profile.gold=false;saveProfile();}}catch{}}
+ // XP only once on match completion, and only after World Rivals settles local ELO.
+ try{if(typeof wrEloSettle==='function'){const settle=wrEloSettle;wrEloSettle=function(...args){const result=settle.apply(this,args);awardGame(args[0],args[1],args[2]);return result;};}}catch(e){console.warn('World Pass XP integration:',e)}
+ // Update the result-badge near endgame, do not alter gameplay or ELO formulas.
+ currency();applyCosmetic();
+ }
+function init(){bind();currency();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+window.WR4={open:(which)=>open(which==='pass'?'free':which),close,get shopCount(){return store.length;},get level(){return level();},get credits(){return state.credits;}};
 })();
 
 </script>
