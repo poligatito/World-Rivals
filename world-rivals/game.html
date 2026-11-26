@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>World Rivals V4.11.1 Stable — Fondo de partida corregido</title>
-<meta name="worldrivals-version" content="4.11.1">
+<title>World Rivals V4.11.2 Stable — Salas y mapas corregidos</title>
+<meta name="worldrivals-version" content="4.11.2">
 <meta name="worldrivals-build-type" content="full-standalone-game">
 <meta name="worldrivals-map-patch" content="openfreemap-liberty-only">
 <meta name="worldrivals-room-patch" content="stable-v4-1-30players-sync">
@@ -485,6 +485,14 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 #wrMusicWindow .wr46-spotify-actions button{background:#1db954;color:#061810;border:0;font-weight:900;box-shadow:0 6px 30px #1db95422}
 #wrMusicWindow .wr46-spotify-actions button:hover,#wrMusicWindow .wr46-spotify-link:hover{filter:brightness(1.1)}
 @media(max-width:560px){#wrMusicWindow .wr46-spotify-landing{min-height:350px;padding:16px}#wrMusicWindow .wr46-spotify-landing h3{font-size:20px}}
+
+/* V4.11.2 · Recuperación de conexión y Google Street View sin pantallas bloqueadas */
+.wr-join-error{margin:10px 0 4px;border:1px solid #ff72806e;border-radius:10px;padding:10px 12px;color:#ffc2c9;background:#491a2585;font-size:12px;line-height:1.5}
+.wr-join-error[hidden]{display:none!important}
+.wr-pano-rescue{position:absolute;z-index:8;left:50%;bottom:74px;transform:translate(-50%,14px);display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:10px 13px;border:1px solid #71cadb7f;border-radius:12px;background:#0d1a26e8;box-shadow:0 8px 24px #000a;color:#e8f6ff;max-width:90%;font-size:12px;opacity:0;visibility:hidden;transition:opacity .3s,transform .3s,visibility .3s}
+.wr-pano-rescue-visible{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.wr-pano-rescue button{white-space:nowrap}
+
 </style>
 <style id="wr4Style">
 /* WORLD RIVALS V4 STABLE — PASS & STORE */
@@ -842,7 +850,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
   <button type="button" class="wr4-shop-entry wr4-shop-panel" data-wr4-open="shop"><span class="wr4-entry-icon">🛒</span><span><strong>TIENDA · 200 COSMÉTICOS</strong><small>Skins, auras, estelas, marcos y mucho más. Solo artículos prémium, sin premios comunes del World Pass.</small><span class="wr4-currency-chip wr4-top-coins">🪙 <span data-wr4-credits>0</span> CRÉDITOS</span></span></button>
  </section>
  <section class="feature-strip">
-<div class="feature"><div class="feature-icon">🌆</div><div><b>V4.11.1 Stable · Fondo recuperado</b><small>La ciudad cyberpunk permanece de fondo también durante las partidas, sin filtros pesados.</small></div></div><div class="feature"><div class="feature-icon">🗺️</div><div><b>Mapa 2D más eficiente</b><small>El minimapa adicional solo se crea en pantalla completa.</small></div></div><div class="feature"><div class="feature-icon">🎵</div><div><b>Música local y menos procesos</b><small>Ambiental y MP3 sin Spotify; el glitch y la música evitan tareas innecesarias.</small></div></div>
+<div class="feature"><div class="feature-icon">👥</div><div><b>Salas con reconexión</b><small>Hasta tres intentos para entrar; si el anfitrión no responde, muestra un error y permite volver a probar.</small></div></div><div class="feature"><div class="feature-icon">🛰️</div><div><b>Street View sin esperas infinitas</b><small>Se limita el tiempo de búsqueda y se informa si Google obliga a usar el catálogo temporal de emergencia.</small></div></div><div class="feature"><div class="feature-icon">🗺️</div><div><b>Mapa de respuestas recuperable</b><small>Reintento del mapa colorido y mapa de emergencia interactivo cuando falla el servidor.</small></div></div>
 </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -855,7 +863,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
   <article class="play-card">
    <div class="card-tag">ÚNETE A TUS AMIGOS</div><h2>Introduce un código</h2>
    <p>¿Ya han creado una sala? Escribe aquí el código de 6 letras y entra directamente.</p>
-   <div class="join-row"><input id="joinCode" class="field code-input" maxlength="6" placeholder="RIVALS" autocomplete="off"><button class="btn btn-secondary" id="joinRoomBtn">Entrar →</button></div>
+   <div class="join-row"><input id="joinCode" class="field code-input" maxlength="6" placeholder="RIVALS" autocomplete="off"><button class="btn btn-secondary" id="joinRoomBtn">Entrar →</button></div><div id="wrJoinErrorBox" class="wr-join-error" role="alert" hidden></div>
    <div class="config-hint"><span>💡</span><div>También puedes personalizar tu personaje y elegir tu bandera antes de entrar.</div></div>
   </article>
  </section>
@@ -1189,6 +1197,34 @@ let p2pRoomClosed = false;
 let wrHostRevision=0, wrGuestRevision=-1, wrLastHostState=0, wrGuestPendingGuess=null;
 const wrGuestAvatarCache=new Map();
 let wrGuestSyncInterval=null;
+// V4.11.2: los fallos de señalización nunca dejan la sala en «CONECTANDO» indefinidamente.
+let wrJoinWatchdog=null,wrJoinRetryCount=0,wrJoinNonce=0,wrJoinTargetCode='';
+function wrClearJoinWatchdog(){if(wrJoinWatchdog)clearTimeout(wrJoinWatchdog);wrJoinWatchdog=null;}
+function wrJoinFailed(msg){
+ wrClearJoinWatchdog();wrJoinNonce++;wrJoinTargetCode='';
+ cleanupRoom();setScreen('home');
+ const text='No se pudo conectar a la sala. '+String(msg||'Comprueba la conexión y que el anfitrión esté conectado.');
+ toast(text);
+ const info=$('wrJoinErrorBox');if(info){info.textContent=text;info.hidden=false;}
+}
+function wrTryJoinConnection(){
+ if(!p2pPeer||p2pPeer.destroyed||p2pRoomClosed||currentRoom||!wrJoinTargetCode)return;
+ wrClearJoinWatchdog();wrJoinRetryCount++;
+ const code=wrJoinTargetCode,nonce=wrJoinNonce;
+ if(wrJoinRetryCount>3){wrJoinFailed('El anfitrión no responde. Revisa el código, Internet y que todos uséis la misma versión.');return;}
+ $('lobbyState').textContent='CONECTANDO · '+wrJoinRetryCount+'/3';
+ $('lobbyHint').textContent='Buscando al anfitrión… intento '+wrJoinRetryCount+' de 3.';
+ try{
+  const old=p2pHostConn;p2pHostConn=null;if(old)try{old.close()}catch(_e){}
+  const conn=p2pPeer.connect(code,{reliable:true});registerP2PConnection(conn);p2pHostConn=conn;
+  conn.on('error',e=>{if(nonce===wrJoinNonce&&!currentRoom){console.warn('Unirse a sala',e);wrTryJoinConnection();}});
+ }catch(e){console.warn('Conexión a sala',e);}
+ wrJoinWatchdog=setTimeout(()=>{
+  if(nonce!==wrJoinNonce||p2pRoomClosed||currentRoom)return;
+  wrTryJoinConnection();
+ },9000);
+}
+
 function wrSendAvatar(conn,p){
  if(!conn?.open||!p?.avatar?.photoData)return;
  p2pSend(conn,{type:'avatar',uid:p.uid,avatar:p.avatar});
@@ -1389,8 +1425,8 @@ function wrMapNextStrategy(id,origin){
  wrMapAttempts[id]++;
  if(wrMapAttempts[id]>=2){
   // Nunca cambiar a un mapa blanco/sin etiquetas. La única fuente es Liberty.
-  wrMapStatus(id,'El mapa colorido no ha cargado. Comprueba Internet y pulsa Reintentar mapa.',true);
-  if(id==='guessMap')wrResolveMap(false);
+  wrActivateLocalMap(id);wrMapStatus(id,'Mapa de emergencia sin conexión: puedes colocar tu pin. Pulsa Reintentar mapa para recuperar Liberty.',true);
+  if(id==='guessMap')wrResolveMap(true);
   return;
  }
  wrInitMap(id);
@@ -1409,8 +1445,8 @@ function wrInitMap(id){
  wrMapStatus(id,wrMapAttempts[id]===0?'Cargando mapa colorido con nombres de países…':'Reintentando mapa colorido…');
  if(!window.maplibregl){
   wrClearMapTimer(id);
-  wrMapTimers[id]=setTimeout(()=>{if(!wrMapObject(id)&&!wrMapFallbacks[id])wrMapStatus(id,'No se cargó el mapa colorido. Pulsa Reintentar mapa.',true);},8500);
-  wrLoadMapLibre().then(ok=>{if(ok && !wrMapFallbacks[id]){wrClearMapTimer(id);wrInitMap(id)}else if(!ok&&!wrMapFallbacks[id]){wrClearMapTimer(id);wrMapStatus(id,'MapLibre no está disponible. Pulsa Reintentar mapa.',true);}});
+  wrMapTimers[id]=setTimeout(()=>{if(!wrMapObject(id)&&!wrMapFallbacks[id])wrActivateLocalMap(id);wrMapStatus(id,'No se pudo descargar MapLibre. Puedes jugar con el mapa de emergencia; pulsa Reintentar.',true);},8500);
+  wrLoadMapLibre().then(ok=>{if(ok && !wrMapFallbacks[id]){wrClearMapTimer(id);wrInitMap(id)}else if(!ok&&!wrMapFallbacks[id]){wrClearMapTimer(id);wrActivateLocalMap(id);wrMapStatus(id,'Sin conexión con los mapas. Mapa de emergencia activado; pulsa Reintentar.',true);}});
   return;
  }
  try{
@@ -1487,7 +1523,16 @@ function updateFullscreenVisuals(next){
 async function waitForMap(){
  initGuessMap();if((guessMap&&guessMap.loaded())||wrMapFallbacks.guessMap)return true;
  if(!mapReadyPromise)mapReadyPromise=new Promise(resolve=>{resolveMapReady=resolve});
- return !!(await Promise.race([mapReadyPromise,new Promise(resolve=>setTimeout(()=>resolve(false),12000))]));
+ const ok=await Promise.race([mapReadyPromise,new Promise(resolve=>setTimeout(()=>resolve(false),12000))]);
+ if(ok)return true;
+ // No dejar el mapa de respuestas en «Cargando» eternamente cuando falla el servidor.
+ // El mapa de emergencia sigue siendo interactivo; la misma cartografía Liberty se puede reintentar.
+ if(!wrMapFallbacks.guessMap && $('gameScreen')&&!$('gameScreen').classList.contains('hidden')){
+  wrActivateLocalMap('guessMap');
+  wrMapStatus('guessMap','No se ha cargado el mapa online. Mapa de emergencia activo. Pulsa Reintentar para recuperar el colorido.',true);
+  return true;
+ }
+ return false;
 }
 function loadMaps(){initGuessMap();updateConnection()}
 /* Semillas mundiales aproximadas para acelerar búsqueda; el juego SIEMPRE genera
@@ -1850,6 +1895,25 @@ async function randomPanorama(options={}){
  }
  throw Error('El verificador revisó '+attempts+' coordenadas, pero no encontró una calle exterior con movimiento. Reintenta o comprueba Street View/API.');
 }
+// Límite global: ni la búsqueda inicial ni la precarga pueden bloquear la partida indefinidamente.
+// Si Google falla se utiliza un catálogo de emergencia claramente indicado (NO son ubicaciones aleatorias nuevas).
+async function wrFetchRoundTarget(options={}){
+ const controller=new AbortController(),outer=options.signal;
+ if(outer?.aborted)throw new DOMException('Cancelado','AbortError');
+ const cancel=()=>controller.abort();outer?.addEventListener('abort',cancel,{once:true});
+ let timer=null;
+ try{
+  return await Promise.race([
+   randomPanorama({signal:controller.signal}),
+   new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(new Error('Tiempo agotado buscando Street View'));},16500);})
+  ]);
+ }catch(e){
+  if(outer?.aborted)throw new DOMException('Cancelado','AbortError');
+  console.warn('Google Street View no respondió; entrando en modo limitado de emergencia',e);
+  toast('Google no ha podido verificar una calle. Usando una de 9 panorámicas de emergencia (modo limitado).');
+  return randomGoogleBackup();
+ }finally{if(timer)clearTimeout(timer);outer?.removeEventListener('abort',cancel);controller.abort();}
+}
 function wrStartNextPrefetch(){
  if(!currentRoom||currentRoom.roundStatus!=='playing')return;
  if(!isSolo&&!p2pHost)return;
@@ -1860,7 +1924,7 @@ function wrStartNextPrefetch(){
  const controller=new AbortController(),pending={round:next,controller,target:null,promise:null};wrNextRound=pending;
  wrPreloadStatus('🤖 Comprobando calle exterior y movimiento para ronda '+next+'…');
  pending.promise=(async()=>{
-  const target=await randomPanorama({signal:controller.signal});
+  const target=await wrFetchRoundTarget({signal:controller.signal});
   if(controller.signal.aborted||generation!==wrPrefetchGeneration)return null;
   pending.target=target;wrWarmNextGoogleEmbed(target);wrPreloadStatus(target.validated?'✅ Ronda '+next+' · ubicación y enlaces comprobados':'✅ Ronda '+next+' preparada (modo compatible)');
   if(!isSolo&&p2pHost)p2pBroadcast({type:'next-preload',round:next,source:target.source,target:{pano:target.pano,googlePanoId:target.googlePanoId,lat:target.lat,lng:target.lng,heading:target.heading}});
@@ -1870,7 +1934,7 @@ function wrStartNextPrefetch(){
 async function wrTakeNextRound(expected){
  const queued=wrNextRound?.round===expected?wrNextRound:null;
  let target=queued?.target||await queued?.promise;
- if(!target){wrPreloadStatus('⏳ Buscando ubicación en Google Street View…');target=await randomPanorama();}
+ if(!target){wrPreloadStatus('⏳ Buscando ubicación en Google Street View…');target=await wrFetchRoundTarget();}
  wrResetPrefetch();return target;
 }
 function googleMapsLink(t){
@@ -1896,8 +1960,14 @@ async function showPano(target){
   if(wrWarmFrame&&wrWarmPano===target.pano&&wrWarmFrame.src===source){frame=wrWarmFrame;wrWarmFrame=null;wrWarmPano='';frame.removeAttribute('aria-hidden');frame.style.cssText='';}
   else{wrRemoveWarmFrame();frame=document.createElement('iframe');frame.className='google-share-iframe';frame.src=source;}
   frame.title='Google Maps · Street View interactivo';frame.referrerPolicy='strict-origin-when-cross-origin';frame.allow='fullscreen; accelerometer; gyroscope';frame.allowFullscreen=true;
-  frame.addEventListener('error',()=>{if(rid===panoRequestId)showPanoError('No se pudo mostrar la panorámica de Google. Comprueba tu conexión o abre la vista desde Google Maps.');});
-  root.appendChild(frame);panoFrame=frame;
+  const rescue=document.createElement('div');rescue.className='wr-pano-rescue';
+  rescue.innerHTML='<span>Si Street View no aparece, puedes reintentar la vista.</span><button class="btn btn-secondary btn-small" type="button">↻ Reintentar Street View</button>';
+  rescue.querySelector('button').addEventListener('click',()=>showPano(target));
+  let loaded=false;
+  frame.addEventListener('load',()=>{if(rid!==panoRequestId)return;loaded=true;rescue.classList.remove('wr-pano-rescue-visible');});
+  frame.addEventListener('error',()=>{if(rid===panoRequestId)showPanoError('No se pudo mostrar Street View. Comprueba Internet y permisos de Google Maps.');});
+  root.appendChild(frame);panoFrame=frame;root.appendChild(rescue);
+  setTimeout(()=>{if(rid===panoRequestId&&root.contains(frame))rescue.classList.add('wr-pano-rescue-visible');},13500);
   // No se toca el nombre comercial ni la atribución obligatoria de Google.
   const mask=document.createElement('div');mask.className='pano-location-mask';mask.innerHTML='<span>Zona tapada · sin pista</span>';root.appendChild(mask);
  }catch(e){showPanoError(e.message||'No se pudo cargar Google Street View.');}
@@ -1949,7 +2019,7 @@ function hostPublish(){
 }
 function registerP2PConnection(conn){
  p2pConnections.set(conn.peer,conn);
- conn.on('open',()=>{if(p2pHost){p2pSend(conn,p2pSnapshot());if(wrNextRound?.target?.source)p2pSend(conn,{type:'next-preload',round:wrNextRound.round,source:wrNextRound.target.source,target:{pano:wrNextRound.target.pano,googlePanoId:wrNextRound.target.googlePanoId,lat:wrNextRound.target.lat,lng:wrNextRound.target.lng,heading:wrNextRound.target.heading}});}else{p2pHostConn=conn;p2pSend(conn,{type:'hello',player:profileForPlayer()});}});
+ conn.on('open',()=>{if(p2pHost){p2pSend(conn,p2pSnapshot());if(wrNextRound?.target?.source)p2pSend(conn,{type:'next-preload',round:wrNextRound.round,source:wrNextRound.target.source,target:{pano:wrNextRound.target.pano,googlePanoId:wrNextRound.target.googlePanoId,lat:wrNextRound.target.lat,lng:wrNextRound.target.lng,heading:wrNextRound.target.heading}});}else{p2pHostConn=conn;p2pSend(conn,{type:'hello',player:profileForPlayer()});p2pSend(conn,{type:'state-request'});}});
  conn.on('data',msg=>{
   if(!msg||typeof msg!=='object')return;
   if(p2pHost){
@@ -1988,11 +2058,12 @@ function registerP2PConnection(conn){
      if(msg.type==='guess-ack'){if(wrGuestPendingGuess?.round===msg.round)wrGuestPendingGuess=null;return;}
      if(msg.type==='kicked'){const reason=String(msg.message||'Has sido expulsado de la sala.').slice(0,160);cleanupRoom();setScreen('home');toast(reason);return;}
     if(msg.type==='next-preload'){wrAcceptNextPreload(msg);return;}
-   if(msg.type==='error'){toast(msg.message||'No se pudo entrar en la sala.');return;}
+   if(msg.type==='error'){wrJoinFailed(msg.message||'El anfitrión rechazó la conexión.');return;}
    if(msg.type==='state'){
      if(Number.isFinite(msg.revision)&&msg.revision<=wrGuestRevision)return;
      if(Number.isFinite(msg.revision))wrGuestRevision=msg.revision;
      wrLastHostState=Date.now();
+     if(msg.currentRoom){wrClearJoinWatchdog();wrJoinTargetCode='';wrJoinNonce++;}
      currentRoom=msg.currentRoom;players=msg.players||[];guesses=msg.guesses||[];messages=msg.messages||[];currentRoomId=msg.roomCode||currentRoomId;
      wrSyncGuestAvatars();
      if(wrGuestPendingGuess&&(currentRoom?.roundStatus!=='playing'||
@@ -2015,7 +2086,7 @@ function registerP2PConnection(conn){
   if(p2pHost){removeVoiceRelaySource(conn.peer);removeVoiceRelayDestination(conn.peer);}
   const oldAudio=document.getElementById('audio-'+conn.peer);if(oldAudio){oldAudio.srcObject=null;oldAudio.remove();}
   if(p2pHost){players=players.filter(p=>p.uid!==conn.peer);guesses=guesses.filter(g=>g.uid!==conn.peer);hostPublish();maybeFinishRound();}
-  else if(!p2pRoomClosed&&conn===p2pHostConn){wrStopGuestSync();cleanupRoom();setScreen('home');toast('Se ha perdido la conexión con la sala.');}
+  else if(!p2pRoomClosed&&conn===p2pHostConn){if(!currentRoom){wrClearJoinWatchdog();wrJoinWatchdog=setTimeout(()=>wrTryJoinConnection(),700);}else{wrStopGuestSync();cleanupRoom();setScreen('home');toast('Se ha perdido la conexión con la sala.');}}
  });
  conn.on('error',e=>console.warn('P2P connection',e));
 }
@@ -2068,6 +2139,7 @@ function setupPeerObject(peer){
  peer.on('error',e=>{
   console.error('PeerJS',e);
   let msg=e?.type==='unavailable-id'?'Ese código ya está ocupado. Crea otra sala.':e?.type==='peer-unavailable'?'No se encuentra la sala. Comprueba el código y que el anfitrión siga conectado.':(e?.message||'Error de conexión P2P.');
+  if(!p2pHost&&!currentRoom&&wrJoinTargetCode&&e?.type==='peer-unavailable'){wrJoinFailed(msg);return;}
   toast(msg);
  });
  peer.on('disconnected',()=>toast('Se perdió la conexión de señalización de la sala.'));
@@ -2083,15 +2155,16 @@ async function createRoom(){
  });
 }
 async function joinRoom(code){
+ if($('wrJoinErrorBox')){$('wrJoinErrorBox').hidden=true;$('wrJoinErrorBox').textContent='';}
  code=(code||'').trim().toUpperCase();if(!/^[A-Z][A-Z0-9]{5}$/.test(code)){toast('El código debe tener 6 caracteres y empezar por una letra.');return;}
  if(!window.Peer){toast('No se ha podido cargar PeerJS. Comprueba tu conexión.');return;}
  cleanupRoom();p2pHost=false;p2pRoomClosed=false;currentRoomId=code;
  p2pPeer=new Peer(undefined,{debug:0});setupPeerObject(p2pPeer);
  p2pPeer.on('open',id=>{
   p2pUid=id;user={uid:id};
-  const conn=p2pPeer.connect(code,{reliable:true});registerP2PConnection(conn);
-  p2pHostConn=conn;wrStartGuestSync();setScreen('lobby');$('lobbyState').textContent='CONECTANDO';$('lobbyHint').textContent='Conectando con el anfitrión...';
-  setTimeout(()=>{if(!currentRoom&&conn.open===false)toast('No se pudo conectar. Comprueba el código y que el anfitrión siga en la sala.');},9000);
+  wrJoinTargetCode=code;wrJoinRetryCount=0;wrJoinNonce++;wrStartGuestSync();setScreen('lobby');
+  $('lobbyState').textContent='CONECTANDO';$('lobbyHint').textContent='Buscando al anfitrión…';
+  wrTryJoinConnection();
  });
 }
 function readMicGain(){try{const n=Number(localStorage.getItem('wr_mic_gain'));return Number.isFinite(n)?Math.max(0,Math.min(300,n)):100;}catch(e){return 100;}}
@@ -2357,6 +2430,7 @@ function wrConfirmKick(){
 }
 
 function cleanupRoom(){
+ wrClearJoinWatchdog();wrJoinTargetCode='';wrJoinRetryCount=0;wrJoinNonce++;
  wrStopGuestSync();
   p2pRoomClosed=true;wrKickedPeers.clear();wrCancelKick();wrEloHide();
  wrResetPrefetch();wrRemoveWarmFrame();
@@ -2391,7 +2465,7 @@ async function startOnlineRound(){
    const mode=currentRoom.mode==='elimination'?'elimination':'classic';
    if(mode==='elimination'&&players.length<2){toast('Eliminatoria necesita al menos 2 jugadores.');return;}
    toast('Buscando una calle real en Google Street View...');
-   const target=await randomPanorama();
+   const target=await wrFetchRoundTarget();
   const rounds=mode==='elimination'?Math.min(29,players.length-1):Math.max(1,Math.min(10,Number($('roundSelect').value)||5));
   const duration=Math.max(30,Math.min(180,Number($('timeSelect').value)||90));
   currentRoom={...currentRoom,status:'playing',gameId:currentRoomId+':'+Date.now(),mode,mapsKey:wrMapsKey(),round:1,rounds,duration,roundStatus:'playing',target,roundStartedAt:Date.now(),roundEndsAt:Date.now()+duration*1000};
@@ -2645,7 +2719,7 @@ function startSolo(daily=false){
  waitForMap().then(ok=>{if(!ok&&isSolo)toast('El mapa de respuestas no está disponible. Comprueba Internet y recarga la página.');});
  const soloRoom=currentRoom;
  (async()=>{try{
-  const target=await randomPanorama();if(!isSolo||currentRoom!==soloRoom)return;
+  const target=await wrFetchRoundTarget();if(!isSolo||currentRoom!==soloRoom)return;
   currentRoom.target=target;wrDailyStarted();loadedRoundKey='';loadRoomRound();renderScoreboard();setupSoloClock();
  }catch(e){if(!isSolo||currentRoom!==soloRoom)return;showPanoError(e.message||'No se pudo iniciar la partida.',true);toast(e.message||'No se pudo iniciar la partida.');}})();
 }
