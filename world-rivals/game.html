@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>World Rivals V4.11.2 Stable — Salas y mapas corregidos</title>
-<meta name="worldrivals-version" content="4.11.2">
+<title>World Rivals V14.6</title>
+<meta name="worldrivals-version" content="14.6">
 <meta name="worldrivals-build-type" content="full-standalone-game">
 <meta name="worldrivals-map-patch" content="openfreemap-liberty-only">
 <meta name="worldrivals-room-patch" content="stable-v4-1-30players-sync">
@@ -1207,8 +1207,10 @@ function wrJoinFailed(msg){
  toast(text);
  const info=$('wrJoinErrorBox');if(info){info.textContent=text;info.hidden=false;}
 }
-function wrTryJoinConnection(){
+function wrRoomPeerOptions(){return {debug:0,config:{iceServers:[{urls:['stun:stun.l.google.com:19302','stun:stun1.l.google.com:19302','stun:stun.cloudflare.com:3478']}]}};}
+ function wrTryJoinConnection(){
  if(!p2pPeer||p2pPeer.destroyed||p2pRoomClosed||currentRoom||!wrJoinTargetCode)return;
+  if(p2pPeer.disconnected){try{p2pPeer.reconnect()}catch(e){} }
  wrClearJoinWatchdog();wrJoinRetryCount++;
  const code=wrJoinTargetCode,nonce=wrJoinNonce;
  if(wrJoinRetryCount>3){wrJoinFailed('El anfitrión no responde. Revisa el código, Internet y que todos uséis la misma versión.');return;}
@@ -1216,13 +1218,13 @@ function wrTryJoinConnection(){
  $('lobbyHint').textContent='Buscando al anfitrión… intento '+wrJoinRetryCount+' de 3.';
  try{
   const old=p2pHostConn;p2pHostConn=null;if(old)try{old.close()}catch(_e){}
-  const conn=p2pPeer.connect(code,{reliable:true});registerP2PConnection(conn);p2pHostConn=conn;
-  conn.on('error',e=>{if(nonce===wrJoinNonce&&!currentRoom){console.warn('Unirse a sala',e);wrTryJoinConnection();}});
+  const conn=p2pPeer.connect(code,{reliable:true});p2pHostConn=conn;registerP2PConnection(conn);
+  conn.on('error',e=>{if(nonce===wrJoinNonce&&!currentRoom&&conn===p2pHostConn){console.warn('Unirse a sala',e);wrClearJoinWatchdog();wrJoinWatchdog=setTimeout(wrTryJoinConnection,1500);}});
  }catch(e){console.warn('Conexión a sala',e);}
  wrJoinWatchdog=setTimeout(()=>{
   if(nonce!==wrJoinNonce||p2pRoomClosed||currentRoom)return;
   wrTryJoinConnection();
- },9000);
+ },25000);
 }
 
 function wrSendAvatar(conn,p){
@@ -2018,16 +2020,23 @@ function hostPublish(){
  renderLobby();renderScoreboard();renderMessages();renderVoiceState();renderWaitBanner();
 }
 function registerP2PConnection(conn){
+ const previous=p2pConnections.get(conn.peer);
  p2pConnections.set(conn.peer,conn);
- conn.on('open',()=>{if(p2pHost){p2pSend(conn,p2pSnapshot());if(wrNextRound?.target?.source)p2pSend(conn,{type:'next-preload',round:wrNextRound.round,source:wrNextRound.target.source,target:{pano:wrNextRound.target.pano,googlePanoId:wrNextRound.target.googlePanoId,lat:wrNextRound.target.lat,lng:wrNextRound.target.lng,heading:wrNextRound.target.heading}});}else{p2pHostConn=conn;p2pSend(conn,{type:'hello',player:profileForPlayer()});p2pSend(conn,{type:'state-request'});}});
+ if(previous&&previous!==conn){try{previous.close()}catch(e){}}
+ conn.on('open',()=>{
+  if(p2pRoomClosed||p2pConnections.get(conn.peer)!==conn)return;
+  if(!p2pHost){if(conn!==p2pHostConn)return;p2pSend(conn,{type:'hello',player:profileForPlayer()});}
+ });
  conn.on('data',msg=>{
-  if(!msg||typeof msg!=='object')return;
+  if(!msg||typeof msg!=='object'||p2pRoomClosed||p2pConnections.get(conn.peer)!==conn||(!p2pHost&&conn!==p2pHostConn))return;
   if(p2pHost){
    if(msg.type==='hello'){
     if(wrKickedPeers.has(conn.peer)){p2pSend(conn,{type:'kicked',message:'Has sido expulsado de esta sala.'});setTimeout(()=>{try{conn.close()}catch(e){}},180);return;}
-     if(players.length>=MAX_ROOM_PLAYERS){p2pSend(conn,{type:'error',message:'La sala está llena (máximo '+MAX_ROOM_PLAYERS+' jugadores).'});conn.close();return;}
+     if(!players.some(p=>p.uid===conn.peer)&&players.length>=MAX_ROOM_PLAYERS){p2pSend(conn,{type:'error',message:'La sala está llena (máximo '+MAX_ROOM_PLAYERS+' jugadores).'});conn.close();return;}
     const existing=players.find(p=>p.uid===conn.peer);
-    if(!existing)players.push({uid:conn.peer,...(msg.player||{}),score:0,mic:false});
+    if(!existing)players.push({...(msg.player||{}),uid:conn.peer,score:0,mic:false});
+     p2pSend(conn,p2pSnapshot());
+     if(wrNextRound?.target?.source)p2pSend(conn,{type:'next-preload',round:wrNextRound.round,source:wrNextRound.target.source,target:wrNextRound.target});
     hostPublish();
      // Enviar miniaturas solo una vez por invitado. El audio se abre
      // cuando alguien activa de verdad el micrófono; no al entrar cada persona.
@@ -2038,7 +2047,7 @@ function registerP2PConnection(conn){
        for(const other of p2pConnections.values())if(other!==conn&&other.open)wrSendAvatar(other,players.find(p=>p.uid===conn.peer));
      }
      if(voiceOn||voiceRelaySources.size)callPeerAudio(conn.peer);
-   }else if(msg.type==='state-request'){p2pSend(conn,p2pSnapshot());}
+   }else if(msg.type==='state-request'){if(players.some(p=>p.uid===conn.peer))p2pSend(conn,p2pSnapshot());}
     else if(msg.type==='chat'){
     const player=players.find(p=>p.uid===conn.peer);if(!player)return;
     messages.push({uid:conn.peer,name:player.name,flag:player.flag,nameColor:player.nameColor,gold:player.gold,text:String(msg.text||'').slice(0,300),createdAt:Date.now()});messages=messages.slice(-50);hostPublish();
@@ -2060,6 +2069,7 @@ function registerP2PConnection(conn){
     if(msg.type==='next-preload'){wrAcceptNextPreload(msg);return;}
    if(msg.type==='error'){wrJoinFailed(msg.message||'El anfitrión rechazó la conexión.');return;}
    if(msg.type==='state'){
+     if(!msg.currentRoom||!msg.players?.some(p=>p.uid===p2pUid))return;
      if(Number.isFinite(msg.revision)&&msg.revision<=wrGuestRevision)return;
      if(Number.isFinite(msg.revision))wrGuestRevision=msg.revision;
      wrLastHostState=Date.now();
@@ -2079,6 +2089,7 @@ function registerP2PConnection(conn){
   }
  });
  conn.on('close',()=>{
+  if(p2pRoomClosed||p2pConnections.get(conn.peer)!==conn)return;
   p2pConnections.delete(conn.peer);
   for(const prefix of ['in:','out:']){const key=prefix+conn.peer,c=p2pVoiceCalls.get(key);if(c){p2pVoiceCalls.delete(key);try{c.close()}catch(e){}}}
   if(p2pVoiceRetryTimers.has(conn.peer)){clearTimeout(p2pVoiceRetryTimers.get(conn.peer));p2pVoiceRetryTimers.delete(conn.peer);}
@@ -2142,12 +2153,12 @@ function setupPeerObject(peer){
   if(!p2pHost&&!currentRoom&&wrJoinTargetCode&&e?.type==='peer-unavailable'){wrJoinFailed(msg);return;}
   toast(msg);
  });
- peer.on('disconnected',()=>toast('Se perdió la conexión de señalización de la sala.'));
+ peer.on('disconnected',()=>{if(peer!==p2pPeer||p2pRoomClosed)return;setTimeout(()=>{if(peer===p2pPeer&&!peer.destroyed&&peer.disconnected)try{peer.reconnect()}catch(e){}},1200);});
 }
 async function createRoom(){
  if(!window.Peer){toast('No se ha podido cargar PeerJS. Comprueba tu conexión.');return;}
  cleanupRoom();const code=makeRoomCode();p2pHost=true;p2pRoomClosed=false;currentRoomId=code;
- p2pPeer=new Peer(code,{debug:0});setupPeerObject(p2pPeer);
+ p2pPeer=new Peer(code,wrRoomPeerOptions());setupPeerObject(p2pPeer);
  p2pPeer.on('open',id=>{
   p2pUid=id;user={uid:id};currentRoom={code,hostUid:id,status:'lobby',mode:$('createModeSelect')?.value==='elimination'?'elimination':'classic',mapsKey:wrMapsKey(),roundStatus:'waiting',round:1,rounds:5,duration:90,target:null,roundStartedAt:0,roundEndsAt:0};
   players=[{uid:id,...profileForPlayer(),score:0}];guesses=[];messages=[];isSolo=false;
@@ -2159,10 +2170,10 @@ async function joinRoom(code){
  code=(code||'').trim().toUpperCase();if(!/^[A-Z][A-Z0-9]{5}$/.test(code)){toast('El código debe tener 6 caracteres y empezar por una letra.');return;}
  if(!window.Peer){toast('No se ha podido cargar PeerJS. Comprueba tu conexión.');return;}
  cleanupRoom();p2pHost=false;p2pRoomClosed=false;currentRoomId=code;
- p2pPeer=new Peer(undefined,{debug:0});setupPeerObject(p2pPeer);
+ p2pPeer=new Peer(undefined,wrRoomPeerOptions());setupPeerObject(p2pPeer);
  p2pPeer.on('open',id=>{
   p2pUid=id;user={uid:id};
-  wrJoinTargetCode=code;wrJoinRetryCount=0;wrJoinNonce++;wrStartGuestSync();setScreen('lobby');
+  wrJoinTargetCode=code;wrJoinRetryCount=0;wrJoinNonce++;wrStartGuestSync();setScreen('lobby');$('roomCodeDisplay').textContent=code;$('lobbyPlayers').replaceChildren();$('startGameBtn').classList.add('hidden');
   $('lobbyState').textContent='CONECTANDO';$('lobbyHint').textContent='Buscando al anfitrión…';
   wrTryJoinConnection();
  });
