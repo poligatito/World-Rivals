@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>World Rivals V14.7.1</title>
-<meta name="worldrivals-version" content="14.7.1">
+<title>World Rivals V14.7.5</title>
+<meta name="worldrivals-version" content="14.7.5">
 <meta name="worldrivals-build-type" content="full-standalone-game">
-<meta name="worldrivals-map-patch" content="liberty-nonblocking-v14.6.1">
+<meta name="worldrivals-map-patch" content="liberty-vector-recovery-v14.7.2">
 <meta name="worldrivals-room-patch" content="supabase-v14.7">
-<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
+<link href="https://unpkg.com/maplibre-gl@5.24.1/dist/maplibre-gl.css" rel="stylesheet" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.1/dist/maplibre-gl.css'">
 
 
 <style>
@@ -524,6 +524,7 @@ button:focus-visible{outline:2px solid #70eafa;outline-offset:3px}
 .wr4-searchrow input:focus{outline:2px solid #39cee5}
 .wr4-art-shell{position:relative;margin:8px auto 11px;width:100%;max-width:195px;height:128px;border-radius:12px;overflow:hidden;box-shadow:0 10px 15px #0007,0 0 20px color-mix(in srgb,var(--wr4-accent,#38b5eb) 22%,transparent)}
 .wr4-art-svg{display:block;width:100%;height:100%}
+.avatar:has(> .wr-shop-avatar){border-radius:12%;background:#11192a;overflow:hidden;padding:0}.avatar>.wr-shop-avatar{display:block;width:100%;height:100%;border-radius:0}.wr4-equipped-aura>.wr-shop-avatar{border-radius:0}
 .wr4-tier .wr4-tier-meta{font-size:11px;min-height:27px}
 .wr4-tier-list{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:13px}
 .wr4-tier{min-height:296px;padding:13px;border:1px solid #455c76!important;background:linear-gradient(155deg,#1b273d,#101523)!important;transition:transform .17s ease,border-color .17s ease}
@@ -807,6 +808,8 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
   body.wr11-in-game .hud-panel,body.wr11-in-game .mini-map-dock{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
   .wr43-screen-enter{animation-duration:.45s!important}
 }
+</style><style>
+#wrOwnedSkinGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:9px;margin:10px 0 14px;max-height:340px;overflow:auto;padding:3px}.wr-owned-skin{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:8px;background:#1b2232;border:1px solid #536079;border-radius:10px;color:#eef4ff;cursor:pointer;text-align:center;font:inherit;font-size:12px;overflow:hidden}.wr-owned-skin svg{width:100%;height:auto;display:block}.wr-owned-skin.active{border-color:#5ee5cf;box-shadow:0 0 0 2px #5ee5cf55}.wr-owned-skin small{color:#a7bdca}.wr-edit-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:560px){.wr-edit-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}#wrPhotoStatus[data-skin-warning="1"]{color:#ff8792!important}#wrRemoveSkin{margin-bottom:10px}
 </style></head>
 <body><div id="wr47Load" class="wr47-load" role="status" aria-live="polite" aria-label="Cargando WORLD RIVALS">
  <div class="wr47-load-photo" aria-hidden="true"></div>
@@ -848,7 +851,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
   <button type="button" class="wr4-shop-entry wr4-shop-panel" data-wr4-open="shop"><span class="wr4-entry-icon">🛒</span><span><strong>TIENDA · 200 COSMÉTICOS</strong><small>Skins, auras, estelas, marcos y mucho más. Solo artículos prémium, sin premios comunes del World Pass.</small><span class="wr4-currency-chip wr4-top-coins">🪙 <span data-wr4-credits>0</span> CRÉDITOS</span></span></button>
  </section>
  <section class="feature-strip">
-<div class="feature"><div class="feature-icon">🌐</div><div><b>Salas online con Supabase</b><small>Conexión por código de sala sin depender de PeerJS para la partida.</small></div></div><div class="feature"><div class="feature-icon">⚡</div><div><b>OpenFreeMap Liberty original</b><small>Mapa y minimapa oficiales, sin mapa simplificado de respaldo.</small></div></div><div class="feature"><div class="feature-icon">🔥</div><div><b>Racha del Diario</b><small>Mantén tu racha diaria. El anfitrión conserva la precarga secuencial.</small></div></div>
+<div class="feature"><div class="feature-icon">🌐</div><div><b>Inventario de skins y protección de fotos</b><small>Elige tus skins compradas desde Personalizar, quítalas cuando quieras y evita capturas de la tienda como avatar.</small></div></div><div class="feature"><div class="feature-icon">⚡</div><div><b>OpenFreeMap Liberty original</b><small>MapLibre actualizado, recuperación de capas vectoriales y diagnóstico de conexión.</small></div></div><div class="feature"><div class="feature-icon">🔥</div><div><b>Racha del Diario</b><small>Mantén tu racha diaria. El anfitrión conserva la precarga secuencial.</small></div></div>
 </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -931,7 +934,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
     <button class="btn btn-secondary btn-small" type="button" id="randomAvatarBtn">🎲 Sorpréndeme</button>
   </aside>
   <section class="wr-editor-controls">
-   <div class="wr-edit-tabs" role="tablist" aria-label="Tipo de personaje"><button type="button" class="wr-edit-tab active" data-avatar-tab="classic" aria-selected="true">🧑 Clásico</button><button type="button" class="wr-edit-tab" data-avatar-tab="emoji" aria-selected="false">😎 Emojis</button><button type="button" class="wr-edit-tab" data-avatar-tab="photo" aria-selected="false">📸 Mi foto</button></div>
+   <div class="wr-edit-tabs" role="tablist" aria-label="Tipo de personaje"><button type="button" class="wr-edit-tab active" data-avatar-tab="classic" aria-selected="true">🧑 Clásico</button><button type="button" class="wr-edit-tab" data-avatar-tab="emoji" aria-selected="false">😎 Emojis</button><button type="button" class="wr-edit-tab" data-avatar-tab="photo" aria-selected="false">📸 Mi foto</button><button type="button" class="wr-edit-tab" data-avatar-tab="skin" aria-selected="false">🛡️ Skins</button></div>
    <div class="form-grid"><div class="form-row"><label for="profileName">Nombre de jugador</label><input id="profileName" class="field" maxlength="18" placeholder="Tu nick"></div><div class="form-row"><label for="profileFlag">Tu bandera</label><select id="profileFlag" class="field"></select></div></div>
    <div id="wrClassicOptions" class="wr-mode-options">
     <div class="wr-edit-caption">✦ APARIENCIA</div>
@@ -942,6 +945,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
    </div>
    <div id="wrEmojiOptions" class="wr-mode-options hidden"><div class="wr-edit-caption">✦ ESCOGE TU EMOJI</div><div id="wrEmojiGrid" class="wr-emoji-grid" role="group" aria-label="Elige un emoji"></div><div class="form-row"><label for="profileEmojiCustom">¿Otro emoji? Escríbelo aquí</label><input class="field" id="profileEmojiCustom" maxlength="20" placeholder="Ej. 🦊, 👻, 🎮" autocomplete="off"><small class="muted">Admite emojis combinados; se mostrarán en tu personaje.</small></div></div>
    <div id="wrPhotoOptions" class="wr-mode-options hidden"><div class="wr-edit-caption">✦ PERSONALIZA CON UNA FOTO</div><label class="wr-upload-box" for="avatarPhotoFile">📷 <strong>Elegir foto desde tu dispositivo</strong><small>JPG, PNG, WebP · hasta 12 MB · se comprime antes de guardar</small></label><input id="avatarPhotoFile" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" class="wr-visually-hidden"><div id="wrPhotoTools" class="hidden"><div class="wr-form-slider"><label for="avatarZoom">Zoom de la imagen <output id="avatarZoomValue">100%</output></label><input type="range" id="avatarZoom" min="100" max="300" step="5" value="100"></div><div class="wr-form-slider"><label for="avatarPhotoX">Mover horizontalmente</label><input type="range" id="avatarPhotoX" min="-100" max="100" step="5" value="0"></div><div class="wr-form-slider"><label for="avatarPhotoY">Mover verticalmente</label><input type="range" id="avatarPhotoY" min="-100" max="100" step="5" value="0"></div><button id="avatarClearPhoto" type="button" class="btn btn-secondary btn-small">🗑 Quitar foto</button></div><p id="wrPhotoStatus" class="tiny muted">Tu foto se guarda en este navegador. Si entras a una sala, los otros jugadores podrán verla.</p></div>
+   <div id="wrSkinOptions" class="wr-mode-options hidden"><div class="wr-edit-caption">✦ MIS SKINS</div><p class="tiny muted">Selecciona una skin comprada y pulsa Guardar. Para quitarla, usa Clásico, Emojis, Mi foto o el botón de abajo.</p><div id="wrOwnedSkinGrid"></div><button type="button" id="wrRemoveSkin" class="btn btn-secondary btn-small">Quitar skin · volver al avatar</button></div>
    <div class="wr-edit-caption">✦ ESTILO GLOBAL</div>
    <div class="form-grid"><div class="form-row"><label for="avatarBg">Fondo</label><input id="avatarBg" class="field wr-color-field" type="color" value="#20263b"></div><div class="form-row"><label for="avatarFrame">Marco / brillo</label><input id="avatarFrame" class="field wr-color-field" type="color" value="#55ddec"></div></div>
    <div class="form-grid"><div class="form-row"><label for="avatarPattern">Efecto del fondo</label><select id="avatarPattern" class="field"><option value="none">Liso</option><option value="stars">Estrellas</option><option value="dots">Puntos</option><option value="grid">Rejilla gamer</option><option value="rays">Rayos</option></select></div><div class="form-row"><label for="avatarBadge">Insignia</label><select id="avatarBadge" class="field"><option value="none">Ninguna</option><option value="bolt">⚡ Rayo</option><option value="star">⭐ Estrella</option><option value="fire">🔥 Fuego</option><option value="game">🎮 Gamer</option><option value="crown">👑 Corona</option></select></div></div>
@@ -1010,13 +1014,15 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 // V8.2: one lightweight avatar renderer for classic, emoji, and photo identities.
 // Images are downscaled to 192x192 before persistence or peer transfer.
 const WR_EMOJI_CHOICES=['😎','😀','😂','🥳','😈','🤖','👻','👽','🤠','🥷','🦊','🐱','🐺','🐸','🦁','🐼','🐯','🐵','🐲','🦄','🦖','🐧','🐢','🐙','🦉','🎮','🔥','⚡','💎','🌌','🚀','🌍','👑','⭐','💀','🥶','😱','❤️','🍕','🏎️','🍀','🎃','🧠','🛸','💥','🦇','🕹️','🐉'];
-const WR_ALLOWED_MODES=new Set(['classic','emoji','photo']);
-let workingAvatarMode='classic',photoImage=null,workingPhotoData='',photoTask=0,avatarRenderId=0,avatarEditing=false;
+const WR_ALLOWED_MODES=new Set(['classic','emoji','photo','skin']);
+let workingAvatarMode='classic',photoImage=null,workingPhotoData='',photoTask=0,avatarRenderId=0,avatarEditing=false,workingSkinId='',previousAvatarMode='classic',photoScanId=0,photoScanBusy=false;
 const colorOr=(p,k,def)=>safeColor(p?.[k],def);
 function safeAvatarPhoto(value){return typeof value==='string'&&value.length<115000&&/^data:image\/(?:webp|jpeg|png);base64,[a-z0-9+/=]+$/i.test(value)?value:'';}
 function saneEnum(v,allowed,fallback){return allowed.includes(v)?v:fallback;}
 function loadSaved(){try{const obj=JSON.parse(localStorage.getItem('wr_profile')||'{}');profile={...defaultProfile,...obj};if(!WR_ALLOWED_MODES.has(profile.avatarMode))profile.avatarMode='classic';profile.photoData=safeAvatarPhoto(profile.photoData);}catch(e){profile={...defaultProfile};}}
-function avatarSvg(p=profile){
+function wrCosmeticIds(value){const id=value?.skin;return typeof id==='string'&&/^wr4-shop-skin-(0[1-9]|1[0-9]|2[0-5])$/.test(id)?{skin:id}:{};}
+function avatarSvg(p=profile){const skin=window.WR4?.renderSkin?.(p);return skin||avatarSvgBase(p);}
+function avatarSvgBase(p=profile){
  const mode=WR_ALLOWED_MODES.has(p.avatarMode)?p.avatarMode:'classic';
  const skin=colorOr(p,'skin','#f5c9a5'),hair=colorOr(p,'hair','#34251f'),shirt=colorOr(p,'shirt','#e34250'),accent=colorOr(p,'shirtAccent','#191e30');
  const bg=colorOr(p,'avatarBg','#20263b'),frame=colorOr(p,'avatarFrame','#55ddec'),badge=saneEnum(p.avatarBadge,['none','bolt','star','fire','game','crown'],'none');
@@ -1076,18 +1082,21 @@ function avatarSvg(p=profile){
  return `<svg role="img" aria-label="Avatar WORLD RIVALS" viewBox="0 0 96 96" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><clipPath id="${uid}"><circle cx="48" cy="48" r="43"/></clipPath></defs><circle cx="48" cy="48" r="46" fill="${bg}"/><g clip-path="url(#${uid})">${shapes.join('')}${contents}</g><circle cx="48" cy="48" r="45" fill="none" stroke="${frame}" stroke-width="3"/>${badgePart}</svg>`;
 }
 function nameHTML(p){return p.gold?`<span class="gold-name">${esc(p.name)}</span>`:`<span class="normal-name" style="color:${safeColor(p.nameColor)}">${esc(p.name)}</span>`}
-function renderProfile(){const a=avatarSvg(profile);for(const id of ['topAvatar','homeAvatar','profilePreview'])if($(id))$(id).innerHTML=a;for(const id of ['topName','homeName','previewName'])if($(id))$(id).textContent=profile.name;for(const id of ['homeName','previewName'])if($(id)){$(id).className=profile.gold?'gold-name':'normal-name';$(id).style.color=profile.gold?'':safeColor(profile.nameColor);}if($('homeFlag'))$('homeFlag').textContent=profile.flag;if($('previewFlag'))$('previewFlag').textContent=profile.flag;}
+function renderProfile(){for(const id of ['topAvatar','homeAvatar','profilePreview'])if($(id))$(id).innerHTML=avatarSvg(profile);for(const id of ['topName','homeName','previewName'])if($(id))$(id).textContent=profile.name;for(const id of ['homeName','previewName'])if($(id)){$(id).className=profile.gold?'gold-name':'normal-name';$(id).style.color=profile.gold?'':safeColor(profile.nameColor);}if($('homeFlag'))$('homeFlag').textContent=profile.flag;if($('previewFlag'))$('previewFlag').textContent=profile.flag;}
 function fillFlags(){const s=$('profileFlag');s.innerHTML=FLAGS.map(([f,n])=>`<option value="${f}">${f} ${n}</option>`).join('')}
-function switchAvatarTab(mode){if(!WR_ALLOWED_MODES.has(mode))return;workingAvatarMode=mode;for(const id of ['wrClassicOptions','wrEmojiOptions','wrPhotoOptions'])$(id)?.classList.toggle('hidden',id!==({classic:'wrClassicOptions',emoji:'wrEmojiOptions',photo:'wrPhotoOptions'}[mode]));document.querySelectorAll('[data-avatar-tab]').forEach(b=>{const yes=b.dataset.avatarTab===mode;b.classList.toggle('active',yes);b.setAttribute('aria-selected',String(yes));});previewFromInputs()}
+function switchAvatarTab(mode){if(!WR_ALLOWED_MODES.has(mode))return;if(mode==='skin'&&workingAvatarMode!=='skin')previousAvatarMode=workingAvatarMode;workingAvatarMode=mode;for(const id of ['wrClassicOptions','wrEmojiOptions','wrPhotoOptions','wrSkinOptions'])$(id)?.classList.toggle('hidden',id!==({classic:'wrClassicOptions',emoji:'wrEmojiOptions',photo:'wrPhotoOptions',skin:'wrSkinOptions'}[mode]));if(mode==='skin')window.WR4?.drawSkinEditor?.();document.querySelectorAll('[data-avatar-tab]').forEach(b=>{const yes=b.dataset.avatarTab===mode;b.classList.toggle('active',yes);b.setAttribute('aria-selected',String(yes));});previewFromInputs()}
 function setEmojiSelection(emoji){if(!$('profileEmojiCustom'))return;$('profileEmojiCustom').value=emoji;document.querySelectorAll('[data-avatar-emoji]').forEach(btn=>btn.classList.toggle('active',btn.dataset.avatarEmoji===emoji));previewFromInputs();}
 function initAvatarEditor(){if(!$('wrEmojiGrid'))return;$('wrEmojiGrid').innerHTML=WR_EMOJI_CHOICES.map(e=>`<button type="button" class="wr-emoji-choice" data-avatar-emoji="${esc(e)}" aria-label="Emoji ${esc(e)}">${esc(e)}</button>`).join('');}
-function readAvatarInputs(){return {name:($('profileName').value||'Invitado'),flag:$('profileFlag').value,nameColor:$('nameColor').value,gold:profile.gold,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,shirtAccent:$('shirtAccentColor').value,eyes:$('eyesStyle').value,mouth:$('mouthStyle').value,accessory:$('accessory').value,avatarMode:workingAvatarMode,emoji:Array.from($('profileEmojiCustom').value.trim()||'😎').slice(0,10).join(''),avatarBg:$('avatarBg').value,avatarFrame:$('avatarFrame').value,avatarPattern:$('avatarPattern').value,avatarBadge:$('avatarBadge').value,photoData:workingPhotoData,photoZoom:Number($('avatarZoom').value),photoX:Number($('avatarPhotoX').value),photoY:Number($('avatarPhotoY').value)};}
-function openProfile(){avatarEditing=true;photoImage=null;workingPhotoData=safeAvatarPhoto(profile.photoData);const values={profileName:profile.name,profileFlag:profile.flag,nameColor:profile.nameColor,skinColor:profile.skin,hairStyle:profile.hairStyle,hairColor:profile.hair,shirtColor:profile.shirt,shirtAccentColor:profile.shirtAccent,eyesStyle:profile.eyes,mouthStyle:profile.mouth,accessory:profile.accessory,profileEmojiCustom:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,avatarZoom:profile.photoZoom,avatarPhotoX:profile.photoX,avatarPhotoY:profile.photoY};for(const [key,val] of Object.entries(values))if($(key))$(key).value=val;$('avatarPhotoFile').value='';$('wrPhotoStatus').textContent=workingPhotoData?'Foto lista. Puedes sustituirla o guardar.':'Tu foto se guarda en este navegador y se comparte con otros jugadores al entrar en salas.';$('wrPhotoTools').classList.toggle('hidden',!workingPhotoData);$('profileModal').classList.remove('hidden');switchAvatarTab(profile.avatarMode||'classic');}
+function readAvatarInputs(){return {name:($('profileName').value||'Invitado'),flag:$('profileFlag').value,nameColor:$('nameColor').value,gold:profile.gold,skin:$('skinColor').value,hairStyle:$('hairStyle').value,hair:$('hairColor').value,shirt:$('shirtColor').value,shirtAccent:$('shirtAccentColor').value,eyes:$('eyesStyle').value,mouth:$('mouthStyle').value,accessory:$('accessory').value,avatarMode:workingAvatarMode,cosmetics:workingAvatarMode==='skin'&&window.WR4?.ownsSkin?.(workingSkinId)?{skin:workingSkinId}:{},emoji:Array.from($('profileEmojiCustom').value.trim()||'😎').slice(0,10).join(''),avatarBg:$('avatarBg').value,avatarFrame:$('avatarFrame').value,avatarPattern:$('avatarPattern').value,avatarBadge:$('avatarBadge').value,photoData:workingPhotoData,photoZoom:Number($('avatarZoom').value),photoX:Number($('avatarPhotoX').value),photoY:Number($('avatarPhotoY').value)};}
+function openProfile(){avatarEditing=true;photoScanId++;photoScanBusy=false;photoImage=null;workingSkinId=window.WR4?.equippedSkin?.()||'';previousAvatarMode=profile.skinPreviousMode||'classic';workingAvatarMode=profile.avatarMode;workingPhotoData=safeAvatarPhoto(profile.photoData);const values={profileName:profile.name,profileFlag:profile.flag,nameColor:profile.nameColor,skinColor:profile.skin,hairStyle:profile.hairStyle,hairColor:profile.hair,shirtColor:profile.shirt,shirtAccentColor:profile.shirtAccent,eyesStyle:profile.eyes,mouthStyle:profile.mouth,accessory:profile.accessory,profileEmojiCustom:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,avatarZoom:profile.photoZoom,avatarPhotoX:profile.photoX,avatarPhotoY:profile.photoY};for(const [key,val] of Object.entries(values))if($(key))$(key).value=val;$('avatarPhotoFile').value='';$('wrPhotoStatus').textContent=workingPhotoData?'Foto lista. Puedes sustituirla o guardar.':'Tu foto se guarda en este navegador y se comparte con otros jugadores al entrar en salas.';$('wrPhotoTools').classList.toggle('hidden',!workingPhotoData);$('profileModal').classList.remove('hidden');switchAvatarTab(workingSkinId?'skin':(profile.avatarMode==='skin'?'classic':profile.avatarMode||'classic'));}
 function previewFromInputs(){if(!avatarEditing)return;const p=readAvatarInputs();$('profilePreview').innerHTML=avatarSvg(p);$('previewFlag').textContent=p.flag;$('previewName').textContent=p.name;$('previewName').className=p.gold?'gold-name':'normal-name';$('previewName').style.color=p.gold?'':p.nameColor;$('avatarZoomValue').textContent=p.photoZoom+'%';document.querySelectorAll('[data-avatar-emoji]').forEach(el=>el.classList.toggle('active',el.dataset.avatarEmoji===p.emoji));}
 function cropAvatarPhoto(){if(!photoImage||!avatarEditing)return;try{const can=document.createElement('canvas');can.width=can.height=192;const ctx=can.getContext('2d',{alpha:false});if(!ctx)throw Error('Sin soporte de imágenes');const w=photoImage.naturalWidth,h=photoImage.naturalHeight,zoom=Math.max(1,Math.min(3,Number($('avatarZoom').value)/100)),side=Math.min(w,h)/zoom;const posX=Math.max(-100,Math.min(100,Number($('avatarPhotoX').value)))/100,posY=Math.max(-100,Math.min(100,Number($('avatarPhotoY').value)))/100;const sx=(w-side)*(posX+1)/2,sy=(h-side)*(posY+1)/2;ctx.drawImage(photoImage,sx,sy,side,side,0,0,192,192);let data=can.toDataURL('image/webp',.72);if(!data.startsWith('data:image/webp'))data=can.toDataURL('image/jpeg',.72);if(data.length>110000)data=can.toDataURL('image/jpeg',.55);if(!safeAvatarPhoto(data))throw Error('La foto es demasiado grande');workingPhotoData=data;$('wrPhotoTools').classList.remove('hidden');$('wrPhotoStatus').textContent='✅ Imagen optimizada a 192×192 para jugar sin lag.';previewFromInputs();}catch(e){toast('No se pudo procesar la foto: '+e.message)}}
 function requestPhotoCrop(){clearTimeout(photoTask);photoTask=setTimeout(cropAvatarPhoto,110)}
-function loadAvatarPhoto(file){if(!file)return;if(!/^image\/(jpeg|png|webp|heic|heif)$/.test(file.type)||file.size>12*1024*1024){toast('Selecciona JPG, PNG o WebP de hasta 12 MB.');return;}const objectUrl=URL.createObjectURL(file);const img=new Image();img.onload=()=>{URL.revokeObjectURL(objectUrl);if(!avatarEditing)return;photoImage=img;$('avatarZoom').value=100;$('avatarPhotoX').value=0;$('avatarPhotoY').value=0;cropAvatarPhoto()};img.onerror=()=>{URL.revokeObjectURL(objectUrl);toast('No se pudo leer la imagen. Prueba JPG, PNG o WebP.')};img.src=objectUrl;}
-function saveAvatarEditor(){const p=readAvatarInputs();if(p.avatarMode==='photo'&&!safeAvatarPhoto(p.photoData)){toast('Selecciona una foto antes de guardar o usa otro tipo de avatar.');return;}const previous={...profile};profile={...profile,...p};if(saveProfile()===false){profile=previous;renderProfile();return;}avatarEditing=false;photoImage=null;$('profileModal').classList.add('hidden');toast('¡Personaje ULTRA guardado! 🎨');}
+function wrPhotoNotice(message,warning=false){const el=$('wrPhotoStatus');el.textContent=message;el.dataset.skinWarning=warning?'1':'0';}
+function wrImageFromData(data){return new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=data;});}
+async function loadAvatarPhoto(file){if(!file)return;if(!/^image\/(jpeg|png|webp|heic|heif)$/.test(file.type)||file.size>12*1024*1024){toast('Selecciona JPG, PNG o WebP de hasta 12 MB.');return;}const job=++photoScanId;photoScanBusy=true;const objectUrl=URL.createObjectURL(file);wrPhotoNotice('Comprobando si la imagen contiene una skin de la tienda…');try{const img=await wrImageFromData(objectUrl);const match=await window.WR4.detectSkinPhoto(img);if(job!==photoScanId||!avatarEditing)return;if(match){$('avatarPhotoFile').value='';wrPhotoNotice('⛔ La foto contiene una skin de la tienda. Equípala desde Skins si la tienes comprada.',true);toast('No se admiten capturas de skins como foto.');return;}photoImage=img;$('avatarZoom').value=100;$('avatarPhotoX').value=0;$('avatarPhotoY').value=0;cropAvatarPhoto();wrPhotoNotice('✅ Imagen comprobada y optimizada.');}catch(e){if(job===photoScanId&&avatarEditing){$('avatarPhotoFile').value='';wrPhotoNotice('No se pudo comprobar la imagen. Prueba JPG, PNG o WebP.',true);}}finally{URL.revokeObjectURL(objectUrl);if(job===photoScanId)photoScanBusy=false;}}
+async function saveAvatarEditor(){if(photoScanBusy){toast('Espera a que termine la comprobación de la foto.');return;}if(workingAvatarMode==='photo'&&photoImage){clearTimeout(photoTask);cropAvatarPhoto();}const p=readAvatarInputs();if(p.avatarMode==='skin'&&!p.cosmetics.skin){toast('Selecciona una skin que tengas comprada.');return;}if(p.avatarMode==='photo'){if(!safeAvatarPhoto(p.photoData)){toast('Selecciona una foto antes de guardar o usa otro tipo de avatar.');return;}const job=++photoScanId;photoScanBusy=true;try{wrPhotoNotice('Comprobando el recorte final…');const match=await window.WR4.detectSkinPhoto(await wrImageFromData(p.photoData));if(job!==photoScanId||!avatarEditing||workingAvatarMode!=='photo')return;if(match){wrPhotoNotice('⛔ Este recorte coincide con una skin. Elige otra foto o usa Skins.',true);toast('No se admiten capturas de skins como foto.');return;}}catch(e){wrPhotoNotice('No se pudo comprobar la foto. Inténtalo otra vez.',true);return;}finally{if(job===photoScanId)photoScanBusy=false;}}
+const previous={...profile};p.skinPreviousMode=p.avatarMode==='skin'?(previousAvatarMode==='skin'?'classic':previousAvatarMode):p.avatarMode;profile={...profile,...p};if(saveProfile()===false){profile=previous;renderProfile();return;}window.WR4?.commitSkin?.(p.cosmetics.skin||'');avatarEditing=false;photoScanId++;photoImage=null;$('profileModal').classList.add('hidden');toast('¡Personaje ULTRA guardado! 🎨');}
 function syncGuessMarkers(){
   const pos=myGuess?[myGuess.lng,myGuess.lat]:null;
   if(pos){
@@ -1127,7 +1136,7 @@ function showTargetOnMap(guess){
 function distanceKm(a,b){const rad=x=>x*Math.PI/180,R=6371,dLat=rad(b.lat-a.lat),dLng=rad(b.lng-a.lng),x=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
 function pointsFor(km){return Math.round(5000*Math.pow(Math.max(0,1-km/20000),10))}
 function formatKm(km){return km<1?Math.round(km*1000)+' m':km.toLocaleString('es-ES',{maximumFractionDigits:1})+' km'}
-function profileForPlayer(){return {name:profile.name,flag:profile.flag,nameColor:profile.nameColor,gold:profile.gold,avatar:{skin:profile.skin,hairStyle:profile.hairStyle,hair:profile.hair,shirt:profile.shirt,shirtAccent:profile.shirtAccent,accessory:profile.accessory,eyes:profile.eyes,mouth:profile.mouth,avatarMode:profile.avatarMode,emoji:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,photoData:profile.avatarMode==='photo'?safeAvatarPhoto(profile.photoData):''},score:0,mic:voiceOn,joinedAt:Date.now()}}
+function profileForPlayer(){return {name:profile.name,flag:profile.flag,nameColor:profile.nameColor,gold:profile.gold,avatar:{skin:profile.skin,hairStyle:profile.hairStyle,hair:profile.hair,shirt:profile.shirt,shirtAccent:profile.shirtAccent,accessory:profile.accessory,eyes:profile.eyes,mouth:profile.mouth,avatarMode:profile.avatarMode,cosmetics:wrCosmeticIds(profile.cosmetics),emoji:profile.emoji,avatarBg:profile.avatarBg,avatarFrame:profile.avatarFrame,avatarPattern:profile.avatarPattern,avatarBadge:profile.avatarBadge,photoData:profile.avatarMode==='photo'?safeAvatarPhoto(profile.photoData):''},score:0,mic:voiceOn,joinedAt:Date.now()}}
 function paintPlayer(p){const av=avatarSvg({...defaultProfile,...p.avatar});return `<span class="avatar">${av}</span>`}
 function playerRow(p,host=false){return `<div class="player-row">${paintPlayer(p)}<div class="player-meta"><b>${p.flag||'🌐'} ${nameHTML(p)}</b><small>${p.uid===user?.uid?'Tú':'En la sala'}</small></div>${host?'<span class="host-mark">ANFITRIÓN</span>':''}</div>`}
 let loadedRoundKey='';
@@ -1312,12 +1321,13 @@ function setScreen(s){
 function updateConnection(){
  const el=$('connectionBadge');if(el){const enabled=Boolean(wrMapsKey()||currentRoom?.googleCoords);el.textContent=enabled?'● Google Street View V8.6 · coordenadas nuevas':'● Street View V8.6 · DEMO 9 calles';el.style.color=enabled?'#63dfaa':'#ffc875';}
 }
-/* V14.7.1: mapa oficial Liberty sin SVG ni estilos sustitutivos. */
+/* V14.7.2: mapa oficial Liberty sin SVG ni estilos sustitutivos. */
 const WR_PIN_MAP_STYLE='https://tiles.openfreemap.org/styles/liberty';
 let wrMapLibraryPromise=null;
 const wrMapPending={guessMap:null,miniGuessMap:null};
 const wrMapGeneration={guessMap:0,miniGuessMap:0};
 const wrMapBusy={guessMap:false,miniGuessMap:false};
+const wrMapLoaded={guessMap:false,miniGuessMap:false};
 function wrMapStatus(id,message,canRetry=false){
  const root=$(id);if(!root)return;
  let note=root.querySelector('.wr-map-status');
@@ -1331,7 +1341,7 @@ function wrLoadMapLibre(){
  if(window.maplibregl)return Promise.resolve(true);
  if(wrMapLibraryPromise)return wrMapLibraryPromise;
  wrMapLibraryPromise=new Promise(resolve=>{
-  const urls=['https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js','https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'];
+  const urls=['https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.1/dist/maplibre-gl.js','https://unpkg.com/maplibre-gl@5.24.1/dist/maplibre-gl.js'];
   let index=0;
   function next(){
    if(window.maplibregl){resolve(true);return;}
@@ -1352,10 +1362,11 @@ function wrAssignMap(id,map){if(id==='guessMap')guessMap=map;else miniGuessMap=m
 function wrResolveMap(ok){if(resolveMapReady){const cb=resolveMapReady;resolveMapReady=null;mapReadyPromise=null;cb(ok);}}
 function wrDiscardPending(id){
  const pending=wrMapPending[id];wrMapPending[id]=null;
- if(pending){clearTimeout(pending.timer);try{pending.map?.remove()}catch(e){console.warn('MapLibre cleanup',e)}pending.layer.remove();}
+ if(pending){clearInterval(pending.timer);clearTimeout(pending.retryTimer);try{pending.map?.remove()}catch(e){console.warn('MapLibre cleanup',e)}pending.layer.remove();}
+ if(id==='guessMap'){guessMarker=null;targetMarker=null;mapsReady=false;}else{miniGuessMarker=null;miniTargetMarker=null;}
+ wrAssignMap(id,null);wrMapLoaded[id]=false;
 }
 function wrRetryMap(id){
- if(wrMapObject(id))return;
  ++wrMapGeneration[id];wrDiscardPending(id);wrMapBusy[id]=false;wrInitMap(id);
 }
 function wrInitMap(id){
@@ -1367,39 +1378,61 @@ function wrInitMap(id){
   if(token!==wrMapGeneration[id])return;
   if(!window.maplibregl){fail('No se pudo cargar MapLibre.');return;}
   const layer=document.createElement('div');layer.className='wr-map-online-layer';root.prepend(layer);
-  const pending={map:null,layer,timer:null};wrMapPending[id]=pending;
+  const pending={map:null,layer,timer:null,retryTimer:null,started:Date.now(),retries:0,error:'',lastCheck:0};wrMapPending[id]=pending;
   try{
-   // Direct official style, no alternate cartography or style overrides.
-   const map=new maplibregl.Map({container:layer,style:WR_PIN_MAP_STYLE,center:[0,20],zoom:1.35,attributionControl:true,dragRotate:false,pitchWithRotate:false});
-   pending.map=map;
+   const map=new maplibregl.Map({container:layer,style:WR_PIN_MAP_STYLE,center:[0,20],zoom:1.35,attributionControl:true,dragRotate:false,pitchWithRotate:false,maxPitch:0,renderWorldCopies:true,refreshExpiredTiles:true});
+   pending.map=map;wrAssignMap(id,map);
    if(id==='guessMap')map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-   map.on('click',ev=>{if(wrMapObject(id)===map)placeGuess(ev.lngLat)});
-   // Promote on actual vector geometry, not on the entire map becoming idle.
-   // Slow glyphs, sprites and unrelated tile errors must not hide the real map.
-   function promote(){
-    if(token!==wrMapGeneration[id]||wrMapPending[id]!==pending)return;
-    if(!root.clientWidth||!root.clientHeight)return;
-    try{if(!map.queryRenderedFeatures().some(f=>f.source&&f.geometry))return;}catch(e){return;}
-    clearTimeout(pending.timer);wrMapPending[id]=null;wrMapBusy[id]=false;
-    map.off('render',promote);map.off('load',promote);map.off('idle',promote);
-    wrAssignMap(id,map);wrMapStatus(id,'');map.resize();
-    syncGuessMarkers();if(currentRoom?.roundStatus==='results'||currentRoom?.status==='finished')syncTargetMarkers();
-    if(id==='guessMap'){mapsReady=true;wrResolveMap(true);updateConnection();if(streetFullscreen)initMiniMap();}
+   map.on('click',ev=>{if(wrMapObject(id)===map&&wrMapLoaded[id])placeGuess(ev.lngLat)});
+   function active(){return token===wrMapGeneration[id]&&wrMapPending[id]===pending;}
+   function hasVectors(){
+    try{
+     const style=map.getStyle();if(!style?.sources)return false;
+     const ids=Object.keys(style.sources).filter(k=>style.sources[k].type==='vector');
+     if(!ids.length)return false;
+     // Do not mistake raster relief for the actual Liberty vector map.
+     return map.queryRenderedFeatures().some(f=>ids.includes(f.source)&&f.geometry);
+    }catch(e){return false;}
    }
-   map.on('render',promote);map.on('load',promote);map.on('idle',promote);
-   map.on('error',e=>{if(token===wrMapGeneration[id])console.warn('OpenFreeMap Liberty:',e?.error||e)});
-   // Leave the original map visible and loading. Manual retry is offered, not forced.
-   pending.timer=setTimeout(()=>{if(wrMapPending[id]===pending){wrMapStatus(id,'Liberty tarda en cargar. Comprueba la conexión.',true);if(id==='guessMap')wrResolveMap(false);}},30000);
-  }catch(e){console.warn('No se pudo iniciar Liberty',e);fail('No se pudo iniciar Liberty. Comprueba WebGL y la conexión.');}
+   function check(){
+    if(!active()||!root.clientWidth||!root.clientHeight)return;
+    if(hasVectors()){
+     if(!wrMapLoaded[id]){
+      wrMapLoaded[id]=true;wrMapBusy[id]=false;clearTimeout(pending.retryTimer);wrMapStatus(id,'');
+      syncGuessMarkers();if(currentRoom?.roundStatus==='results'||currentRoom?.status==='finished')syncTargetMarkers();
+      if(id==='guessMap'){mapsReady=true;wrResolveMap(true);updateConnection();if(streetFullscreen)initMiniMap();}
+     }
+     return;
+    }
+    if(wrMapLoaded[id])return;
+    const age=Date.now()-pending.started;
+    if(age>15000&&pending.retries===0&&!/403|429|CORS/i.test(pending.error)){
+     pending.retries++;pending.started=Date.now();pending.error='';wrMapStatus(id,'Reconectando con Liberty…');
+     try{map.resize();map.setStyle(WR_PIN_MAP_STYLE,{diff:false});}catch(e){pending.error=String(e.message||e);}
+    }else if(age>22000||(/403|429|CORS/i.test(pending.error)&&age>4000)){
+     const msg=pending.error?('Liberty: '+pending.error.slice(0,150)):'Liberty no ha recibido las capas de países y carreteras.';
+     wrMapStatus(id,msg,true);if(id==='guessMap')wrResolveMap(false);
+    }
+   }
+   map.on('error',e=>{
+    if(!active())return;
+    const err=e?.error||e;pending.error=String(err?.message||err||'Error de conexión');
+    console.warn('[World Rivals] OpenFreeMap Liberty:',err);
+   });
+   map.on('style.load',()=>{if(active()){map.resize();check();}});
+   map.on('sourcedata',()=>{if(active()&&!wrMapLoaded[id]&&Date.now()-pending.lastCheck>500){pending.lastCheck=Date.now();check();}});
+   map.on('idle',check);
+   pending.timer=setInterval(()=>{if(!active())return;if(wrMapLoaded[id]){clearInterval(pending.timer);return;}check();},1000);
+   requestAnimationFrame(()=>{if(active())map.resize();});
+  }catch(e){console.warn('No se pudo iniciar Liberty',e);fail('No se pudo iniciar Liberty: '+String(e.message||e).slice(0,140));}
  };
  if(window.maplibregl)begin();else wrLoadMapLibre().then(ok=>{if(token!==wrMapGeneration[id])return;if(ok)begin();else fail('No se pudo descargar MapLibre.');});
 }
 function initGuessMap(){wrInitMap('guessMap')}
 function initMiniMap(){wrInitMap('miniGuessMap')}
-// Start loading the library before the first round, without requesting any map tiles yet.
 wrLoadMapLibre();
-window.addEventListener('online',()=>{for(const id of ['guessMap','miniGuessMap'])if(!wrMapObject(id))wrRetryMap(id)});
-if(window.ResizeObserver){const wrMapResizeObserver=new ResizeObserver(entries=>{for(const entry of entries){const id=entry.target.id;if(!entry.contentRect.width||!entry.contentRect.height)continue;try{wrMapObject(id)?.resize();wrMapPending[id]?.map?.resize();if(!wrMapObject(id)&&!wrMapBusy[id])wrInitMap(id)}catch(e){console.warn('Map resize',e)}}});for(const id of ['guessMap','miniGuessMap'])if($(id))wrMapResizeObserver.observe($(id));}
+window.addEventListener('online',()=>{for(const id of ['guessMap','miniGuessMap'])if(!wrMapLoaded[id])wrRetryMap(id)});
+if(window.ResizeObserver){const wrMapResizeObserver=new ResizeObserver(entries=>{for(const entry of entries){const id=entry.target.id;if(!entry.contentRect.width||!entry.contentRect.height)continue;try{if(wrMapObject(id))wrMapObject(id).resize();else if(!wrMapBusy[id])wrInitMap(id)}catch(e){console.warn('Map resize',e)}}});for(const id of ['guessMap','miniGuessMap'])if($(id))wrMapResizeObserver.observe($(id));}
 
 function updateFullscreenVisuals(next){
   streetFullscreen=!!next;
@@ -1440,11 +1473,11 @@ function updateFullscreenVisuals(next){
    if(streetFullscreen!==active)updateFullscreenVisuals(active);
  });
 async function waitForMap(){
- initGuessMap();if(guessMap)return true;
- await new Promise(resolve=>requestAnimationFrame(resolve));initGuessMap();if(guessMap)return true;
+ initGuessMap();if(wrMapLoaded.guessMap)return true;
+ await new Promise(resolve=>requestAnimationFrame(resolve));initGuessMap();if(wrMapLoaded.guessMap)return true;
  if(!wrMapBusy.guessMap)return false;
  if(!mapReadyPromise)mapReadyPromise=new Promise(resolve=>{resolveMapReady=resolve;});
- return mapReadyPromise;
+ return Promise.race([mapReadyPromise,new Promise(resolve=>setTimeout(()=>resolve(false),45000))]);
 }
 function loadMaps(){initGuessMap();updateConnection()}
 /* Semillas mundiales aproximadas para acelerar búsqueda; el juego SIEMPRE genera
@@ -2083,7 +2116,7 @@ function wrCloudProfile(p){
  for(const k of ['gold','mic'])if(typeof p[k]==='boolean')q[k]=p[k];
  if(p.avatar&&typeof p.avatar==='object'){
   q.avatar={};for(const k of ['skin','hairStyle','hair','shirt','shirtAccent','accessory','eyes','mouth','avatarMode','emoji','avatarBg','avatarFrame','avatarPattern','avatarBadge'])if(typeof p.avatar[k]==='string')q.avatar[k]=p.avatar[k].slice(0,64);
-  q.avatar.photoData='';if(q.avatar.avatarMode==='photo')q.avatar.avatarMode='emoji';
+  q.avatar.cosmetics=wrCosmeticIds(p.avatar.cosmetics);q.avatar.photoData='';if(q.avatar.avatarMode==='photo')q.avatar.avatarMode='emoji';
  }
  return q;
 }
@@ -3035,7 +3068,7 @@ function runUiAction(label, fn){
 }
 document.addEventListener('click',ev=>{
  const closeBtn=ev.target.closest('[data-close]');
- if(closeBtn){const panel=$(closeBtn.dataset.close);if(panel)panel.classList.add('hidden');if(closeBtn.dataset.close==='profileModal'){avatarEditing=false;photoImage=null;}return;}
+ if(closeBtn){const panel=$(closeBtn.dataset.close);if(panel)panel.classList.add('hidden');if(closeBtn.dataset.close==='profileModal'){avatarEditing=false;photoScanId++;photoScanBusy=false;photoImage=null;}return;}
   const b=ev.target.closest('button');if(!b)return;
   if(b.dataset.avatarTab){ev.preventDefault();switchAvatarTab(b.dataset.avatarTab);return;}
   if(b.dataset.avatarEmoji){ev.preventDefault();setEmojiSelection(b.dataset.avatarEmoji);return;}
@@ -3106,7 +3139,7 @@ $('saveGoogleMapsKeyBtn')?.addEventListener('click',()=>{
  updateConnection();toast('Google Maps configurado.');
 });
 document.getElementById('avatarPhotoFile')?.addEventListener('change',e=>loadAvatarPhoto(e.target.files?.[0]));
-document.getElementById('avatarClearPhoto')?.addEventListener('click',()=>{workingPhotoData='';photoImage=null;$('avatarPhotoFile').value='';$('wrPhotoTools').classList.add('hidden');$('wrPhotoStatus').textContent='Foto eliminada del editor. Guarda los cambios para confirmarlo.';previewFromInputs();});
+document.getElementById('avatarClearPhoto')?.addEventListener('click',()=>{photoScanId++;photoScanBusy=false;workingPhotoData='';photoImage=null;$('avatarPhotoFile').value='';$('wrPhotoTools').classList.add('hidden');$('wrPhotoStatus').textContent='Foto eliminada del editor. Guarda los cambios para confirmarlo.';previewFromInputs();});
 const roomCodeEl=$('roomCodeDisplay');
 if(roomCodeEl)roomCodeEl.addEventListener('click',()=>runUiAction('copiar código',()=>{
  if(!currentRoomId){toast('Todavía no hay un código de sala.');return;}
@@ -3523,7 +3556,7 @@ function exportLauncher(){
   if(markup.length<150000 || !markup.includes('worldrivals-build-type') || !markup.includes('createModeSelect'))throw Error('No se pudo generar una copia completa del juego.');
   const blob=new Blob([markup],{type:'text/html;charset=utf-8'});
   const blobUrl=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=blobUrl;a.download='World Rivals V4.2 Stable - Musica.html';document.body.appendChild(a);a.click();a.remove();
+  a.href=blobUrl;a.download='World Rivals V14.7.5.html';document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(blobUrl),30000);
   toast('✅ Juego completo exportado, sin launcher ni redirección a V8.4.');
  }catch(e){toast(sanitizeError(e));}
@@ -3589,10 +3622,11 @@ function dashboard(){const l=level(),within=state.xp%STEP,pct=l===50?100:Math.ro
 
 function passHtml(){return dashboard()+`<div class="wr4-plus-warning"><strong>🌍 WORLD PASS · 50 NIVELES</strong><div>Completa partidas para ganar XP y subir niveles. El pase es <b>gratuito</b>, se guarda en este dispositivo y la recompensa final del nivel 50 es el <b>nombre dorado</b>. Las cajas y estrellas tienen premios definidos, no son pagos ni sorteos.</div></div><div class="wr4-tier-list">${Array.from({length:LEVELS},(_,i)=>tierCard(i+1,'free')).join('')}</div><p style="margin-top:15px;color:#9eacbb;font-size:12px">Temporada 1 del World Pass: todo se gana jugando y reclamando tus niveles.</p>`;}
 /* Original, deterministic vector illustration for each of the 200 cosmetic items. */
+let artSequence=0;
 function cosmeticArt(item){
  const parts=item.id.split('-'),index=Math.max(0,(Number(parts[parts.length-1])||1)-1);
  const type=item.type, c=item.color, alt=colorFor((index*7+36)%200), seed=index+1;
- const uid='wr4art'+item.id.replace(/[^a-z0-9]/gi,'');
+ const uid='wr4art'+item.id.replace(/[^a-z0-9]/gi,'')+'n'+(++artSequence);
  const r=(seed*19)%21, y=(seed*13)%17;
  const sparks=Array.from({length:7},(_,k)=>{const x=14+((seed*19+k*43)%130), sy=12+((seed*31+k*37)%95);return `<path d="M${x-3} ${sy}h6 M${x} ${sy-3}v6" stroke="${k%2?alt:c}" stroke-width="${k%3===0?1.9:1}" opacity="${k%2?.62:.45}"/>`}).join('');
  const backgrounds=[`<path d="M0 100Q35 78 65 97T160 80V125H0Z" fill="${c}" opacity=".15"/>`,`<path d="M0 120L35 44 60 86 93 34 160 118Z" fill="${alt}" opacity=".21"/>`,`<circle cx="82" cy="62" r="48" stroke="${c}" stroke-width="1.5" fill="none" opacity=".18"/>`];
@@ -3645,6 +3679,22 @@ function cosmeticArt(item){
  return `<svg class="wr4-art-svg" viewBox="0 0 160 125" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración de ${h(item.name)}"><defs><linearGradient id="${uid}bg" x2="1" y2="1"><stop stop-color="#1f2648"/><stop offset="1" stop-color="#081322"/></linearGradient><linearGradient id="${uid}metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${c}"/><stop offset=".42" stop-color="${alt}"/><stop offset="1" stop-color="#1d2a47"/></linearGradient></defs><rect x="1" y="1" width="158" height="123" rx="13" fill="url(#${uid}bg)"/><g opacity=".46">${backgrounds[seed%backgrounds.length]}${sparks}</g>${drawing}<path d="M11 15V9h16M133 9h16v6M11 109v7h16M133 116h16v-7" fill="none" stroke="${c}" stroke-width="2" opacity=".85"/></svg>`;
 }
 
+const storeById=new Map(store.map(item=>[item.id,item]));
+function ownsSkin(id){return storeById.get(id)?.type==='skin'&&state.owned.includes(id);}
+function equippedSkin(){return ownsSkin(state.equip.skin)?state.equip.skin:'';}
+function commitSkin(id){if(ownsSkin(id))state.equip.skin=id;else delete state.equip.skin;save();if($4('wr4Overlay')?.classList.contains('wr4-open'))draw();}
+function drawSkinEditor(){const grid=$4('wrOwnedSkinGrid');if(!grid)return;const items=store.filter(i=>ownsSkin(i.id));grid.innerHTML=items.map(i=>`<button type="button" class="wr-owned-skin ${workingSkinId===i.id?'active':''}" data-owned-skin="${i.id}" aria-pressed="${workingSkinId===i.id}">${cosmeticArt(i)}<strong>${h(i.name)}</strong><small>${workingSkinId===i.id?'✓ Seleccionada':h(i.rarity)}</small></button>`).join('')||'<p class="tiny muted">Todavía no tienes skins. Compra una con créditos en la tienda.</p>';}
+$4('wrOwnedSkinGrid')?.addEventListener('click',e=>{const b=e.target.closest('[data-owned-skin]');if(!b||!ownsSkin(b.dataset.ownedSkin))return;workingSkinId=b.dataset.ownedSkin;drawSkinEditor();previewFromInputs();});
+$4('wrRemoveSkin')?.addEventListener('click',()=>{workingSkinId='';const mode=previousAvatarMode==='photo'&&!safeAvatarPhoto(workingPhotoData)?'classic':previousAvatarMode;switchAvatarTab(mode==='skin'?'classic':mode||'classic');});
+// Local reference-image recognition. No network, no identity/face analysis.
+let skinTemplatesPromise=null;
+function skinTemplates(){return skinTemplatesPromise||=(async()=>{const out=[];for(const item of store.filter(i=>i.type==='skin')){const img=await wrImageFromData('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(cosmeticArt(item)));const can=document.createElement('canvas');can.width=160;can.height=125;const ctx=can.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,160,125);const data=ctx.getImageData(0,0,160,125).data;
+for(const region of [[37,8,86,115],[44,12,73,88]]){const [x0,y0,w,h0]=region;const samples=[];for(let y=4;y<h0-3;y+=6)for(let x=4;x<w-3;x+=6){const idx=((y+y0)*160+x+x0)*4;const rgb=[data[idx],data[idx+1],data[idx+2]];const sat=Math.max(...rgb)-Math.min(...rgb);let rough=0;for(const off of [-8,8,-1280,1280])rough+=Math.abs(data[idx+off]-rgb[0])+Math.abs(data[idx+off+1]-rgb[1])+Math.abs(data[idx+off+2]-rgb[2]);samples.push({x:x/w,y:y/h0,r:rgb[0],g:rgb[1],b:rgb[2],sat,rank:sat-rough*.35});}const anchors=[];for(const pt of [...samples].sort((a,b)=>b.rank-a.rank)){if(pt.sat<85)continue;if(anchors.every(a=>Math.hypot(a.x-pt.x,a.y-pt.y)>.22))anchors.push(pt);if(anchors.length>=5)break;}if(anchors.length>=3)out.push({item,w,h:h0,samples,anchors});}}
+return out;})().catch(e=>{skinTemplatesPromise=null;throw e;});}
+async function detectSkinPhoto(img){const templates=await skinTemplates();const iw=img.naturalWidth||img.width,ih=img.naturalHeight||img.height;if(!iw||!ih)throw Error('Imagen inválida');const scale=Math.min(1,640/Math.max(iw,ih));const W=Math.max(1,Math.round(iw*scale)),H=Math.max(1,Math.round(ih*scale));const can=document.createElement('canvas');can.width=W;can.height=H;const ctx=can.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,W,H);const pixels=ctx.getImageData(0,0,W,H).data;
+const dist=(a,idx)=>Math.abs(a.r-pixels[idx])+Math.abs(a.g-pixels[idx+1])+Math.abs(a.b-pixels[idx+2]);
+for(let ti=0;ti<templates.length;ti++){const t=templates[ti];for(const stretch of [1,.9,1.1]){const ratio=t.h/t.w*stretch,limit=Math.min(W,H/ratio);if(limit<24)continue;const sizes=[];for(let size=limit;size>=24;size*=.93)sizes.push(size);for(const size of sizes){const w=Math.round(size),h=Math.round(size*ratio),step=Math.max(1,Math.floor(w/36));const anchors=t.anchors.map(a=>({...a,off:(Math.round(a.y*(h-1))*W+Math.round(a.x*(w-1)))*4}));const samples=t.samples.map(a=>({...a,off:(Math.round(a.y*(h-1))*W+Math.round(a.x*(w-1)))*4}));for(let y=0;y<=H-h;y+=step){for(let x=0;x<=W-w;x+=step){const base=(y*W+x)*4;if(dist(anchors[0],base+anchors[0].off)>155&&dist(anchors[1],base+anchors[1].off)>155)continue;let hits=0;for(const a of anchors)if(dist(a,base+a.off)<155)hits++;if(hits<Math.max(3,anchors.length-2))continue;let good=0,sum=0;for(const a of samples){const d=dist(a,base+a.off);sum+=Math.min(255,d);if(d<110)good++;}if(good/samples.length>.78&&sum/samples.length<72)return t.item;}}}}if(ti%3===2)await new Promise(r=>setTimeout(r,0));}return null;}
+function renderSkin(p){const id=wrCosmeticIds(p.cosmetics).skin;const item=storeById.get(id);if(!item||item.type!=='skin')return '';return cosmeticArt(item).replace('class="wr4-art-svg"','class="wr4-art-svg wr-shop-avatar"');}
 function shopHtml(){
  const q=shopQuery.trim().toLocaleLowerCase('es');
  const filtered=store.filter(i=>(filter==='Todos'||i.type===filter)&&(!q||i.name.toLocaleLowerCase('es').includes(q)||i.desc.toLocaleLowerCase('es').includes(q)));
@@ -3653,14 +3703,14 @@ function shopHtml(){
   if(id==='wr4-gold-name')return '<div class="wr4-inventory-row">👑 Nombre dorado <b>Desbloqueado</b></div>';
   const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item)return '';
   const thumb=store.some(x=>x.id===id)?`<span class="wr4-inventory-thumb">${cosmeticArt(item)}</span>`:`<span style="font-size:25px">${h(item.icon)}</span>`;
-  return `<div class="wr4-inventory-row"><span>${thumb}${h(item.name)}</span><button class="wr4-btn" style="margin:0" data-wr4-equip="${h(id)}">${state.equip[item.type]===id?'✓ Equipado':'Equipar'}</button></div>`;
+  return `<div class="wr4-inventory-row"><span>${thumb}${h(item.name)}</span><button class="wr4-btn" style="margin:0" data-wr4-equip="${h(id)}">${state.equip[item.type]===id?(item.type==='skin'&&storeById.has(id)?'✓ Equipado · quitar':'✓ Equipado'):'Equipar'}</button></div>`;
  }).join('');
  return dashboard()+`<div class="wr4-plus-warning" style="border-color:#7d5cce88;background:linear-gradient(120deg,#251e3c,#111b2c)"><strong>🛒 TIENDA · 200 COSMÉTICOS ILUSTRADOS</strong><div>Diseños exclusivos de armaduras, halos, estelas, marcos, insignias, títulos, escenarios y efectos. <b>Sin artículos comunes del World Pass ni compras con dinero real.</b> Consigue créditos jugando y con recompensas gratuitas.</div></div>
  <details class="wr4-inventory"><summary>🎒 Inventario (${state.owned.length} desbloqueos) · pulsa para equipar</summary><div>${inventory||'<p style="color:#afc0ce">Completa partidas y reclama recompensas para empezar tu colección.</p>'}</div></details>
  <div class="wr4-store-filters">${['Todos',...families.map(f=>f.type)].map(t=>`<button class="wr4-tab" data-wr4-filter="${t}" aria-selected="${t===filter}">${h(t==='Todos'?'Todos':families.find(x=>x.type===t).label)}</button>`).join('')}</div>
  <form class="wr4-searchrow" data-wr4-search-form="1"><input id="wr4ShopSearch" aria-label="Buscar cosmético" type="search" placeholder="Buscar por nombre o temática…" value="${h(shopQuery)}"><button class="wr4-btn" type="submit" style="margin:0;padding:12px 18px">BUSCAR</button>${shopQuery?'<button type="button" class="wr4-btn wr4-neutral" data-wr4-clearsearch="1" style="margin:0;padding:12px">Limpiar</button>':''}</form>
  <div class="wr4-store-head"><strong>${filtered.length.toLocaleString('es-ES')} artículos encontrados</strong><span>Mostrando ${shown.length} de ${filtered.length} · Imágenes originales del juego</span></div>
- <div class="wr4-tier-list">${shown.map(i=>{const own=state.owned.includes(i.id);return `<article class="wr4-tier ${i.rarity==='ULTRA'||i.rarity==='LEGENDARIA'?'wr4-legend':'wr4-rare'}" style="--wr4-accent:${i.color}"><div class="wr4-tier-top">${h(i.rarity)} · ${h(families.find(x=>x.type===i.type).label)}</div><div class="wr4-art-shell">${cosmeticArt(i)}</div><h3>${h(i.name)}</h3><div class="wr4-tier-meta"><span class="wr4-credits-pill">🪙 ${i.price.toLocaleString('es-ES')}</span><span class="wr4-shop-desc">${h(i.desc)}</span></div><button class="wr4-btn" data-wr4-buy="${i.id}" ${own?'disabled':''}>${own?'✓ EN INVENTARIO':'COMPRAR CON CRÉDITOS'}</button></article>`;}).join('')||'<p style="color:#bfcbd5">No hay artículos con ese filtro.</p>'}</div>
+ <div class="wr4-tier-list">${shown.map(i=>{const own=state.owned.includes(i.id);return `<article class="wr4-tier ${i.rarity==='ULTRA'||i.rarity==='LEGENDARIA'?'wr4-legend':'wr4-rare'}" style="--wr4-accent:${i.color}"><div class="wr4-tier-top">${h(i.rarity)} · ${h(families.find(x=>x.type===i.type).label)}</div><div class="wr4-art-shell">${cosmeticArt(i)}</div><h3>${h(i.name)}</h3><div class="wr4-tier-meta"><span class="wr4-credits-pill">🪙 ${i.price.toLocaleString('es-ES')}</span><span class="wr4-shop-desc">${h(i.desc)}</span></div><button class="wr4-btn" ${own&&i.type==='skin'?`data-wr4-equip="${i.id}"`:`data-wr4-buy="${i.id}" ${own?'disabled':''}`}>${own?(i.type==='skin'?(state.equip.skin===i.id?'✓ EQUIPADA · QUITAR':'EQUIPAR'):'✓ EN INVENTARIO'):'COMPRAR CON CRÉDITOS'}</button></article>`;}).join('')||'<p style="color:#bfcbd5">No hay artículos con ese filtro.</p>'}</div>
  ${filtered.length>shown.length?`<button type="button" class="wr4-more" data-wr4-more="1">VER MÁS COSMÉTICOS (${filtered.length-shown.length} restantes)</button>`:''}`;
 }
 function open(which='free'){view=which==='pass'?'free':which;active='free';if(view==='shop')shopShown=30;$4('wr4Overlay').classList.add('wr4-open');document.body.style.overflow='hidden';draw();}
@@ -3672,8 +3722,9 @@ function showLoot(reward){lootLocked=false;const panel=$4('wr4Loot'),art=$4('wr4
 function buy(id){const item=store.find(x=>x.id===id);if(!item||state.owned.includes(id))return;if(state.credits<item.price){quickToast('Necesitas '+(item.price-state.credits)+' créditos más. ¡Juega para conseguirlos!');return;}state.credits-=item.price;state.owned.push(id);save();draw();quickToast('✅ Has comprado '+item.name+'. Está en tu inventario.');}
 function hex(hsl){const el=document.createElement('span');el.style.color=hsl;document.body.appendChild(el);const rgb=getComputedStyle(el).color;el.remove();const parts=(rgb.match(/\d+/g)||[]).slice(0,3).map(v=>(+v).toString(16).padStart(2,'0'));return parts.length===3?'#'+parts.join(''):'#ed5568';}
 function applyCosmetic(){
+ const skin=equippedSkin();profile.cosmetics=skin?{skin}:{};if(skin){if(profile.avatarMode!=='skin')profile.skinPreviousMode=profile.avatarMode||'classic';profile.avatarMode='skin';}else if(profile.avatarMode==='skin'){profile.avatarMode=profile.skinPreviousMode||'classic';if(profile.avatarMode==='skin'||(profile.avatarMode==='photo'&&!safeAvatarPhoto(profile.photoData)))profile.avatarMode='classic';}
  let glow=null;for(const [type,id] of Object.entries(state.equip)){const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item||!state.owned.includes(id))continue;const color=hex(item.color||'#fa5269');try{
- if(type==='skin'){profile.shirt=color;profile.shirtAccent=hex(colorFor(Number(id.split('-').pop())+37));profile.avatarPattern=['stars','grid','rays','dots'][Number(id.split('-').pop())%4];}
+ if(type==='skin'&&!wrCosmeticIds(profile.cosmetics).skin){profile.shirt=color;profile.shirtAccent=hex(colorFor(Number(id.split('-').pop())+37));profile.avatarPattern=['stars','grid','rays','dots'][Number(id.split('-').pop())%4];}
  if(type==='frame')profile.avatarFrame=color;
  if(type==='background'){profile.avatarBg=color;profile.avatarPattern=['stars','grid','dots','rays'][Number(id.split('-').pop())%4];}
  if(type==='effect'){profile.nameColor=color;profile.avatarFrame=color;}
@@ -3687,7 +3738,7 @@ function applyCosmetic(){
  for(const el of [$4('wr4TitleBadge'),$4('wr4TitleBadgeTop')])if(el){el.textContent=state.displayTitle||'';el.style.display=state.displayTitle?'inline-block':'none';}
  try{if(typeof window.saveProfile==='function')saveProfile();else if(typeof window.renderProfile==='function')renderProfile();}catch{}
 }
-function equip(id){const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item||!state.owned.includes(id))return;state.equip[item.type]=id;save();applyCosmetic();draw();quickToast('✨ Equipado: '+item.name);}
+function equip(id){const item=store.find(x=>x.id===id)||state.ownNames?.[id];if(!item||!state.owned.includes(id))return;const remove=item.type==='skin'&&storeById.has(id)&&state.equip.skin===id;if(remove)delete state.equip.skin;else state.equip[item.type]=id;save();applyCosmetic();draw();quickToast((remove?'Skin retirada: ':'✨ Equipado: ')+item.name);}
 function bind(){const overlay=$4('wr4Overlay');if(!overlay)return;document.addEventListener('click',e=>{
  const openButton=e.target.closest('[data-wr4-open]');if(openButton){e.preventDefault();open(openButton.dataset.wr4Open);return;}
  if(e.target.closest('[data-wr4-close]')){close();return;}
@@ -3709,9 +3760,9 @@ function bind(){const overlay=$4('wr4Overlay');if(!overlay)return;document.addEv
  // Update the result-badge near endgame, do not alter gameplay or ELO formulas.
  currency();applyCosmetic();
  }
-function init(){bind();currency();}
+function init(){bind();currency();renderProfile();}
+window.WR4={open:(which)=>open(which==='pass'?'free':which),close,renderSkin,ownsSkin,equippedSkin,drawSkinEditor,commitSkin,detectSkinPhoto,get shopCount(){return store.length;},get level(){return level();},get credits(){return state.credits;}};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.WR4={open:(which)=>open(which==='pass'?'free':which),close,get shopCount(){return store.length;},get level(){return level();},get credits(){return state.credits;}};
 })();
 
 </script>
