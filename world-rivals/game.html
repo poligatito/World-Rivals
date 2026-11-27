@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101116">
-<title>World Rivals V14.6.1</title>
-<meta name="worldrivals-version" content="14.6.1">
+<title>World Rivals V14.7</title>
+<meta name="worldrivals-version" content="14.7">
 <meta name="worldrivals-build-type" content="full-standalone-game">
 <meta name="worldrivals-map-patch" content="liberty-nonblocking-v14.6.1">
-<meta name="worldrivals-room-patch" content="stable-v4-1-30players-sync">
+<meta name="worldrivals-room-patch" content="supabase-v14.7">
 <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css'">
 
 
@@ -850,7 +850,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
   <button type="button" class="wr4-shop-entry wr4-shop-panel" data-wr4-open="shop"><span class="wr4-entry-icon">🛒</span><span><strong>TIENDA · 200 COSMÉTICOS</strong><small>Skins, auras, estelas, marcos y mucho más. Solo artículos prémium, sin premios comunes del World Pass.</small><span class="wr4-currency-chip wr4-top-coins">🪙 <span data-wr4-credits>0</span> CRÉDITOS</span></span></button>
  </section>
  <section class="feature-strip">
-<div class="feature"><div class="feature-icon">👥</div><div><b>Salas con reconexión</b><small>Hasta tres intentos para entrar; si el anfitrión no responde, muestra un error y permite volver a probar.</small></div></div><div class="feature"><div class="feature-icon">🛰️</div><div><b>Street View sin esperas infinitas</b><small>Se limita el tiempo de búsqueda y se informa si Google obliga a usar el catálogo temporal de emergencia.</small></div></div><div class="feature"><div class="feature-icon">🗺️</div><div><b>Mapa de respuestas recuperable</b><small>OpenFreeMap Liberty carga en segundo plano; el mapa interactivo de respaldo permanece visible hasta que el mapa online esté listo.</small></div></div>
+<div class="feature"><div class="feature-icon">🌐</div><div><b>Salas online con Supabase</b><small>Conexión por código de sala sin depender de PeerJS para la partida.</small></div></div><div class="feature"><div class="feature-icon">⚡</div><div><b>Sincronización en tiempo real</b><small>Jugadores, respuestas y rondas sincronizados mediante la base de datos.</small></div></div><div class="feature"><div class="feature-icon">🔥</div><div><b>Racha del Diario</b><small>Mantén tu racha diaria. El anfitrión conserva la precarga secuencial.</small></div></div>
 </section>
   <div class="home-dashboard">
   <section class="play-grid">
@@ -858,7 +858,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
    <div class="card-tag">MULTIJUGADOR · ONLINE</div><h2>Crea una sala</h2>
    <p>Genera un código privado y compártelo con tus amigos. Hasta 30 jugadores pueden competir en la misma partida.</p>
     <div class="scan-row"><div class="room-invite-callout"><div class="room-invite-faces" aria-hidden="true"><span>👤</span><span>👤</span><span>＋</span></div><div><strong>Juega partidas con tus amigos</strong><small>Invítalos desde amigos o con tu código privado</small></div></div><button class="btn btn-primary" id="createRoomBtn">Crear sala <span>↗</span></button></div>
-   <div class="settings-row wr-create-mode"><label for="createModeSelect">🏆 Modo de partida</label><select id="createModeSelect" class="field"><option value="classic">Clásico · puntos</option><option value="elimination">Eliminatoria · sale el último</option></select></div><div class="config-hint"><span>🔒</span><div><b>Partidas privadas</b><br>Las salas se conectan directamente entre jugadores con PeerJS. No necesitas cuenta; la clave de Google Maps solo es necesaria para generar nuevas calles por coordenadas.</div></div>
+   <div class="settings-row wr-create-mode"><label for="createModeSelect">🏆 Modo de partida</label><select id="createModeSelect" class="field"><option value="classic">Clásico · puntos</option><option value="elimination">Eliminatoria · sale el último</option></select></div><div class="config-hint"><span>🔒</span><div><b>Partidas privadas</b><br>Las salas se sincronizan online mediante Supabase. No necesitas cuenta; la clave de Google Maps solo es necesaria para generar nuevas calles por coordenadas.</div></div>
   </article>
   <article class="play-card">
    <div class="card-tag">ÚNETE A TUS AMIGOS</div><h2>Introduce un código</h2>
@@ -955,7 +955,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
 <div id="setupModal" class="modal-backdrop hidden"><div class="modal">
  <div class="modal-head"><h2>⚙ Configuración WORLD RIVALS</h2><button class="icon-btn" data-close="setupModal">✕</button></div>
  <div class="setup-block"><h3>🛰️ Google Maps · Street View</h3><p><b>El visor es EXACTAMENTE el Google Street View compartido de V8.6</b>, también con coordenadas nuevas. Para pasar de 9 panorámicas a buscar realmente otras, el anfitrión necesita una clave pública de <b>Maps JavaScript API</b> (StreetViewService). El juego sortea coordenadas dentro del país, exige panorámica exterior real y verifica al menos una conexión navegable a otro punto. Si falla, intenta nuevas coordenadas. Es un filtro inteligente de metadatos, no un modelo de visión artificial; no garantiza lo que finalmente pueda bloquear Google dentro del iframe. Solo se requiere esta API para la búsqueda; el visor de Google no lleva clave. La API puede generar costes y requiere un proyecto Google Cloud con facturación configurada. Utiliza una clave restringida a tu dominio HTTPS. Puedes pedir ayuda a un adulto para gestionar la cuenta y facturación.</p><div class="form-row"><label for="googleMapsKeyInput">Clave pública de Google Maps (NO token de GitHub)</label><input id="googleMapsKeyInput" class="field" placeholder="AIza…" autocomplete="off" spellcheck="false"></div><div class="setup-actions"><button type="button" class="btn btn-primary" id="saveGoogleMapsKeyBtn">Guardar Google Maps</button><button type="button" class="btn btn-secondary" id="testGoogleMapsKeyBtn">🧪 Probar coordenadas</button></div><p class="tiny muted" id="googleMapsKeyStatus" aria-live="polite">MODO DEMOSTRACIÓN: sin una clave de Google solo existen 9 ubicaciones precargadas y volverán a repetirse. Guarda y prueba la clave para activar las coordenadas nuevas reales sin cambiar el visor.</p><p class="tiny muted"><a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank" rel="noopener noreferrer" style="color:#8be3ff;text-decoration:underline">Cómo configurar Maps JavaScript API (guía oficial de Google)</a></p><p class="tiny muted">Las claves públicas incluidas en un juego HTML pueden inspeccionarse. Limítalas por dominio y API; nunca pegues claves privadas ni tokens de GitHub.</p></div>
-  <div class="setup-block"><h3>👥 Amigos · sin configuración</h3><p>World Rivals V2 utiliza la misma conexión PeerJS que las salas multijugador. No se necesitan URL, claves ni bases de datos para buscar usuarios que tengan el juego abierto. Pulsa «Amigos», busca el nombre exacto y envía tu solicitud. Como no hay cuentas ni servidor de perfiles propio, no se pueden encontrar usuarios desconectados ni garantizar identidades verificadas. La lista se guarda únicamente en este navegador.</p><p id="cloudSetupStatus" class="tiny muted">Conectando a amigos…</p></div>
+  <div class="setup-block"><h3>👥 Amigos · sin configuración</h3><p>Amigos y voz utilizan PeerJS; las salas utilizan Supabase. No se necesitan URL, claves ni bases de datos para buscar usuarios que tengan el juego abierto. Pulsa «Amigos», busca el nombre exacto y envía tu solicitud. Como no hay cuentas ni servidor de perfiles propio, no se pueden encontrar usuarios desconectados ni garantizar identidades verificadas. La lista se guarda únicamente en este navegador.</p><p id="cloudSetupStatus" class="tiny muted">Conectando a amigos…</p></div>
  </div></div>
 <div class="modal-backdrop hidden" id="wrKickModal" role="dialog" aria-modal="true" aria-labelledby="wrKickTitle">
  <div class="modal wr-kick-dialog"><div class="eyebrow">MODERACIÓN DE SALA</div>
@@ -974,6 +974,7 @@ body.wr11-in-game .pano-badge,body.wr11-in-game .play-hud{backdrop-filter:none!i
 <div id="toast" class="toast"></div>
 <script async src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <script defer src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- Street View se carga mediante Google Maps Embed API; no se usa otro proveedor. -->
 <!-- Amigos V2: PeerJS ya se comparte con el multijugador; no necesita Supabase. -->
 <script id="wrMapsConfig" type="application/json">{"key":"AIzaSyDF4CspLtMjCXY0DQfeZi-9fxWo1xcM1vg"}</script>
@@ -1922,7 +1923,7 @@ function wrStartNextPrefetch(){
   const target=await wrFetchRoundTarget({signal:controller.signal});
   if(controller.signal.aborted||generation!==wrPrefetchGeneration)return null;
   pending.target=target;wrWarmNextGoogleEmbed(target);wrPreloadStatus(target.validated?'✅ Ronda '+next+' · ubicación y enlaces comprobados':'✅ Ronda '+next+' preparada (modo compatible)');
-  if(!isSolo&&p2pHost)p2pBroadcast({type:'next-preload',round:next,source:target.source,target:{pano:target.pano,googlePanoId:target.googlePanoId,lat:target.lat,lng:target.lng,heading:target.heading}});
+  // Next target stays on the host until round change.
   return target;
  })().catch(e=>{if(!controller.signal.aborted&&generation===wrPrefetchGeneration){wrPreloadStatus('⚠️ No se preparó la ronda '+next);console.warn('Precarga',e);}return null;});
 }
@@ -2001,15 +2002,8 @@ function p2pSnapshot(){
 }
 let hostBroadcastTimer=null;
 function hostPublish(){
- if(!p2pHost)return;
- // Batch concurrent arrivals, guesses and chat: avoid repeated huge full-room state transfers.
- if(!hostBroadcastTimer){hostBroadcastTimer=setTimeout(()=>{
-   hostBroadcastTimer=null;
-   if(!p2pHost)return;
-   const state=p2pSnapshot(),conns=[...p2pConnections.values()].filter(conn=>conn.open);
-   // Escalonar envíos para evitar saturar un solo WebRTC/PeerJS cuando hay 30.
-   conns.forEach((conn,i)=>setTimeout(()=>{if(p2pHost&&conn.open)p2pSend(conn,state)},i*22));
-  },220);}
+ if(!p2pHost||!currentRoom)return;
+ const s=wrCloud;if(s?.host){s.dirty=true;if(!hostBroadcastTimer)hostBroadcastTimer=setTimeout(()=>{hostBroadcastTimer=null;wrCloudPublish(s);},120);}
  renderLobby();renderScoreboard();renderMessages();renderVoiceState();renderWaitBanner();
 }
 function registerP2PConnection(conn){
@@ -2148,29 +2142,151 @@ function setupPeerObject(peer){
  });
  peer.on('disconnected',()=>{if(peer!==p2pPeer||p2pRoomClosed)return;setTimeout(()=>{if(peer===p2pPeer&&!peer.destroyed&&peer.disconnected)try{peer.reconnect()}catch(e){}},1200);});
 }
-async function createRoom(){
- if(!window.Peer){toast('No se ha podido cargar PeerJS. Comprueba tu conexión.');return;}
- cleanupRoom();const code=makeRoomCode();p2pHost=true;p2pRoomClosed=false;currentRoomId=code;
- p2pPeer=new Peer(code,wrRoomPeerOptions());setupPeerObject(p2pPeer);
- p2pPeer.on('open',id=>{
-  p2pUid=id;user={uid:id};currentRoom={code,hostUid:id,status:'lobby',mode:$('createModeSelect')?.value==='elimination'?'elimination':'classic',mapsKey:wrMapsKey(),roundStatus:'waiting',round:1,rounds:5,duration:90,target:null,roundStartedAt:0,roundEndsAt:0};
-  players=[{uid:id,...profileForPlayer(),score:0}];guesses=[];messages=[];isSolo=false;
-  $('gameRoomTitle').textContent='WORLD RIVALS · '+code;setScreen('lobby');renderLobby();updateGuestStatus();toast('Sala creada. ¡Comparte el código '+code+'!');
- });
+/* V14.7 — durable Supabase transport. PeerJS is used only for optional voice/social. */
+const WR_SB_URL='https://kdcjxyractrrubvypvqs.supabase.co';
+const WR_SB_KEY='sb_publishable_5VLOJxyJObaKb1pKNTMzFw_2h3jwRag';
+let wrCloudClient=null,wrCloudAuth=null,wrCloud=null,wrCloudBusy=false,wrCloudEpoch=0;
+function wrCloudError(e){if(e?.code==='PGRST202'||e?.code==='42703')return 'Falta ejecutar el SQL de World Rivals V14.7 en Supabase.';return String(e?.message||e||'Error de conexión');}
+async function wrCloudLogin(){
+ if(!window.supabase?.createClient)throw Error('No se cargó Supabase. Comprueba Internet y recarga.');
+ if(!wrCloudClient){
+  // A separate anonymous session per page avoids two tabs sharing the same player ID.
+  wrCloudClient=window.supabase.createClient(WR_SB_URL,WR_SB_KEY,{auth:{persistSession:false,autoRefreshToken:true,detectSessionInUrl:false}});
+ }
+ if(!wrCloudAuth)wrCloudAuth=(async()=>{
+  let {data,error}=await wrCloudClient.auth.getSession();if(error)throw error;
+  if(!data.session){({data,error}=await wrCloudClient.auth.signInAnonymously());if(error)throw error;}
+  const id=data.session?.user?.id;if(!id)throw Error('No se pudo identificar al jugador.');return id;
+ })().catch(e=>{wrCloudAuth=null;throw e;});
+ return wrCloudAuth;
 }
-async function joinRoom(code){
- if($('wrJoinErrorBox')){$('wrJoinErrorBox').hidden=true;$('wrJoinErrorBox').textContent='';}
- code=(code||'').trim().toUpperCase();if(!/^[A-Z][A-Z0-9]{5}$/.test(code)){toast('El código debe tener 6 caracteres y empezar por una letra.');return;}
- if(!window.Peer){toast('No se ha podido cargar PeerJS. Comprueba tu conexión.');return;}
- cleanupRoom();p2pHost=false;p2pRoomClosed=false;currentRoomId=code;
- p2pPeer=new Peer(undefined,wrRoomPeerOptions());setupPeerObject(p2pPeer);
- p2pPeer.on('open',id=>{
-  p2pUid=id;user={uid:id};
-  wrJoinTargetCode=code;wrJoinRetryCount=0;wrJoinNonce++;wrStartGuestSync();setScreen('lobby');$('roomCodeDisplay').textContent=code;$('lobbyPlayers').replaceChildren();$('startGameBtn').classList.add('hidden');
-  $('lobbyState').textContent='CONECTANDO';$('lobbyHint').textContent='Buscando al anfitrión…';
-  wrTryJoinConnection();
- });
+function wrCloudCheck(result){if(result.error)throw result.error;return result.data;}
+function wrCloudProfile(p){
+ const q={};if(!p||typeof p!=='object')return q;
+ for(const k of ['name','flag','nameColor'])if(typeof p[k]==='string')q[k]=p[k].slice(0,k==='name'?18:32);
+ for(const k of ['gold','mic'])if(typeof p[k]==='boolean')q[k]=p[k];
+ if(p.avatar&&typeof p.avatar==='object'){
+  q.avatar={};for(const k of ['skin','hairStyle','hair','shirt','shirtAccent','accessory','eyes','mouth','avatarMode','emoji','avatarBg','avatarFrame','avatarPattern','avatarBadge'])if(typeof p.avatar[k]==='string')q.avatar[k]=p.avatar[k].slice(0,64);
+  q.avatar.photoData='';if(q.avatar.avatarMode==='photo')q.avatar.avatarMode='emoji';
+ }
+ return q;
 }
+function wrCloudConn(id,s,isHostSide){
+ const events=new Map();
+ return {peer:id,open:true,on(t,f){if(!events.has(t))events.set(t,[]);events.get(t).push(f);},emit(t,d){for(const f of events.get(t)||[])f(d);},send(data){if(!this.open||wrCloud!==s)return;if(!isHostSide)wrCloudSend(s,data);},close(){if(!this.open)return;this.open=false;this.emit('close');}};
+}
+function wrCloudSend(s,data){
+ if(!['guess','chat','profile'].includes(data.type)||s.host||wrCloud!==s)return;
+ const ev={id:++s.seq,type:data.type};
+ if(data.type==='guess'){ev.round=currentRoom?.round;ev.lat=Number(data.lat);ev.lng=Number(data.lng);}
+ if(data.type==='chat')ev.text=String(data.text||'').slice(0,300);
+ if(data.type==='profile')ev.player=wrCloudProfile(data.player||{});
+ s.events.push(ev);s.events=s.events.slice(-40);s.mailDirty=true;wrCloudFlushMail(s);
+}
+async function wrCloudFlushMail(s){
+ if(s.mailWriting||wrCloud!==s||s.host)return;s.mailWriting=true;
+ try{while(s.mailDirty&&wrCloud===s){s.mailDirty=false;
+  const payload={profile:s.profile,events:s.events};
+  const {error}=await wrCloudClient.from('wr_players').update({payload,last_seen:new Date().toISOString()}).eq('room_code',s.code).eq('player_id',s.uid);
+  if(error){s.mailDirty=true;throw error;}
+ }}catch(e){console.warn('Supabase envío',e);wrCloudWarn(s,e);}finally{s.mailWriting=false;}
+}
+function wrCloudWarn(s,e){if(Date.now()-(s.warnAt||0)>12000){s.warnAt=Date.now();toast('Conexión Supabase: '+wrCloudError(e));}}
+async function wrCloudPublish(s){
+ if(!s||wrCloud!==s||!s.host||!currentRoom||s.writing)return;
+ s.writing=true;
+ try{while(s.dirty&&wrCloud===s&&currentRoom){s.dirty=false;
+  const snapshot=p2pSnapshot();
+  // Never put the local Maps credential or real avatar photographs into the database.
+  snapshot.players=snapshot.players.map(p=>({...p,avatar:p.avatar?wrCloudProfile(p).avatar:p.avatar}));
+  const {error}=await wrCloudClient.from('wr_rooms').update({status:currentRoom.status,mode:currentRoom.mode,current_round:currentRoom.round,round_data:snapshot,last_seen:new Date().toISOString()}).eq('code',s.code).eq('host_id',s.uid);
+  if(error){s.dirty=true;throw error;}
+ }}catch(e){console.warn('Supabase estado',e);wrCloudWarn(s,e);}finally{s.writing=false;}
+}
+function wrCloudApplyRow(s,row){
+ const id=row.player_id;if(id===s.uid)return;
+ let conn=p2pConnections.get(id);
+ if(!conn){conn=wrCloudConn(id,s,true);registerP2PConnection(conn);conn.emit('data',{type:'hello',player:wrCloudProfile(row.payload?.profile||{name:row.username})});}
+ const list=Array.isArray(row.payload?.events)?row.payload.events:[];
+ let seen=s.seen.get(id)||0;
+ for(const ev of list){if(!Number.isSafeInteger(ev?.id)||ev.id<=seen)continue;seen=ev.id;
+  if(ev.type==='guess'&&ev.round===currentRoom?.round&&Number.isFinite(ev.lat)&&Number.isFinite(ev.lng)&&Math.abs(ev.lat)<=90&&Math.abs(ev.lng)<=180)conn.emit('data',{type:'guess',lat:ev.lat,lng:ev.lng});
+  else if(ev.type==='chat'&&typeof ev.text==='string')conn.emit('data',{type:'chat',text:ev.text.slice(0,300)});
+  else if(ev.type==='profile')conn.emit('data',{type:'profile',player:wrCloudProfile(ev.player||{})});
+ }s.seen.set(id,seen);
+}
+async function wrCloudPoll(s){
+ if(wrCloud!==s||s.polling)return;s.polling=true;
+ try{
+  if(s.host){
+   const rows=wrCloudCheck(await wrCloudClient.from('wr_players').select('player_id,username,payload,last_seen').eq('room_code',s.code));if(wrCloud!==s)return;
+   const live=new Set();
+   for(const row of rows){if(row.player_id===s.uid)continue;
+    if(Date.now()-Date.parse(row.last_seen)>150000){await wrCloudClient.from('wr_players').delete().eq('room_code',s.code).eq('player_id',row.player_id);continue;}
+    live.add(row.player_id);wrCloudApplyRow(s,row);
+   }
+   for(const [id,conn] of [...p2pConnections])if(!live.has(id)){conn.close();s.seen.delete(id);}
+   if(s.dirty)wrCloudPublish(s);
+  }else{
+   const row=wrCloudCheck(await wrCloudClient.from('wr_rooms').select('round_data,last_seen').eq('code',s.code).maybeSingle());if(wrCloud!==s)return;
+   if(!row){wrJoinFailed('La sala se ha cerrado o has sido expulsado.');return;}
+   if(Date.now()-Date.parse(row.last_seen)>150000){wrJoinFailed('El anfitrión se ha desconectado.');return;}
+   if(row.round_data?.type==='state')s.conn.emit('data',row.round_data);
+   if(s.mailDirty)wrCloudFlushMail(s);
+   if(!currentRoom&&Date.now()-s.started>30000){wrJoinFailed('El anfitrión no ha sincronizado tu entrada.');return;}
+  }
+ }catch(e){console.warn('Supabase sincronización',e);wrCloudWarn(s,e);}finally{s.polling=false;}
+}
+function wrCloudStart(s){
+ s.channel=wrCloudClient.channel('wr147-'+s.code+'-'+s.uid)
+ .on('postgres_changes',{event:'*',schema:'public',table:s.host?'wr_players':'wr_rooms',filter:(s.host?'room_code':'code')+'=eq.'+s.code},()=>wrCloudPoll(s))
+ .subscribe(status=>{s.realtime=status==='SUBSCRIBED';if(s.realtime)wrCloudPoll(s);});
+ s.timer=setInterval(()=>wrCloudPoll(s),3000);
+ s.heartbeat=setInterval(async()=>{if(wrCloud!==s)return;try{
+  if(s.host){wrCloudCheck(await wrCloudClient.from('wr_rooms').update({last_seen:new Date().toISOString()}).eq('code',s.code).eq('host_id',s.uid));}
+  else{wrCloudCheck(await wrCloudClient.from('wr_players').update({last_seen:new Date().toISOString()}).eq('room_code',s.code).eq('player_id',s.uid));}
+ }catch(e){wrCloudWarn(s,e);}},20000);
+ wrCloudPoll(s);
+}
+function wrCloudVoice(s){
+ if(!window.Peer)return;
+ try{const peer=new Peer(s.uid,wrRoomPeerOptions());p2pPeer=peer;
+  peer.on('call',call=>{if(wrCloud!==s||!players.some(p=>p.uid===call.peer)){call.close();return;}try{call.answer();attachVoiceCall(call,false);}catch(e){call.close();}});
+  peer.on('open',()=>{if(wrCloud===s&&voiceOn)for(const p of players)if(p.uid!==s.uid)callPeerAudio(p.uid);});
+  peer.on('error',e=>console.warn('Voz PeerJS (no afecta a las salas)',e));
+  peer.on('disconnected',()=>{if(wrCloud===s&&!peer.destroyed)try{peer.reconnect();}catch(e){}});
+ }catch(e){console.warn('Voz no disponible',e);}
+}
+async function wrCloudEnter(host,code){
+ if(wrCloudBusy)return;
+ if(!host){code=String(code||'').trim().toUpperCase();if(!/^[A-Z][A-Z0-9]{5}$/.test(code)){toast('El código debe tener 6 caracteres y empezar por una letra.');return;}}
+ cleanupRoom();wrCloudBusy=true;const epoch=wrCloudEpoch;let s=null;
+ try{
+  const mode=$('createModeSelect')?.value==='elimination'?'elimination':'classic';
+  const info=$('wrJoinErrorBox');if(info){info.hidden=true;info.textContent='';}
+  isSolo=false;p2pRoomClosed=false;setScreen('lobby');$('roomCodeDisplay').textContent=host?'------':code;$('lobbyPlayers').replaceChildren();$('startGameBtn').classList.add('hidden');$('lobbyState').textContent='CONECTANDO CON SUPABASE';$('lobbyHint').textContent='Identificando jugador y conectando a la base de datos…';
+  const uid=await wrCloudLogin();if(epoch!==wrCloudEpoch)return;
+  const me=wrCloudProfile(profileForPlayer()),payload={profile:me,events:[]};let hostId=uid;
+  if(host){for(let attempt=0;attempt<5;attempt++){code=makeRoomCode();const r=await wrCloudClient.rpc('wr_create_room',{p_code:code,p_mode:mode,p_name:me.name,p_payload:payload});if(!r.error)break;if(r.error.code!=='23505'||attempt===4)throw r.error;}}
+  else hostId=wrCloudCheck(await wrCloudClient.rpc('wr_join_room',{p_code:code,p_name:me.name,p_payload:payload}));
+  s={host,uid,code,hostId,profile:me,events:[],seq:0,seen:new Map(),started:Date.now()};
+  if(epoch!==wrCloudEpoch){await wrCloudLeave(s);return;}
+  wrCloud=s;p2pHost=host;p2pUid=uid;user={uid};p2pRoomClosed=false;currentRoomId=code;wrHostRevision=0;wrGuestRevision=-1;wrLastHostState=0;
+  if(host){currentRoom={code,hostUid:uid,status:'lobby',mode,mapsKey:wrMapsKey(),roundStatus:'waiting',round:1,rounds:5,duration:90,target:null,roundStartedAt:0,roundEndsAt:0};players=[{uid,...profileForPlayer(),score:0}];guesses=[];messages=[];renderLobby();s.dirty=true;await wrCloudPublish(s);toast('Sala creada. Código: '+code);}
+  else{s.conn=wrCloudConn(hostId,s,false);p2pHostConn=s.conn;registerP2PConnection(s.conn);wrStartGuestSync();$('roomCodeDisplay').textContent=code;$('lobbyHint').textContent='Esperando la primera sincronización del anfitrión…';}
+  if(wrCloud!==s)return;
+  $('gameRoomTitle').textContent='WORLD RIVALS · '+code;wrCloudStart(s);wrCloudVoice(s);
+ }catch(e){if(epoch===wrCloudEpoch){console.error('Supabase sala',e);wrJoinFailed(wrCloudError(e));}}finally{wrCloudBusy=false;}
+}
+async function wrCloudLeave(s){
+ if(!s||!wrCloudClient)return;
+ try{if(s.host)await wrCloudClient.from('wr_rooms').delete().eq('code',s.code).eq('host_id',s.uid);
+ else await wrCloudClient.from('wr_players').delete().eq('room_code',s.code).eq('player_id',s.uid);}catch(e){console.warn('Salir de sala',e);}
+}
+function wrCloudCleanup(){wrCloudEpoch++;const s=wrCloud;wrCloud=null;if(!s)return;clearInterval(s.timer);clearInterval(s.heartbeat);if(s.channel)wrCloudClient.removeChannel(s.channel).catch(()=>{});wrCloudLeave(s);}
+
+async function createRoom(){return wrCloudEnter(true);}
+async function joinRoom(code){return wrCloudEnter(false,code);}
 function readMicGain(){try{const n=Number(localStorage.getItem('wr_mic_gain'));return Number.isFinite(n)?Math.max(0,Math.min(300,n)):100;}catch(e){return 100;}}
 function setMicGain(value){
  micGainValue=Math.max(0,Math.min(300,Number(value)||0));
@@ -2288,7 +2404,8 @@ async function toggleMic(){
  // La activación del audio debe arrancar directamente desde el clic del usuario.
  // Así se evita depender del antiguo botón gris de «Reproducir sonido».
  unlockVoiceAudio();
- if(!currentRoom||!p2pPeer||isSolo){toast('Entra en una sala multijugador para activar la voz.');return;}
+ if(!currentRoom||isSolo){toast('Entra en una sala multijugador para activar la voz.');return;}
+ if(!p2pPeer?.open){toast('La voz PeerJS aún no está conectada. Puedes jugar y usar el chat igualmente.');return;}
  if(voiceActivationBusy)return;
  if(!navigator.mediaDevices?.getUserMedia){toast('El micrófono necesita HTTPS, localhost y el permiso del navegador.');return;}
  if(!micInputStream){
@@ -2420,10 +2537,12 @@ function wrPromptKick(id){
  $('wrKickModal').classList.remove('hidden');
 }
 function wrCancelKick(){wrKickUid=null;$('wrKickModal')?.classList.add('hidden')}
-function wrConfirmKick(){
+async function wrConfirmKick(){
  const id=wrKickUid;wrCancelKick();
  if(!p2pHost||!currentRoom||!id||id===p2pUid||id===currentRoom.hostUid)return;
  const p=players.find(p=>p.uid===id);if(!p)return;
+ if(wrCloud?.host){try{wrCloudCheck(await wrCloudClient.rpc('wr_kick_player',{p_code:currentRoomId,p_player:id}));}catch(e){toast('No se pudo expulsar: '+wrCloudError(e));return;}}
+ if(!p2pHost||!currentRoom)return;
  wrKickedPeers.add(id);
  const conn=p2pConnections.get(id);
  p2pSend(conn,{type:'kicked',message:'El administrador te ha expulsado de la sala.'});
@@ -2434,6 +2553,7 @@ function wrConfirmKick(){
 }
 
 function cleanupRoom(){
+ wrCloudCleanup();
  wrClearJoinWatchdog();wrJoinTargetCode='';wrJoinRetryCount=0;wrJoinNonce++;
  wrStopGuestSync();
   p2pRoomClosed=true;wrKickedPeers.clear();wrCancelKick();wrEloHide();
@@ -2469,13 +2589,14 @@ async function startOnlineRound(){
    const mode=currentRoom.mode==='elimination'?'elimination':'classic';
    if(mode==='elimination'&&players.length<2){toast('Eliminatoria necesita al menos 2 jugadores.');return;}
    toast('Buscando una calle real en Google Street View...');
-   const target=await wrFetchRoundTarget();
+   const session=wrCloud;const target=await wrFetchRoundTarget();
+  if(wrCloud!==session||!p2pHost||!currentRoom)return;
   const rounds=mode==='elimination'?Math.min(29,players.length-1):Math.max(1,Math.min(10,Number($('roundSelect').value)||5));
   const duration=Math.max(30,Math.min(180,Number($('timeSelect').value)||90));
   currentRoom={...currentRoom,status:'playing',gameId:currentRoomId+':'+Date.now(),mode,mapsKey:wrMapsKey(),round:1,rounds,duration,roundStatus:'playing',target,roundStartedAt:Date.now(),roundEndsAt:Date.now()+duration*1000};
   guesses=[];roundSubmittedLocal=0;loadedRoundKey='';setScreen('game');
   $('gameRoomTitle').textContent='WORLD RIVALS · '+currentRoomId;
-  $('gameFootStatus').textContent=wrMapsKey()?'Sala P2P · coordenadas reales':'Sala P2P · DEMO 9 calles';
+  $('gameFootStatus').textContent=wrMapsKey()?'Sala Supabase · coordenadas reales':'Sala Supabase · DEMO 9 calles';
   loadRoomRound();setupClock();hostPublish();
  }catch(e){console.error('startOnlineRound',e);toast(e.message||'No se pudo iniciar la ronda.');}
 }
@@ -2559,7 +2680,7 @@ async function hostNextRound(){
   currentRoom.status='finished';currentRoom.roundStatus='finished';hostPublish();showFinalResults();return;
  }
  try{
-  toast('Cambiando a la siguiente ronda...');const target=await wrTakeNextRound(currentRoom.round+1);
+  toast('Cambiando a la siguiente ronda...');const session=wrCloud;const target=await wrTakeNextRound(currentRoom.round+1);if(wrCloud!==session||!p2pHost||!currentRoom)return;
   currentRoom={...currentRoom,round:currentRoom.round+1,roundStatus:'playing',target,roundStartedAt:Date.now(),roundEndsAt:Date.now()+currentRoom.duration*1000};
   guesses=guesses.filter(g=>g.round>=currentRoom.round);roundSubmittedLocal=0;loadedRoundKey='';
   $('resultBanner').classList.add('hidden');loadRoomRound();setupClock();hostPublish();
@@ -2586,7 +2707,7 @@ function showFinalResults(){
 function sendMessage(text){
  text=(text||'').trim().slice(0,300);if(!text)return;
  if(isSolo){toast('El chat está disponible en salas multijugador.');return;}
- if(!currentRoom||!p2pPeer){toast('Entra en una sala para usar el chat.');return;}
+ if(!currentRoom||!wrCloud){toast('Entra en una sala para usar el chat.');return;}
  if(p2pHost){
   messages.push({uid:p2pUid,name:profile.name,flag:profile.flag,nameColor:profile.nameColor,gold:profile.gold,text,createdAt:Date.now()});
   messages=messages.slice(-50);hostPublish();
@@ -2640,7 +2761,7 @@ function attachVoiceCall(call,outgoing=false){
  renderVoiceState();
 }
 function callPeerAudio(remoteId){
- if(!p2pPeer||!remoteId||remoteId===p2pUid)return;
+ if(!p2pPeer?.open||!remoteId||remoteId===p2pUid)return;
  // Only the host publishes ONE combined stream to each guest.
  // Each guest uploads ONE voice stream to the host, never a 29-peer mesh.
  if(p2pHost){
@@ -2926,7 +3047,7 @@ function openSetup(){
 }
 function saveProfile(){
  profile.name=(profile.name||'Invitado').trim().slice(0,18)||'Invitado';for(const [k,def] of [['nameColor','#f3f4f7'],['skin','#f5c9a5'],['hair','#34251f'],['shirt','#e34250'],['shirtAccent','#191e30'],['avatarBg','#20263b'],['avatarFrame','#55ddec']])profile[k]=safeColor(profile[k],def);profile.photoData=safeAvatarPhoto(profile.photoData);let persisted=true;try{localStorage.setItem('wr_profile',JSON.stringify(profile));}catch(e){persisted=false;toast('No se pudo guardar en este navegador: almacenamiento lleno o bloqueado.');}renderProfile();if(!persisted)return false;syncFriendProfile();
- if(currentRoom&&p2pPeer){const updated={...profileForPlayer(),uid:p2pUid};if(p2pHost){const i=players.findIndex(p=>p.uid===p2pUid);if(i>=0)players[i]={...players[i],...updated};hostPublish();}else p2pSend(p2pHostConn,{type:'profile',player:updated});}
+ if(currentRoom&&wrCloud){const updated={...profileForPlayer(),uid:p2pUid};if(p2pHost){const i=players.findIndex(p=>p.uid===p2pUid);if(i>=0)players[i]={...players[i],...wrCloudProfile(updated),uid:p2pUid};hostPublish();}else p2pSend(p2pHostConn,{type:'profile',player:updated});}
 }
 function playerRow(p,host=false){
  const safeName=esc(p.name||'Jugador');
@@ -3037,6 +3158,8 @@ document.addEventListener('input',ev=>{
 });
 $('modeSelect')?.addEventListener('change',()=>{if(!p2pHost||currentRoom?.status!=='lobby')return;currentRoom.mode=$('modeSelect').value==='elimination'?'elimination':'classic';renderLobby();hostPublish();});
 $('createModeSelect')?.addEventListener('change',()=>{});
+$('roundSelect')?.addEventListener('change',()=>{if(p2pHost&&currentRoom?.status==='lobby'&&currentRoom.mode!=='elimination'){currentRoom.rounds=Number($('roundSelect').value)||5;hostPublish();}});
+$('timeSelect')?.addEventListener('change',()=>{if(p2pHost&&currentRoom?.status==='lobby'){currentRoom.duration=Number($('timeSelect').value)||90;hostPublish();}});
 $('testGoogleMapsKeyBtn')?.addEventListener('click',async()=>{
  const el=$('googleMapsKeyStatus'),btn=$('testGoogleMapsKeyBtn');
  if(!wrMapsKey()){
