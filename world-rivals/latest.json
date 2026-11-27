@@ -1,8 +1,8 @@
 {
   "format": "worldrivals-online-v2",
-  "version": "V14.7",
+  "version": "V14.7.1",
   "file": "world-rivals/game.html",
-  "sha256": "7eccec590f1a25940beccc53cdfb06d30d289500b15e1569ff4d3dc37a1c1878",
-  "publishedAt": "2026-11-27T12:17:05.690Z",
+  "sha256": "7e12f56dacf84db0bf0afbd97692a0df3e71cf55ecd6ef243b0a05a486deb2a4",
+  "publishedAt": "2026-11-27T17:57:58.276Z",
   "requiresOnline": true
 }
